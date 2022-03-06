@@ -30,7 +30,13 @@ class CreatePollViewController: UIViewController {
         let btn = Button()
         btn.setTitle("Create poll", for: .normal)
         btn.titleLabel?.textColor = .white
+        btn.addTarget(self, action: #selector(createPoll), for: .touchUpInside)
         return btn
+    }()
+    
+    var cview: UIView = {
+        let v = UIView()
+        return v
     }()
     
     override func viewDidLoad() {
@@ -64,6 +70,10 @@ class CreatePollViewController: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+    }
+    
+    @objc func createPoll() {
+//        navigationController?.pushViewController(PollListController(), animated: true)
     }
 
 }

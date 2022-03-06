@@ -13,12 +13,16 @@
 		B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917466127CD9B5300140F5B /* KeyboardResponsive.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
-		B95E572B27CD1B6E0021E53C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572A27CD1B6E0021E53C /* ViewController.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
 		B95E573327CD1B700021E53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95E573227CD1B700021E53C /* Assets.xcassets */; };
 		B95E573627CD1B700021E53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95E573427CD1B700021E53C /* LaunchScreen.storyboard */; };
 		B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E573E27CD614D0021E53C /* CreatePollViewController.swift */; };
 		B95E574227CD61A80021E53C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E574127CD61A80021E53C /* TextField.swift */; };
+		B9EA042F27D4260500D70769 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA042E27D4260500D70769 /* Poll.swift */; };
+		B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043027D428ED00D70769 /* TableView+EmptyView.swift */; };
+		B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043227D46E7500D70769 /* PollTableViewCell.swift */; };
+		B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043427D52A1500D70769 /* PollViewController.swift */; };
+		B9EA043727D52BC900D70769 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043627D52BC800D70769 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,13 +33,17 @@
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B95E572A27CD1B6E0021E53C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B95E573027CD1B6E0021E53C /* iPoll.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPoll.xcdatamodel; sourceTree = "<group>"; };
 		B95E573227CD1B700021E53C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B95E573527CD1B700021E53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B95E573727CD1B700021E53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B95E573E27CD614D0021E53C /* CreatePollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollViewController.swift; sourceTree = "<group>"; };
 		B95E574127CD61A80021E53C /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		B9EA042E27D4260500D70769 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		B9EA043027D428ED00D70769 /* TableView+EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+EmptyView.swift"; sourceTree = "<group>"; };
+		B9EA043227D46E7500D70769 /* PollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
+		B9EA043427D52A1500D70769 /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
+		B9EA043627D52BC800D70769 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,17 +76,16 @@
 		B95E572527CD1B6E0021E53C /* iPoll */ = {
 			isa = PBXGroup;
 			children = (
+				B9EA043827D52BD500D70769 /* Utils */,
+				B9EA042D27D425EF00D70769 /* Model */,
 				B95E573D27CD61220021E53C /* Views */,
 				B95E572627CD1B6E0021E53C /* AppDelegate.swift */,
 				B95E572827CD1B6E0021E53C /* SceneDelegate.swift */,
-				B95E572A27CD1B6E0021E53C /* ViewController.swift */,
 				B95E573227CD1B700021E53C /* Assets.xcassets */,
 				B95E573427CD1B700021E53C /* LaunchScreen.storyboard */,
 				B95E573727CD1B700021E53C /* Info.plist */,
 				B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */,
-				B917465B27CD90A000140F5B /* UIColor+Hex.swift */,
-				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
-				B917466127CD9B5300140F5B /* KeyboardResponsive.swift */,
+				B9EA043627D52BC800D70769 /* Constants.swift */,
 			);
 			path = iPoll;
 			sourceTree = "<group>";
@@ -88,6 +95,7 @@
 			children = (
 				B95E574027CD616C0021E53C /* Widgets */,
 				B95E573E27CD614D0021E53C /* CreatePollViewController.swift */,
+				B9EA043427D52A1500D70769 /* PollViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -97,8 +105,28 @@
 			children = (
 				B95E574127CD61A80021E53C /* TextField.swift */,
 				B917465F27CD976C00140F5B /* Button.swift */,
+				B9EA043027D428ED00D70769 /* TableView+EmptyView.swift */,
+				B9EA043227D46E7500D70769 /* PollTableViewCell.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		B9EA042D27D425EF00D70769 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B9EA042E27D4260500D70769 /* Poll.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B9EA043827D52BD500D70769 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B917466127CD9B5300140F5B /* KeyboardResponsive.swift */,
+				B917465B27CD90A000140F5B /* UIColor+Hex.swift */,
+				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,13 +200,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
-				B95E572B27CD1B6E0021E53C /* ViewController.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
+				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
+				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
+				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
 				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
 				B95E574227CD61A80021E53C /* TextField.swift in Sources */,
 				B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
+				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,
+				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B917466027CD976C00140F5B /* Button.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,
 			);
