@@ -94,6 +94,7 @@ class PollViewController: UIViewController {
     
     private func setupViews() {
         navigationItem.title = "Polls"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
         view.backgroundColor = UIColor(named: Constants.Colors.bgBlue)
         
         // TODO: add other subviews
@@ -143,6 +144,12 @@ class PollViewController: UIViewController {
         }
     }
     
+    @objc func onEditBtnPressed() {
+        tableView.isEditing = !tableView.isEditing
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
+        
+    }
+    
     @objc func onTapFab(_ sender: UIButton) {
         navigationController?.pushViewController(CreatePollViewController(), animated: true)
     }
@@ -172,10 +179,8 @@ extension PollViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let from = polls[sourceIndexPath.row]
-        polls[sourceIndexPath.row] = polls[destinationIndexPath.row]
-        polls[destinationIndexPath.row] = from
-        tableView.reloadRows(at: [sourceIndexPath, destinationIndexPath], with: .top)
+        let moved = polls.remove(at: sourceIndexPath.row)
+        polls.insert(moved, at: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
