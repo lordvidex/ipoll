@@ -17,5 +17,10 @@ struct Constants {
         static let appBlack = "AppBlack"
     }
     
+    // MARK: cell identifiers
+    struct CellIdentifiers {
+        static let pollOption = "CreatePollOptionCell"
+    }
+    
     static var appFont = UIFont(name: "Futura-Medium", size: 16)
 }

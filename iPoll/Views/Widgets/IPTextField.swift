@@ -1,5 +1,5 @@
 //
-//  TextField.swift
+//  IPTextField.swift
 //  iPoll
 //
 //  Created by Evans Owamoyo on 28.02.2022.
@@ -7,7 +7,15 @@
 
 import UIKit
 
-class TextField: UITextField {
+class IPTextField: UITextField {
+    
+    var borderColor: UIColor? {
+        didSet {
+            if let borderColor = borderColor {
+                layer.borderColor = borderColor.cgColor
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +27,8 @@ class TextField: UITextField {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("This class does not support NSEncoding")
+        super.init(coder: coder)
+        updateUI()
     }
     
     func updateUI() {
