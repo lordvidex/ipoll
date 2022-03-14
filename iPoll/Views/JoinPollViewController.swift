@@ -129,8 +129,12 @@ class JoinPollViewController: UIViewController {
     }
     
     @objc func onTapFab(_ sender: UIButton) {
-        navigationController?.popViewController(animated: false)
-        navigationController?.pushViewController(CreatePollViewController(), animated: true)
+        let viewControllers = navigationController?.viewControllers
+        if var viewControllers = viewControllers {
+            viewControllers.removeLast()
+            viewControllers.append(CreatePollViewController())
+            navigationController?.setViewControllers(viewControllers, animated: true)
+        }
     }
     
 }

@@ -39,6 +39,7 @@ class PollViewController: UIViewController {
         let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: UIColor(named: Constants.Colors.darkBlue))
         btn.addRightIcon(image: UIImage(systemName: "chevron.right")!)
         btn.tintColor = .white
+        btn.addTarget(self, action: #selector(onJoinBtnClicked), for: .touchUpInside)
         return btn
     }()
     
@@ -144,6 +145,10 @@ class PollViewController: UIViewController {
     
     @objc func onTapFab(_ sender: UIButton) {
         navigationController?.pushViewController(CreatePollViewController(), animated: true)
+    }
+    
+    @objc func onJoinBtnClicked() {
+        navigationController?.pushViewController(JoinPollViewController(), animated: true)
     }
 }
 
