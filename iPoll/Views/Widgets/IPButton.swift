@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Button: UIButton {
+class IPButton: UIButton {
     
     private var cornerRadius: CGFloat = 9
     private var height: CGFloat = 50
