@@ -53,7 +53,6 @@ class CreatePollOptionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
-        
     }
     
     private func updateUI() {
@@ -61,7 +60,7 @@ class CreatePollOptionCell: UITableViewCell {
         addBtn.layer.cornerRadius = 4
         
     }
-    
+
     @IBAction private func onTextChanged(_ sender: UITextField) {
         delegate?.didChangePollText(self, sender: sender, text: sender.text ?? "", for: indexPath)
     }
