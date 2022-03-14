@@ -8,6 +8,14 @@
 import UIKit
 
 class PollViewController: UIViewController {
+    
+    var activeSegmentedControlIndex: Int = 0 {
+        didSet {
+            if activeSegmentedControlIndex < 3 {
+                segmentedContol.selectedSegmentIndex = activeSegmentedControlIndex
+            }
+        }
+    }
     // MARK: local variables
     var polls: [Poll] = [
         Poll(id: "sdfdsf", title:  "asdfdsahgdslge ergbsagbdsg dsagfidasgbdsg dsfgasdgdsag reg erwgaewtfaseg rgargars grdsgrdgrsgre gergerger gergergerwger gsdfgsrdg ", finished: false, startTime: Date(), endTime: nil, options: [
@@ -27,16 +35,16 @@ class PollViewController: UIViewController {
     }()
     
     @UsesAutoLayout
-    private var joinPollBtn: Button = {
-        let btn = Button(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: UIColor(named: Constants.Colors.darkBlue))
+    private var joinPollBtn: IPButton = {
+        let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: UIColor(named: Constants.Colors.darkBlue))
         btn.addRightIcon(image: UIImage(systemName: "chevron.right")!)
         btn.tintColor = .white
         return btn
     }()
     
     @UsesAutoLayout
-    private var fab: Button = {
-        let btn = Button(
+    private var fab: IPButton = {
+        let btn = IPButton(
             text: "Create Poll",
             cornerRadius: 25,
             height: 50,

@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		44D069D584B70CEAA7F8C7F7 /* Pods_iPoll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */; };
+		B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F627DF9AF000D54B3E /* IPLabel.swift */; };
+		B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F727DF9AF000D54B3E /* IPButton.swift */; };
+		B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F827DF9AF000D54B3E /* IPTextField.swift */; };
+		B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
-		B917466027CD976C00140F5B /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465F27CD976C00140F5B /* Button.swift */; };
 		B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917466127CD9B5300140F5B /* KeyboardResponsive.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
@@ -18,7 +21,6 @@
 		B95E573327CD1B700021E53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95E573227CD1B700021E53C /* Assets.xcassets */; };
 		B95E573627CD1B700021E53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95E573427CD1B700021E53C /* LaunchScreen.storyboard */; };
 		B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E573E27CD614D0021E53C /* CreatePollViewController.swift */; };
-		B95E574227CD61A80021E53C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E574127CD61A80021E53C /* TextField.swift */; };
 		B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */; };
 		B9B275B327DF207E00DD3711 /* CreatePollOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */; };
 		B9EA042F27D4260500D70769 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA042E27D4260500D70769 /* Poll.swift */; };
@@ -32,9 +34,12 @@
 		7B42ABA568AD87AB11D3D1C7 /* Pods-iPoll.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.release.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.release.xcconfig"; sourceTree = "<group>"; };
 		83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPoll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57117825CA50EA4D1352F15 /* Pods-iPoll.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.debug.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.debug.xcconfig"; sourceTree = "<group>"; };
+		B90BC0F627DF9AF000D54B3E /* IPLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPLabel.swift; sourceTree = "<group>"; };
+		B90BC0F727DF9AF000D54B3E /* IPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPButton.swift; sourceTree = "<group>"; };
+		B90BC0F827DF9AF000D54B3E /* IPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPTextField.swift; sourceTree = "<group>"; };
+		B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPollViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
-		B917465F27CD976C00140F5B /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		B917466127CD9B5300140F5B /* KeyboardResponsive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsive.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +49,6 @@
 		B95E573527CD1B700021E53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B95E573727CD1B700021E53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B95E573E27CD614D0021E53C /* CreatePollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollViewController.swift; sourceTree = "<group>"; };
-		B95E574127CD61A80021E53C /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollOptionCell.swift; sourceTree = "<group>"; };
 		B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePollOptionCell.xib; sourceTree = "<group>"; };
 		B9EA042E27D4260500D70769 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				B95E574027CD616C0021E53C /* Widgets */,
 				B95E573E27CD614D0021E53C /* CreatePollViewController.swift */,
 				B9EA043427D52A1500D70769 /* PollViewController.swift */,
+				B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,8 +136,9 @@
 		B95E574027CD616C0021E53C /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				B95E574127CD61A80021E53C /* TextField.swift */,
-				B917465F27CD976C00140F5B /* Button.swift */,
+				B90BC0F727DF9AF000D54B3E /* IPButton.swift */,
+				B90BC0F627DF9AF000D54B3E /* IPLabel.swift */,
+				B90BC0F827DF9AF000D54B3E /* IPTextField.swift */,
 				B9EA043027D428ED00D70769 /* TableView+EmptyView.swift */,
 				B9EA043227D46E7500D70769 /* PollTableViewCell.swift */,
 				B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */,
@@ -275,19 +281,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
+				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
 				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
 				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
-				B95E574227CD61A80021E53C /* TextField.swift in Sources */,
 				B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
 				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,
+				B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */,
+				B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */,
+				B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */,
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
-				B917466027CD976C00140F5B /* Button.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

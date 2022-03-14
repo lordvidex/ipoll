@@ -11,6 +11,14 @@ class CreatePollViewController: UIViewController {
     
     var options = ["Option 1", "Option 2"]
     
+    var _optionCount = 2
+    var optionCount: Int {
+        get {
+            _optionCount += 1
+            return _optionCount
+        }
+    }
+    
     @UsesAutoLayout
     var pollTitleLabel: UILabel = {
         let label = UILabel()
@@ -31,14 +39,14 @@ class CreatePollViewController: UIViewController {
     
     @UsesAutoLayout
     var pollTitleTF: UITextField = {
-        let tf = TextField()
+        let tf = IPTextField()
         tf.text = "Hello World!"
         return tf
     }()
     
     @UsesAutoLayout
     var pollCreateBtn: UIButton = {
-        let btn = Button(text: "Create poll", textColor: .white)
+        let btn = IPButton(text: "Create poll", textColor: .white)
         btn.addTarget(self, action: #selector(createPoll), for: .touchUpInside)
         return btn
     }()
@@ -55,10 +63,9 @@ class CreatePollViewController: UIViewController {
     @UsesAutoLayout
     var optionsTableView: UITableView = {
         let table = UITableView()
-        table.register(CreatePollOptionCell.self, forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
+        table.register(UINib(nibName: Constants.CellIdentifiers.pollOption, bundle: nil), forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
         table.separatorStyle = .none
         table.allowsSelection = false
-        table.backgroundColor = .black
         table.estimatedRowHeight = 60
         table.rowHeight = UITableView.automaticDimension
         return table
@@ -68,7 +75,6 @@ class CreatePollViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        optionsTableView.delegate = self
         optionsTableView.dataSource = self
         
         view.backgroundColor = .white
@@ -105,8 +111,8 @@ class CreatePollViewController: UIViewController {
             
             pollCreateBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -26),
             
-            optionsTableView.leftAnchor.constraint(equalTo: optionsLabel.leftAnchor),
-            optionsTableView.rightAnchor.constraint(equalTo: optionsLabel.rightAnchor),
+            optionsTableView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 5),
+            optionsTableView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -5),
             optionsTableView.topAnchor.constraint(equalTo: optionsLabel.bottomAnchor, constant: 10),
             optionsTableView.bottomAnchor.constraint(equalTo: pollCreateBtn.topAnchor, constant: -5)
             
@@ -114,13 +120,11 @@ class CreatePollViewController: UIViewController {
     }
     
     @objc func createPoll() {
-        //        navigationController?.pushViewController(PollListController(), animated: true)
+        // TODO: create the poll
+        let pollVC = PollViewController()
+        pollVC.activeSegmentedControlIndex = 2
+        navigationController?.viewControllers = [pollVC]
     }
-    
-}
-
-// MARK: - UITableViewDelegate
-extension CreatePollViewController: UITableViewDelegate {
     
 }
 
@@ -133,10 +137,11 @@ extension CreatePollViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.pollOption, for: indexPath) as? CreatePollOptionCell {
-            cell.initialText = options[indexPath.row]
-            cell.showOptionBtn = indexPath.row == options.count - 1
-            cell.indexPath = indexPath
             cell.delegate = self
+            cell.indexPath = indexPath
+            cell.initialText = options[indexPath.row]
+            cell.showAddBtn = indexPath.row == options.count - 1
+            cell.showDeleteBtn = options.count > 2
             return cell
         } else {
             return UITableViewCell()
@@ -148,15 +153,24 @@ extension CreatePollViewController: UITableViewDataSource {
 
 // MARK: - CreatePollOptionCellDelegate
 extension CreatePollViewController: CreatePollOptionCellDelegate {
-    func didAddNewOptionCell(_ sender: CreatePollOptionCell) {
-        options.append("Option \(options.count)")
-        optionsTableView.reloadData()
-    }
-    
-    func didChangePollText(_ sender: CreatePollOptionCell, text: String, for indexPath: IndexPath?) {
+    func didChangePollText(_ cell: CreatePollOptionCell, sender: UITextField, text: String, for indexPath: IndexPath?) {
         if let indexPath = indexPath {
             options[indexPath.row] = text
         }
     }
+    
+    func didDeleteOptionCell(_ cell: CreatePollOptionCell, at indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            options.remove(at: indexPath.row)
+            optionsTableView.reloadData()
+        }
+    }
+    
+    func didAddNewOptionCell(_ sender: CreatePollOptionCell) {
+        options.append("Option \(optionCount)")
+        optionsTableView.reloadData()
+        optionsTableView.scrollToRow(at: IndexPath(row: options.count-1 , section: 0), at: .bottom, animated: true)
+    }
+
     
 }
