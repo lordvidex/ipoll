@@ -12,6 +12,7 @@
 		B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F727DF9AF000D54B3E /* IPButton.swift */; };
 		B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F827DF9AF000D54B3E /* IPTextField.swift */; };
 		B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */; };
+		B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
 		B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917466127CD9B5300140F5B /* KeyboardResponsive.swift */; };
@@ -38,6 +39,7 @@
 		B90BC0F727DF9AF000D54B3E /* IPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPButton.swift; sourceTree = "<group>"; };
 		B90BC0F827DF9AF000D54B3E /* IPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPTextField.swift; sourceTree = "<group>"; };
 		B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPollViewController.swift; sourceTree = "<group>"; };
+		B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		B917466127CD9B5300140F5B /* KeyboardResponsive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsive.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				B95E573E27CD614D0021E53C /* CreatePollViewController.swift */,
 				B9EA043427D52A1500D70769 /* PollViewController.swift */,
 				B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */,
+				B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */,
 				B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */,
 				B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */,
+				B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */,
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,

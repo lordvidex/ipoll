@@ -44,8 +44,7 @@ class JoinPollViewController: UIViewController {
         btn.backgroundColor = .clear
         btn.titleLabel?.font = Constants.appFont?.withSize(18)
         btn.setTitleColor(UIColor(named: Constants.Colors.darkBlue), for: .normal)
-        
-        // TODO: add btn target to open QR Code Scanner
+        btn.addTarget(self, action: #selector(openScanner), for: .touchUpInside)
         
         return btn
     }()
@@ -135,6 +134,10 @@ class JoinPollViewController: UIViewController {
             viewControllers.append(CreatePollViewController())
             navigationController?.setViewControllers(viewControllers, animated: true)
         }
+    }
+    
+    @objc func openScanner() {
+        present(QRScannerViewController(), animated: true)
     }
     
 }
