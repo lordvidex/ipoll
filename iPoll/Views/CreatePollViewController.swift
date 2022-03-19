@@ -18,6 +18,7 @@ class CreatePollViewController: UIViewController {
             return _optionCount
         }
     }
+    weak var pollManager: PollManager! = .shared
     
     @UsesAutoLayout
     var pollTitleLabel: UILabel = {
@@ -61,6 +62,13 @@ class CreatePollViewController: UIViewController {
     }()
     
     @UsesAutoLayout
+    var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.hidesWhenStopped = true
+        return loading
+    }()
+    
+    @UsesAutoLayout
     var optionsTableView: UITableView = {
         let table = UITableView()
         table.register(UINib(nibName: Constants.CellIdentifiers.pollOption, bundle: nil), forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
@@ -76,6 +84,7 @@ class CreatePollViewController: UIViewController {
         super.viewDidLoad()
         
         optionsTableView.dataSource = self
+        loadingIndicator.stopAnimating()
         
         view.backgroundColor = .white
         
@@ -85,6 +94,7 @@ class CreatePollViewController: UIViewController {
         view.addSubview(optionsLabel)
         view.addSubview(optionsTableView)
         view.addSubview(pollCreateBtn)
+        view.addSubview(loadingIndicator)
         
         let safeArea = view.safeAreaLayoutGuide
         
@@ -114,16 +124,32 @@ class CreatePollViewController: UIViewController {
             optionsTableView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 5),
             optionsTableView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -5),
             optionsTableView.topAnchor.constraint(equalTo: optionsLabel.bottomAnchor, constant: 10),
-            optionsTableView.bottomAnchor.constraint(equalTo: pollCreateBtn.topAnchor, constant: -5)
+            optionsTableView.bottomAnchor.constraint(equalTo: pollCreateBtn.topAnchor, constant: -5),
             
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     @objc func createPoll() {
-        // TODO: create the poll
-        let pollVC = PollViewController()
-        pollVC.activeSegmentedControlIndex = 2
-        navigationController?.viewControllers = [pollVC]
+        loadingIndicator.startAnimating()
+        pollManager.createPoll(title: (pollTitleTF.text?.trimmingCharacters(in: .whitespacesAndNewlines))!, options: options) { [weak self] result in
+            switch result {
+                case .success(_):
+                    DispatchQueue.main.async {
+                        let pollVC = PollViewController()
+                        pollVC.activeSegmentedControlIndex = 2
+                        self?.navigationController?.viewControllers = [pollVC]
+                    }
+                case .failure(let err):
+                    print(err)
+                    
+            }
+            DispatchQueue.main.async {
+                self?.loadingIndicator.stopAnimating()
+            }
+        }
+       
     }
     
 }

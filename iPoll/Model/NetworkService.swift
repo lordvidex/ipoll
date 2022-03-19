@@ -45,7 +45,7 @@ class NetworkService {
     /// If `id` does not exist in the keychain, it gets the UUID of the device
     /// and sets it as `id` in the KeyChain
     public static func configure() {
-        self.userId = "12345"
+        self.userId = "A435365S"
     }
     
     public func getUser(completion: @escaping (Result<User, IPollError>) -> Void) {
@@ -64,7 +64,9 @@ class NetworkService {
     
     public func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void) {
         let params = ["title": title, "options": options] as [String : Any]
-        AF.request(pollsEndpoint,method: .post, parameters: params, headers: requestHeader).validate(statusCode: [200, 201])
+        AF.request(pollsEndpoint,method: .post, parameters: params,
+                   encoding: URLEncoding.httpBody,
+                   headers: requestHeader).validate(statusCode: [200, 201])
             .responseDecodable(of: Poll.self) { result in
                 print(result.result)
             }

@@ -11,6 +11,8 @@ protocol PollManagerProtocol {
     var createdPolls: [Poll]? { get }
     var joinedPolls: [Poll]? { get }
     func queryPolls(completion: ( (Bool) -> Void)?)
+    func createPoll(title: String, options: [String],
+                    completion: ((Result<Poll, IPollError>) -> Void)?)
 }
 
 protocol PollManagerDelegate: AnyObject {
@@ -18,6 +20,19 @@ protocol PollManagerDelegate: AnyObject {
 }
 
 class PollManager: PollManagerProtocol {
+    func createPoll(title: String,
+                    options: [String],
+                    completion: ((Result<Poll, IPollError>) -> Void)?) {
+        network.createPoll(title: title, options: options) { result in
+            switch result {
+                case .success(let poll):
+                    completion?(.success(poll))
+                case .failure(let err):
+                    completion?(.failure(err))
+            }
+        }
+    }
+    
     
     weak var delegate: PollManagerDelegate?
     
