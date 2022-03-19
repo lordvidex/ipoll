@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Poll {
+struct Poll: Codable {
     let id: String
     let title: String
-    let finished: Bool
-    let startTime: Date
-    let endTime: Date?
-    let options: [PollOption]
+//    let finished: Bool
+    let isAnonymous: Bool
+//    let startTime: Date
+//    let endTime: Date?
+    let options: [PollOption]?
 }
 
-struct PollOption {
+struct PollOption: Codable {
     let id: String
     let title: String
-    let votes: [String]
-    
+    let votesId: [String]
 }

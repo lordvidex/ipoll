@@ -9,6 +9,7 @@ import UIKit
 
 class PollViewController: UIViewController {
     
+    // MARK: local variables
     var activeSegmentedControlIndex: Int = 0 {
         didSet {
             if activeSegmentedControlIndex < 3 {
@@ -16,16 +17,12 @@ class PollViewController: UIViewController {
             }
         }
     }
-    // MARK: local variables
-    var polls: [Poll] = [
-        Poll(id: "sdfdsf", title:  "asdfdsahgdslge ergbsagbdsg dsagfidasgbdsg dsfgasdgdsag reg erwgaewtfaseg rgargars grdsgrdgrsgre gergerger gergergerwger gsdfgsrdg ", finished: false, startTime: Date(), endTime: nil, options: [
-            PollOption(id: "sdf", title: "yes", votes: []),
-            PollOption(id: "sdfg", title: "no", votes: [])
-        ]),
-        Poll(id: "sdfd",title: "Hello", finished: false, startTime: Date(), endTime: Date(), options: [])]
+    
+    weak var pollManager: PollManager! = .shared
+    var polls: [Poll] = []
+    
     
     // MARK: - UI Elements
-    
     @UsesAutoLayout
     private var pollLabel: UILabel = {
         let label = UILabel()
@@ -85,6 +82,8 @@ class PollViewController: UIViewController {
         setupViews()
         tableView.delegate = self
         tableView.dataSource = self
+        pollManager.queryPolls()
+        pollManager.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,16 +92,24 @@ class PollViewController: UIViewController {
     }
     
     private func setupViews() {
+        // set navigation Items
         navigationItem.title = "Polls"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
         view.backgroundColor = UIColor(named: Constants.Colors.bgBlue)
         
-        // TODO: add other subviews
+        // set refresh control to tableView
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(onRefreshed), for: .valueChanged)
+        tableView.refreshControl = control
+        
+        // add subviews
         view.addSubview(segmentedContol)
         view.addSubview(pollLabel)
         view.addSubview(joinPollBtn)
         view.addSubview(tableView)
         view.addSubview(fab)
+        
+        // define constraints
         
         let guide = view.safeAreaLayoutGuide
         
@@ -131,17 +138,26 @@ class PollViewController: UIViewController {
     }
     
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+        pollManager.queryPolls()
+        updatePolls()
+    }
+    
+    private func updatePolls() {
+        switch segmentedContol.selectedSegmentIndex {
             case 0:
                 pollLabel.text = "Active Polls"
+                polls = pollManager?.joinedPolls ?? []
             case 1:
                 pollLabel.text = "Past Polls"
+                polls = pollManager?.joinedPolls ?? []
             case 2:
                 pollLabel.text = "My Polls"
+                polls = pollManager?.createdPolls ?? []
             default:
                 fatalError("segmentControl should have only 2 children")
                 
         }
+        tableView.reloadData()
     }
     
     @objc func onEditBtnPressed() {
@@ -156,6 +172,18 @@ class PollViewController: UIViewController {
     
     @objc func onJoinBtnClicked() {
         navigationController?.pushViewController(JoinPollViewController(), animated: true)
+    }
+    
+    @objc func onRefreshed(sender: UIRefreshControl) {
+        pollManager.queryPolls { [weak self] updated in
+            if updated {
+                print(self?.pollManager.joinedPolls ?? "Null")
+                self?.updatePolls()
+            }
+            DispatchQueue.main.async {
+                sender.endRefreshing()
+            }
+        }
     }
 }
 
@@ -203,5 +231,15 @@ extension PollViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
+    
+}
+
+extension PollViewController: PollManagerDelegate {
+    func finishedFetchingPolls(_ success: Bool) {
+        DispatchQueue.main.async {
+            self.updatePolls()
+        }
+    }
+    
     
 }

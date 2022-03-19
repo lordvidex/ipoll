@@ -137,7 +137,7 @@ class JoinPollViewController: UIViewController {
     }
     
     @objc func openScanner() {
-        present(QRScannerViewController(), animated: true)
+        navigationController?.pushViewController(QRScannerViewController(), animated: true)
     }
     
 }

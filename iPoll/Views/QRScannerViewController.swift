@@ -83,7 +83,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             goToPoll(code: stringValue)
         }
         
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
         
     }
     

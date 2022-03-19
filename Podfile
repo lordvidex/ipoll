@@ -8,5 +8,6 @@ target 'iPoll' do
   # Pods for iPoll
   pod 'IQKeyboardManagerSwift', '~> 6.5.9'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Alamofire', '~> 5.5'
 
 end
