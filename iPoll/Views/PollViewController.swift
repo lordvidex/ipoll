@@ -81,11 +81,13 @@ class PollViewController: UIViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        
         tableView.delegate = self
         tableView.dataSource = self
-        pollManager.queryPolls()
         pollManager.delegate = self
+        setupViews()
+        pollManager.queryPolls()
+        
     }
     
     override func viewDidLayoutSubviews() {

@@ -13,7 +13,7 @@ class VoteViewController: UIViewController {
     // MARK: Variables
     private var poll: Poll?
     public var pollId: String?
-    private var voteManager: VoteManager = .init()
+    private let voteManager = VoteManager()
     
     // MARK: UI
     private var titleLabel: IPLabel = {
@@ -129,7 +129,7 @@ extension VoteViewController: VoteManagerDelegate {
         present(alert, animated: true)
     }
     
-    func didFetchPoll(_ voteManager: VoteManager, sender: Action, poll: Poll) {
+    func didReceivePoll(_ voteManager: VoteManager, sender: Action, poll: Poll) {
         self.poll = poll
         titleLabel.text = poll.title
         hideLoading()

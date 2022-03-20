@@ -36,6 +36,7 @@
 		B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043227D46E7500D70769 /* PollTableViewCell.swift */; };
 		B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043427D52A1500D70769 /* PollViewController.swift */; };
 		B9EA043727D52BC900D70769 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043627D52BC800D70769 /* Constants.swift */; };
+		B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03427E7D3CF00483244 /* SocketParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B9EA043227D46E7500D70769 /* PollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
 		B9EA043427D52A1500D70769 /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
 		B9EA043627D52BC800D70769 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B9EED03427E7D3CF00483244 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				B917465B27CD90A000140F5B /* UIColor+Hex.swift */,
 				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
 				B98837E827E656C700094768 /* IPollError.swift */,
+				B9EED03427E7D3CF00483244 /* SocketParser.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
 				B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
+				B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */,
 				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,
 				B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */,
 				B98837EB27E65A1400094768 /* PollManager.swift in Sources */,
