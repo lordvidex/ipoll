@@ -15,6 +15,16 @@ struct Poll: Codable {
 //    let startTime: Date
 //    let endTime: Date?
     let options: [PollOption]?
+    
+    var totalVotes: Int {
+        var count = 0
+        if let options = options {
+            for option in options {
+                count += option.votesId.count
+            }
+        }
+        return count
+    }
 }
 
 struct PollOption: Codable {

@@ -33,7 +33,7 @@ class PollViewController: UIViewController {
     
     @UsesAutoLayout
     private var joinPollBtn: IPButton = {
-        let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: UIColor(named: Constants.Colors.darkBlue))
+        let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor:  Constants.Colors.darkBlue)
         btn.addRightIcon(image: UIImage(systemName: "chevron.right")!)
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(onJoinBtnClicked), for: .touchUpInside)
@@ -59,6 +59,7 @@ class PollViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         table.register(PollTableViewCell.self, forCellReuseIdentifier: "poll")
         table.estimatedRowHeight = 50
+        table.backgroundColor = .clear
         table.separatorStyle = .none
         return table
     }()
@@ -67,8 +68,8 @@ class PollViewController: UIViewController {
     private var segmentedContol: UISegmentedControl = {
         let ctrl = UISegmentedControl(items: ["Active Polls", "Past Polls", "My Polls"])
         ctrl.layer.cornerRadius = 9
-        ctrl.selectedSegmentTintColor = UIColor(named: Constants.Colors.darkBlue)
-        ctrl.tintColor = UIColor(named: Constants.Colors.lightBlue)
+        ctrl.selectedSegmentTintColor = Constants.Colors.darkBlue
+        ctrl.tintColor = Constants.Colors.lightBlue
         ctrl.selectedSegmentIndex = 0
         ctrl.addTarget(self, action: #selector(onTapSegmentedControl(_:)), for: .valueChanged)
         ctrl.sendActions(for: .valueChanged)
@@ -95,7 +96,7 @@ class PollViewController: UIViewController {
         // set navigation Items
         navigationItem.title = "Polls"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
-        view.backgroundColor = UIColor(named: Constants.Colors.bgBlue)
+        view.backgroundColor = Constants.Colors.bgBlue
         
         // set refresh control to tableView
         let control = UIRefreshControl()
@@ -203,7 +204,9 @@ extension PollViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: navigate to details screen
+        let voteViewController = VoteViewController()
+        voteViewController.pollId = polls[indexPath.row].id
+        navigationController?.pushViewController(voteViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

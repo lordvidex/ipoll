@@ -56,7 +56,7 @@ class CreatePollOptionCell: UITableViewCell {
     }
     
     private func updateUI() {
-        optionTextField.borderColor = UIColor(named: Constants.Colors.darkBlue)
+        optionTextField.borderColor = Constants.Colors.darkBlue
         addBtn.layer.cornerRadius = 4
         
     }

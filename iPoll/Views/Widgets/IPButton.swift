@@ -27,7 +27,7 @@ class IPButton: UIButton {
         cornerRadius: CGFloat? = nil,
         height: CGFloat? = nil,
         width: CGFloat? = nil,
-        backgroundColor: UIColor? = UIColor(named: Constants.Colors.darkBlue),
+        backgroundColor: UIColor? = Constants.Colors.darkBlue,
         textColor: UIColor? = nil
     ) {
         self.init(frame: CGRect.zero)

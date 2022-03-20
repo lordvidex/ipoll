@@ -24,7 +24,7 @@ class CreatePollViewController: UIViewController {
     var pollTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Poll Title"
-        label.textColor = UIColor(named: Constants.Colors.darkBlue)
+        label.textColor = Constants.Colors.darkBlue
         label.font = Constants.appFont?.withSize(18)
         return label
     }()
@@ -34,7 +34,7 @@ class CreatePollViewController: UIViewController {
         let label = UILabel()
         label.text = "Create Poll"
         label.font = Constants.appFont?.withSize(24)
-        label.textColor = UIColor(named: Constants.Colors.darkBlue)
+        label.textColor = Constants.Colors.darkBlue
         return label
     }()
     
@@ -57,7 +57,7 @@ class CreatePollViewController: UIViewController {
         let label = UILabel()
         label.text = "Options"
         label.font = Constants.appFont?.withSize(14)
-        label.textColor = UIColor(named: Constants.Colors.darkBlue)
+        label.textColor = Constants.Colors.darkBlue
         return label
     }()
     

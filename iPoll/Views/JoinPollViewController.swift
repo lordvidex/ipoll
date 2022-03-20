@@ -43,7 +43,7 @@ class JoinPollViewController: UIViewController {
         btn.layer.cornerRadius = 6
         btn.backgroundColor = .clear
         btn.titleLabel?.font = Constants.appFont?.withSize(18)
-        btn.setTitleColor(UIColor(named: Constants.Colors.darkBlue), for: .normal)
+        btn.setTitleColor(Constants.Colors.darkBlue, for: .normal)
         btn.addTarget(self, action: #selector(openScanner), for: .touchUpInside)
         
         return btn
@@ -64,7 +64,7 @@ class JoinPollViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: Constants.Colors.bgBlue)
+        view.backgroundColor = Constants.Colors.bgBlue
         view.addSubview(joinPollLabel)
         view.addSubview(pollIdLabel)
         view.addSubview(pollIdTF)
@@ -112,7 +112,7 @@ class JoinPollViewController: UIViewController {
     
     private func addDottedDashes(to view: UIView) {
         let border = CAShapeLayer()
-        border.strokeColor = UIColor(named: Constants.Colors.darkBlue)?.cgColor
+        border.strokeColor = Constants.Colors.darkBlue?.cgColor
         border.lineDashPattern = [4,2]
         border.fillColor = nil
         border.frame = view.bounds

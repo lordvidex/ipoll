@@ -18,7 +18,7 @@ class IPLabel: UILabel {
     }
     
     convenience init(_ text: String,
-                     textColor: UIColor? = UIColor(named: Constants.Colors.darkBlue),
+                     textColor: UIColor? = Constants.Colors.darkBlue,
                      font: UIFont? = Constants.appFont
     ) {
         self.init(frame: CGRect.zero)
