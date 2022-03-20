@@ -123,8 +123,12 @@ class JoinPollViewController: UIViewController {
     }
     
     @objc func onJoinBtnClicked() {
-        //TODO: link join poll function
-        print("Clicked")
+        if let id = pollIdTF.text {
+            let voteVC = VoteViewController()
+            voteVC.pollId = id.trimmingCharacters(in: .whitespacesAndNewlines)
+            print(voteVC.pollId!)
+            navigationController?.pushViewController(voteVC, animated: true)
+        }
     }
     
     @objc func onTapFab(_ sender: UIButton) {

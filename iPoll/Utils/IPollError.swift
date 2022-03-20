@@ -12,7 +12,7 @@ struct IPollError: Error, Decodable {
     var statusCode: Int?
     var error: String?
     
-    init(message: String?) {
+    init(message: String? = nil) {
         self.message = message ?? "An Error Occured"
     }
 }

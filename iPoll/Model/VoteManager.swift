@@ -7,9 +7,14 @@
 
 import Foundation
 
+enum Action {
+    case vote
+    case fetch
+}
+
 protocol VoteManagerDelegate: AnyObject {
-    func didFetchPoll(_ voteManager: VoteManager, poll: Poll)
-    func didFail(_ voteManager: VoteManager, with error: IPollError)
+    func didFetchPoll(_ voteManager: VoteManager,sender: Action, poll: Poll)
+    func didFail(_ voteManager: VoteManager,sender: Action, with error: IPollError)
 }
 protocol VoteManagerProtocol {
     func fetchPoll(_ id: String)
@@ -23,9 +28,9 @@ struct VoteManager: VoteManagerProtocol {
         network.getPoll(id) { result in
             switch result {
                 case .success(let poll):
-                    delegate?.didFetchPoll(self, poll: poll)
+                    delegate?.didFetchPoll(self, sender: .fetch, poll: poll)
                 case .failure(let error):
-                    delegate?.didFail(self, with: error)
+                    delegate?.didFail(self, sender: .fetch, with: error)
             }
         }
     }
@@ -34,9 +39,9 @@ struct VoteManager: VoteManagerProtocol {
         network.vote(pollId: pollId, optionId: optionId) { result in
             switch result {
                 case .success(let poll):
-                    delegate?.didFetchPoll(self, poll: poll)
+                    delegate?.didFetchPoll(self, sender: .vote, poll: poll)
                 case .failure(let error):
-                    delegate?.didFail(self, with: error)
+                    delegate?.didFail(self, sender: .vote, with: error)
                     
             }
         }

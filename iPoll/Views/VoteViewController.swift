@@ -106,19 +106,30 @@ extension VoteViewController: UITableViewDataSource {
 
 // MARK: VoteManagerDelegate
 extension VoteViewController: VoteManagerDelegate {
-    func didFail(_ voteManager: VoteManager, with error: IPollError) {
+    func didFail(_ voteManager: VoteManager, sender: Action, with error: IPollError) {
         hideLoading()
-        showErrorAlert(with: error.message)
+        showErrorAlert(with: error.message, addBackButton: sender == .fetch, addOkButton: false)
     }
     
-    func showErrorAlert(with message: String? = nil) {
+    func showErrorAlert(with message: String? = nil, addBackButton: Bool, addOkButton: Bool = true) {
         let alert = UIAlertController(title: "Vote Error", message: "An error occured while voting: \n \(message ?? "")", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(okAction)
+        let backAction = UIAlertAction(title: "Exit", style: .cancel) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        if addOkButton {
+            alert.addAction(okAction) // simply dismisses alertAction
+        }
+        
+        if addBackButton {
+            alert.addAction(backAction) // returns User to previous screen
+        }
+        
         present(alert, animated: true)
     }
     
-    func didFetchPoll(_ voteManager: VoteManager, poll: Poll) {
+    func didFetchPoll(_ voteManager: VoteManager, sender: Action, poll: Poll) {
         self.poll = poll
         titleLabel.text = poll.title
         hideLoading()
@@ -130,6 +141,10 @@ extension VoteViewController: VoteManagerDelegate {
 extension VoteViewController: SkeletonTableViewDataSource {
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         Constants.CellIdentifiers.voteOption
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
     }
 }
 

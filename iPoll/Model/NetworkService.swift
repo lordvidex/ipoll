@@ -113,7 +113,8 @@ class NetworkService: NetworkServiceProtocol {
     private func decodeError<T>(from response: DataResponse<T, AFError>) -> IPollError {
         let decoder = JSONDecoder()
         do {
-            let err = try decoder.decode(IPollError.self, from: response.data!)
+            guard let data = response.data else { throw IPollError() }
+            let err = try decoder.decode(IPollError.self, from: data)
             return err
         } catch {
             return IPollError(message: response.error?.errorDescription ?? "An Error Occurred")

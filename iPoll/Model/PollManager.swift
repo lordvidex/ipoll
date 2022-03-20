@@ -11,7 +11,8 @@ protocol PollManagerProtocol {
     var createdPolls: [Poll]? { get }
     var joinedPolls: [Poll]? { get }
     func queryPolls(completion: ( (Bool) -> Void)?)
-    func createPoll(title: String, options: [String],
+    func createPoll(title: String,
+                    options: [String],
                     completion: ((Result<Poll, IPollError>) -> Void)?)
 }
 

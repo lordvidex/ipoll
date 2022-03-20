@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UIImageSymbols
 
 class PollViewController: UIViewController {
     
@@ -139,7 +140,7 @@ class PollViewController: UIViewController {
     }
     
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
-        pollManager.queryPolls()
+//        pollManager.queryPolls()
         updatePolls()
     }
     
@@ -186,6 +187,19 @@ class PollViewController: UIViewController {
             }
         }
     }
+    
+    func displayBottomSheetAlert(_ message: String, dismissAfter: Double? = nil) {
+        let alert = UIAlertController(title: message, message: "", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
+        
+        if let dismissAfter = dismissAfter {
+            DispatchQueue.main.asyncAfter(deadline: .now()+dismissAfter ) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -193,13 +207,37 @@ extension PollViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "poll", for: indexPath) as? PollTableViewCell {
             cell.title = polls[indexPath.row].title
-            
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   contextMenuConfigurationForRowAt indexPath: IndexPath,
+                   point: CGPoint) -> UIContextMenuConfiguration? {
+        let poll = polls[indexPath.row]
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+
+            let copyLink = UIAction(title: "Copy Link", image: .docOnDocFill) { _ in
+                print("Action")
+            }
+            
+            let copyCode = UIAction(title: "Copy Code", image: .number) { [weak self] _ in
+                UIPasteboard.general.string = poll.id
+                self?.displayBottomSheetAlert("Code successfully copied to clipboard", dismissAfter: 2)
+            }
+            
+            let qrCode = UIAction(title: "QR Code", image: .qrcode) {_ in
+                
+            }
+            
+            
+            let menu = UIMenu(title: "",  options: [], children: [copyLink, copyCode, qrCode])
+            return menu
+        }
+        
+        return config
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
