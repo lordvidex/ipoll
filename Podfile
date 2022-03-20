@@ -9,7 +9,8 @@ target 'iPoll' do
   pod 'IQKeyboardManagerSwift', '~> 6.5.9'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 5.5'
-  pod 'SkeletonView'
-  pod 'UIImageSymbols'
+  pod 'SkeletonView', '~> 1.29.2'
+  pod 'UIImageSymbols', '~> 0.6.1'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
 end

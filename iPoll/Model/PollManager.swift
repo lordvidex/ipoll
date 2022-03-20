@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// PollManagers ViewModels must conform to the following protocol
 protocol PollManagerProtocol {
+    var delegate: PollManagerDelegate? { get set }
     var createdPolls: [Poll]? { get }
     var joinedPolls: [Poll]? { get }
     func queryPolls(completion: ( (Bool) -> Void)?)
@@ -16,11 +18,29 @@ protocol PollManagerProtocol {
                     completion: ((Result<Poll, IPollError>) -> Void)?)
 }
 
+
+/// Delegate for updating view from the ViewModel
 protocol PollManagerDelegate: AnyObject {
     func finishedFetchingPolls(_ success: Bool)
 }
 
+
 class PollManager: PollManagerProtocol {
+    
+    // MARK: variables
+    weak var delegate: PollManagerDelegate?
+    
+    public static let shared = PollManager()
+    
+    let network: NetworkService = .shared
+    
+    var createdPolls: [Poll]?
+    
+    var joinedPolls: [Poll]?
+    
+    private init() {}
+    
+    // MARK: functions
     func createPoll(title: String,
                     options: [String],
                     completion: ((Result<Poll, IPollError>) -> Void)?) {
@@ -33,9 +53,6 @@ class PollManager: PollManagerProtocol {
             }
         }
     }
-    
-    
-    weak var delegate: PollManagerDelegate?
     
     func queryPolls(completion: ( (Bool) -> Void )? = nil) {
         network.getUser { [weak self] result in
@@ -52,16 +69,4 @@ class PollManager: PollManagerProtocol {
             }
         }
     }
-    
-    
-    private init() {}
-    
-    public static let shared = PollManager()
-    
-    let network: NetworkService = .shared
-    
-    var createdPolls: [Poll]?
-    
-    var joinedPolls: [Poll]?
-    
 }

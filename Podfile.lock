@@ -3,14 +3,18 @@ PODS:
   - IQKeyboardManagerSwift (6.5.9)
   - SkeletonView (1.29.2)
   - SnapKit (5.0.1)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - UIImageSymbols (0.6.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
   - IQKeyboardManagerSwift (~> 6.5.9)
-  - SkeletonView
+  - SkeletonView (~> 1.29.2)
   - SnapKit (~> 5.0.0)
-  - UIImageSymbols
+  - Socket.IO-Client-Swift (~> 15.2.0)
+  - UIImageSymbols (~> 0.6.1)
 
 SPEC REPOS:
   trunk:
@@ -18,6 +22,8 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - SkeletonView
     - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
     - UIImageSymbols
 
 SPEC CHECKSUMS:
@@ -25,8 +31,10 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UIImageSymbols: d0ad8b1865e8c295539b618b95cf4b8dc19614fb
 
-PODFILE CHECKSUM: f084f302d5540906dc30f7700a4e75e62192a368
+PODFILE CHECKSUM: 7bda9c7cae1b909623043313daeb8fff9f0dede5
 
 COCOAPODS: 1.11.2
