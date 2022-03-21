@@ -12,6 +12,7 @@
 		B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F727DF9AF000D54B3E /* IPButton.swift */; };
 		B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F827DF9AF000D54B3E /* IPTextField.swift */; };
 		B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */; };
+		B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
 		B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917466127CD9B5300140F5B /* KeyboardResponsive.swift */; };
@@ -21,6 +22,13 @@
 		B95E573327CD1B700021E53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95E573227CD1B700021E53C /* Assets.xcassets */; };
 		B95E573627CD1B700021E53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95E573427CD1B700021E53C /* LaunchScreen.storyboard */; };
 		B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E573E27CD614D0021E53C /* CreatePollViewController.swift */; };
+		B98837E527E6311B00094768 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E427E6311B00094768 /* NetworkService.swift */; };
+		B98837E727E6426700094768 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E627E6426700094768 /* User.swift */; };
+		B98837E927E656C700094768 /* IPollError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E827E656C700094768 /* IPollError.swift */; };
+		B98837EB27E65A1400094768 /* PollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EA27E65A1400094768 /* PollManager.swift */; };
+		B98837ED27E6839200094768 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EC27E6839200094768 /* VoteViewController.swift */; };
+		B98837EF27E6925200094768 /* VoteOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EE27E6925200094768 /* VoteOptionCell.swift */; };
+		B98837F127E71BE000094768 /* VoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837F027E71BE000094768 /* VoteManager.swift */; };
 		B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */; };
 		B9B275B327DF207E00DD3711 /* CreatePollOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */; };
 		B9EA042F27D4260500D70769 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA042E27D4260500D70769 /* Poll.swift */; };
@@ -28,6 +36,7 @@
 		B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043227D46E7500D70769 /* PollTableViewCell.swift */; };
 		B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043427D52A1500D70769 /* PollViewController.swift */; };
 		B9EA043727D52BC900D70769 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043627D52BC800D70769 /* Constants.swift */; };
+		B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03427E7D3CF00483244 /* SocketParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +47,7 @@
 		B90BC0F727DF9AF000D54B3E /* IPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPButton.swift; sourceTree = "<group>"; };
 		B90BC0F827DF9AF000D54B3E /* IPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPTextField.swift; sourceTree = "<group>"; };
 		B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPollViewController.swift; sourceTree = "<group>"; };
+		B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		B917466127CD9B5300140F5B /* KeyboardResponsive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsive.swift; sourceTree = "<group>"; };
@@ -49,6 +59,13 @@
 		B95E573527CD1B700021E53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B95E573727CD1B700021E53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B95E573E27CD614D0021E53C /* CreatePollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollViewController.swift; sourceTree = "<group>"; };
+		B98837E427E6311B00094768 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B98837E627E6426700094768 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B98837E827E656C700094768 /* IPollError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPollError.swift; sourceTree = "<group>"; };
+		B98837EA27E65A1400094768 /* PollManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollManager.swift; sourceTree = "<group>"; };
+		B98837EC27E6839200094768 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		B98837EE27E6925200094768 /* VoteOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteOptionCell.swift; sourceTree = "<group>"; };
+		B98837F027E71BE000094768 /* VoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteManager.swift; sourceTree = "<group>"; };
 		B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollOptionCell.swift; sourceTree = "<group>"; };
 		B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePollOptionCell.xib; sourceTree = "<group>"; };
 		B9EA042E27D4260500D70769 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
@@ -56,6 +73,7 @@
 		B9EA043227D46E7500D70769 /* PollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
 		B9EA043427D52A1500D70769 /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
 		B9EA043627D52BC800D70769 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B9EED03427E7D3CF00483244 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +147,8 @@
 				B95E573E27CD614D0021E53C /* CreatePollViewController.swift */,
 				B9EA043427D52A1500D70769 /* PollViewController.swift */,
 				B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */,
+				B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */,
+				B98837EC27E6839200094768 /* VoteViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +163,7 @@
 				B9EA043227D46E7500D70769 /* PollTableViewCell.swift */,
 				B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */,
 				B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */,
+				B98837EE27E6925200094768 /* VoteOptionCell.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -151,6 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				B9EA042E27D4260500D70769 /* Poll.swift */,
+				B98837E427E6311B00094768 /* NetworkService.swift */,
+				B98837E627E6426700094768 /* User.swift */,
+				B98837EA27E65A1400094768 /* PollManager.swift */,
+				B98837F027E71BE000094768 /* VoteManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +186,8 @@
 				B917466127CD9B5300140F5B /* KeyboardResponsive.swift */,
 				B917465B27CD90A000140F5B /* UIColor+Hex.swift */,
 				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
+				B98837E827E656C700094768 /* IPollError.swift */,
+				B9EED03427E7D3CF00483244 /* SocketParser.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -280,23 +307,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B98837E527E6311B00094768 /* NetworkService.swift in Sources */,
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
+				B98837F127E71BE000094768 /* VoteManager.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
 				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
+				B98837E727E6426700094768 /* User.swift in Sources */,
 				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
 				B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
+				B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */,
 				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,
 				B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */,
+				B98837EB27E65A1400094768 /* PollManager.swift in Sources */,
 				B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */,
+				B98837ED27E6839200094768 /* VoteViewController.swift in Sources */,
 				B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */,
+				B98837E927E656C700094768 /* IPollError.swift in Sources */,
+				B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */,
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,
+				B98837EF27E6925200094768 /* VoteOptionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,15 +53,14 @@ class CreatePollOptionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
-        
     }
     
     private func updateUI() {
-        optionTextField.borderColor = UIColor(named: Constants.Colors.darkBlue)
+        optionTextField.borderColor = Constants.Colors.darkBlue
         addBtn.layer.cornerRadius = 4
         
     }
-    
+
     @IBAction private func onTextChanged(_ sender: UITextField) {
         delegate?.didChangePollText(self, sender: sender, text: sender.text ?? "", for: indexPath)
     }

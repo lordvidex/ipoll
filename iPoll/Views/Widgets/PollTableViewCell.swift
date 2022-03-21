@@ -48,7 +48,7 @@ class PollTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        contentView.backgroundColor = Constants.Colors.bgBlue
         mainView.addSubview(pollLabel)
         mainView.addSubview(arrow)
         contentView.addSubview(mainView)

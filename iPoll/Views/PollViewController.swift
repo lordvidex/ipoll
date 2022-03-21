@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import UIImageSymbols
 
 class PollViewController: UIViewController {
     
+    // MARK: local variables
     var activeSegmentedControlIndex: Int = 0 {
         didSet {
             if activeSegmentedControlIndex < 3 {
@@ -16,16 +18,12 @@ class PollViewController: UIViewController {
             }
         }
     }
-    // MARK: local variables
-    var polls: [Poll] = [
-        Poll(id: "sdfdsf", title:  "asdfdsahgdslge ergbsagbdsg dsagfidasgbdsg dsfgasdgdsag reg erwgaewtfaseg rgargars grdsgrdgrsgre gergerger gergergerwger gsdfgsrdg ", finished: false, startTime: Date(), endTime: nil, options: [
-            PollOption(id: "sdf", title: "yes", votes: []),
-            PollOption(id: "sdfg", title: "no", votes: [])
-        ]),
-        Poll(id: "sdfd",title: "Hello", finished: false, startTime: Date(), endTime: Date(), options: [])]
+    
+    weak var pollManager: PollManager! = .shared
+    var polls: [Poll] = []
+    
     
     // MARK: - UI Elements
-    
     @UsesAutoLayout
     private var pollLabel: UILabel = {
         let label = UILabel()
@@ -36,7 +34,7 @@ class PollViewController: UIViewController {
     
     @UsesAutoLayout
     private var joinPollBtn: IPButton = {
-        let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: UIColor(named: Constants.Colors.darkBlue))
+        let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor:  Constants.Colors.darkBlue)
         btn.addRightIcon(image: UIImage(systemName: "chevron.right")!)
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(onJoinBtnClicked), for: .touchUpInside)
@@ -62,6 +60,7 @@ class PollViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         table.register(PollTableViewCell.self, forCellReuseIdentifier: "poll")
         table.estimatedRowHeight = 50
+        table.backgroundColor = .clear
         table.separatorStyle = .none
         return table
     }()
@@ -70,8 +69,8 @@ class PollViewController: UIViewController {
     private var segmentedContol: UISegmentedControl = {
         let ctrl = UISegmentedControl(items: ["Active Polls", "Past Polls", "My Polls"])
         ctrl.layer.cornerRadius = 9
-        ctrl.selectedSegmentTintColor = UIColor(named: Constants.Colors.darkBlue)
-        ctrl.tintColor = UIColor(named: Constants.Colors.lightBlue)
+        ctrl.selectedSegmentTintColor = Constants.Colors.darkBlue
+        ctrl.tintColor = Constants.Colors.lightBlue
         ctrl.selectedSegmentIndex = 0
         ctrl.addTarget(self, action: #selector(onTapSegmentedControl(_:)), for: .valueChanged)
         ctrl.sendActions(for: .valueChanged)
@@ -82,9 +81,13 @@ class PollViewController: UIViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        
         tableView.delegate = self
         tableView.dataSource = self
+        pollManager.delegate = self
+        setupViews()
+        pollManager.queryPolls()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,15 +96,24 @@ class PollViewController: UIViewController {
     }
     
     private func setupViews() {
+        // set navigation Items
         navigationItem.title = "Polls"
-        view.backgroundColor = UIColor(named: Constants.Colors.bgBlue)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
+        view.backgroundColor = Constants.Colors.bgBlue
         
-        // TODO: add other subviews
+        // set refresh control to tableView
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(onRefreshed), for: .valueChanged)
+        tableView.refreshControl = control
+        
+        // add subviews
         view.addSubview(segmentedContol)
         view.addSubview(pollLabel)
         view.addSubview(joinPollBtn)
         view.addSubview(tableView)
         view.addSubview(fab)
+        
+        // define constraints
         
         let guide = view.safeAreaLayoutGuide
         
@@ -130,17 +142,32 @@ class PollViewController: UIViewController {
     }
     
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+//        pollManager.queryPolls()
+        updatePolls()
+    }
+    
+    private func updatePolls() {
+        switch segmentedContol.selectedSegmentIndex {
             case 0:
                 pollLabel.text = "Active Polls"
+                polls = pollManager?.joinedPolls ?? []
             case 1:
                 pollLabel.text = "Past Polls"
+                polls = pollManager?.joinedPolls ?? []
             case 2:
                 pollLabel.text = "My Polls"
+                polls = pollManager?.createdPolls ?? []
             default:
                 fatalError("segmentControl should have only 2 children")
                 
         }
+        tableView.reloadData()
+    }
+    
+    @objc func onEditBtnPressed() {
+        tableView.isEditing = !tableView.isEditing
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
+        
     }
     
     @objc func onTapFab(_ sender: UIButton) {
@@ -150,6 +177,31 @@ class PollViewController: UIViewController {
     @objc func onJoinBtnClicked() {
         navigationController?.pushViewController(JoinPollViewController(), animated: true)
     }
+    
+    @objc func onRefreshed(sender: UIRefreshControl) {
+        pollManager.queryPolls { [weak self] updated in
+            if updated {
+                print(self?.pollManager.joinedPolls ?? "Null")
+                self?.updatePolls()
+            }
+            DispatchQueue.main.async {
+                sender.endRefreshing()
+            }
+        }
+    }
+    
+    func displayBottomSheetAlert(_ message: String, dismissAfter: Double? = nil) {
+        let alert = UIAlertController(title: message, message: "", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
+        
+        if let dismissAfter = dismissAfter {
+            DispatchQueue.main.asyncAfter(deadline: .now()+dismissAfter ) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -157,25 +209,49 @@ extension PollViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "poll", for: indexPath) as? PollTableViewCell {
             cell.title = polls[indexPath.row].title
-            
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
             return cell
         }
         
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView,
+                   contextMenuConfigurationForRowAt indexPath: IndexPath,
+                   point: CGPoint) -> UIContextMenuConfiguration? {
+        let poll = polls[indexPath.row]
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+
+            let copyLink = UIAction(title: "Copy Link", image: .docOnDocFill) { _ in
+                print("Action")
+            }
+            
+            let copyCode = UIAction(title: "Copy Code", image: .number) { [weak self] _ in
+                UIPasteboard.general.string = poll.id
+                self?.displayBottomSheetAlert("Code successfully copied to clipboard", dismissAfter: 2)
+            }
+            
+            let qrCode = UIAction(title: "QR Code", image: .qrcode) {_ in
+                
+            }
+            
+            
+            let menu = UIMenu(title: "",  options: [], children: [copyLink, copyCode, qrCode])
+            return menu
+        }
+        
+        return config
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: navigate to details screen
+        let voteViewController = VoteViewController()
+        voteViewController.pollId = polls[indexPath.row].id
+        navigationController?.pushViewController(voteViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let from = polls[sourceIndexPath.row]
-        polls[sourceIndexPath.row] = polls[destinationIndexPath.row]
-        polls[destinationIndexPath.row] = from
-        tableView.reloadRows(at: [sourceIndexPath, destinationIndexPath], with: .top)
+        let moved = polls.remove(at: sourceIndexPath.row)
+        polls.insert(moved, at: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -198,5 +274,15 @@ extension PollViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
+    
+}
+
+extension PollViewController: PollManagerDelegate {
+    func finishedFetchingPolls(_ success: Bool) {
+        DispatchQueue.main.async {
+            self.updatePolls()
+        }
+    }
+    
     
 }
