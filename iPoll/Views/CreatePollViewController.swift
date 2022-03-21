@@ -11,8 +11,8 @@ class CreatePollViewController: UIViewController {
     
     var options = ["Option 1", "Option 2"]
     
-    var _optionCount = 2
-    var optionCount: Int {
+    private var _optionCount = 2
+    private var optionCount: Int {
         get {
             _optionCount += 1
             return _optionCount
@@ -21,7 +21,7 @@ class CreatePollViewController: UIViewController {
     weak var pollManager: PollManager! = .shared
     
     @UsesAutoLayout
-    var pollTitleLabel: UILabel = {
+    private var pollTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Poll Title"
         label.textColor = Constants.Colors.darkBlue
@@ -30,7 +30,7 @@ class CreatePollViewController: UIViewController {
     }()
     
     @UsesAutoLayout
-    var headerLabel: UILabel = {
+    private var headerLabel: UILabel = {
         let label = UILabel()
         label.text = "Create Poll"
         label.font = Constants.appFont?.withSize(24)
@@ -46,14 +46,14 @@ class CreatePollViewController: UIViewController {
     }()
     
     @UsesAutoLayout
-    var pollCreateBtn: UIButton = {
+    private var pollCreateBtn: UIButton = {
         let btn = IPButton(text: "Create poll", textColor: .white)
         btn.addTarget(self, action: #selector(createPoll), for: .touchUpInside)
         return btn
     }()
     
     @UsesAutoLayout
-    var optionsLabel: UILabel = {
+    private var optionsLabel: UILabel = {
         let label = UILabel()
         label.text = "Options"
         label.font = Constants.appFont?.withSize(14)
@@ -62,14 +62,14 @@ class CreatePollViewController: UIViewController {
     }()
     
     @UsesAutoLayout
-    var loadingIndicator: UIActivityIndicatorView = {
+    private var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.hidesWhenStopped = true
         return loading
     }()
     
     @UsesAutoLayout
-    var optionsTableView: UITableView = {
+    private var optionsTableView: UITableView = {
         let table = UITableView()
         table.register(UINib(nibName: Constants.CellIdentifiers.pollOption, bundle: nil), forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
         table.separatorStyle = .none

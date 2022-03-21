@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast_Swift
 
 class JoinPollViewController: UIViewController {
     
@@ -16,13 +17,13 @@ class JoinPollViewController: UIViewController {
     }()
     
     
-    private var pollIdTF: UITextField = {
+    var pollIdTF: UITextField = {
         let tf = IPTextField()
         return tf
     }()
     
     
-    var pollIdLabel: UILabel = {
+    private var pollIdLabel: UILabel = {
         let label = IPLabel("Poll #ID")
         label.font = Constants.appFont?.withSize(14)
         return label
@@ -141,7 +142,10 @@ class JoinPollViewController: UIViewController {
     }
     
     @objc func openScanner() {
-        navigationController?.pushViewController(QRScannerViewController(), animated: true)
+        let qrScannerVC = QRScannerViewController { error in
+            self.view.makeToast(error)
+        }
+        navigationController?.pushViewController(qrScannerVC, animated: true)
     }
     
 }

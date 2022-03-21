@@ -6,6 +6,7 @@ PODS:
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
+  - Toast-Swift (5.0.1)
   - UIImageSymbols (0.6.1)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - SkeletonView (~> 1.29.2)
   - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
+  - Toast-Swift (~> 5.0.1)
   - UIImageSymbols (~> 0.6.1)
 
 SPEC REPOS:
@@ -24,6 +26,7 @@ SPEC REPOS:
     - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
+    - Toast-Swift
     - UIImageSymbols
 
 SPEC CHECKSUMS:
@@ -33,8 +36,9 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UIImageSymbols: d0ad8b1865e8c295539b618b95cf4b8dc19614fb
 
-PODFILE CHECKSUM: 7bda9c7cae1b909623043313daeb8fff9f0dede5
+PODFILE CHECKSUM: e059ad0f4000fcfc3dd0d0d8d165655dd3b18523
 
 COCOAPODS: 1.11.2

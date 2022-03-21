@@ -30,7 +30,8 @@ class VoteManager: VoteManagerProtocol {
     private let network: NetworkService = .shared
     
     // create a manager that connects to the socket API with a room param
-    private var socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!, config: [.log(false), .compress, .connectParams(["EIO": "3"])])
+    private var socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!,
+                                              config: [.log(false), .compress, .connectParams(["EIO": "3"])])
     
     
     private weak var socket: SocketIOClient?

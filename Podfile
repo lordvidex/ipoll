@@ -12,5 +12,6 @@ target 'iPoll' do
   pod 'SkeletonView', '~> 1.29.2'
   pod 'UIImageSymbols', '~> 0.6.1'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+  pod 'Toast-Swift', '~> 5.0.1'
 
 end

@@ -13,7 +13,17 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     // MARK: private variables
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer!
+    private var onError: ((String) -> Void)?
     
+    
+    init(onError: @escaping (String) -> Void) {
+        super.init(nibName: nil, bundle: nil)
+        self.onError = onError
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("QRScannerViewController does not have a decoder")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +32,8 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         captureSession = AVCaptureSession()
         
         // get the video input from the capture device
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else { return }
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { showError(); return }
+        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else { showError(); return }
         
         // add the video input to the session
         if captureSession!.canAddInput(videoInput) {
@@ -83,17 +93,29 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             goToPoll(code: stringValue)
         }
         
-        navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
         
     }
     
     private func showError() {
-        //TODO: display an alert for error
+        let alert = UIAlertController(title: "Error Initialising Camera", message: "Camera could not start to read QR code", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Close", style: .default) { _ in
+            self.dismiss(animated: true) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
     }
     
     private func goToPoll(code: String) {
-        print(code)
-        //        navigationController?.pushViewController(PollDetailViewController(), animated: true)
+        if let url = URL(string: code) {
+            Router.to(url){ [self] reason in
+                onError?(reason)
+            }
+            
+        }
     }
-    
 }

@@ -37,6 +37,8 @@
 		B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043427D52A1500D70769 /* PollViewController.swift */; };
 		B9EA043727D52BC900D70769 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043627D52BC800D70769 /* Constants.swift */; };
 		B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03427E7D3CF00483244 /* SocketParser.swift */; };
+		B9EED03727E88FDF00483244 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03627E88FDF00483244 /* Router.swift */; };
+		B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03827E8A9D900483244 /* QRGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		B9EA043427D52A1500D70769 /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
 		B9EA043627D52BC800D70769 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B9EED03427E7D3CF00483244 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
+		B9EED03627E88FDF00483244 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B9EED03827E8A9D900483244 /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,8 @@
 				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
 				B98837E827E656C700094768 /* IPollError.swift */,
 				B9EED03427E7D3CF00483244 /* SocketParser.swift */,
+				B9EED03627E88FDF00483244 /* Router.swift */,
+				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -311,7 +317,9 @@
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
+				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
+				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
 				B98837F127E71BE000094768 /* VoteManager.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
@@ -477,6 +485,7 @@
 				DEVELOPMENT_TEAM = QX575RRUK3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iPoll/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -486,7 +495,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPoll;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.lordvidex.ipoll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -505,6 +514,7 @@
 				DEVELOPMENT_TEAM = QX575RRUK3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iPoll/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -514,7 +524,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPoll;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.lordvidex.ipoll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
