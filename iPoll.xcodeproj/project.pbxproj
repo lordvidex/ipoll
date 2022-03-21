@@ -39,6 +39,8 @@
 		B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03427E7D3CF00483244 /* SocketParser.swift */; };
 		B9EED03727E88FDF00483244 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03627E88FDF00483244 /* Router.swift */; };
 		B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03827E8A9D900483244 /* QRGenerator.swift */; };
+		B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03A27E8B1E100483244 /* PollPreviewController.swift */; };
+		B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03C27E8C62900483244 /* UIImage+resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		B9EED03427E7D3CF00483244 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
 		B9EED03627E88FDF00483244 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B9EED03827E8A9D900483244 /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
+		B9EED03A27E8B1E100483244 /* PollPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPreviewController.swift; sourceTree = "<group>"; };
+		B9EED03C27E8C62900483244 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,7 @@
 				B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */,
 				B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */,
 				B98837EC27E6839200094768 /* VoteViewController.swift */,
+				B9EED03A27E8B1E100483244 /* PollPreviewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				B9EED03427E7D3CF00483244 /* SocketParser.swift */,
 				B9EED03627E88FDF00483244 /* Router.swift */,
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
+				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 			files = (
 				B98837E527E6311B00094768 /* NetworkService.swift in Sources */,
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
+				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
@@ -341,6 +348,7 @@
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,
 				B98837EF27E6925200094768 /* VoteOptionCell.swift in Sources */,
+				B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

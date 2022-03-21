@@ -7,6 +7,7 @@
 
 import UIKit
 import UIImageSymbols
+import Toast_Swift
 
 class PollViewController: UIViewController {
     
@@ -142,7 +143,7 @@ class PollViewController: UIViewController {
     }
     
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
-//        pollManager.queryPolls()
+        //        pollManager.queryPolls()
         updatePolls()
     }
     
@@ -189,19 +190,6 @@ class PollViewController: UIViewController {
             }
         }
     }
-    
-    func displayBottomSheetAlert(_ message: String, dismissAfter: Double? = nil) {
-        let alert = UIAlertController(title: message, message: "", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Dismiss", style: .cancel)
-        alert.addAction(action)
-        present(alert, animated: true)
-        
-        if let dismissAfter = dismissAfter {
-            DispatchQueue.main.asyncAfter(deadline: .now()+dismissAfter ) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-        }
-    }
 }
 
 // MARK: - UITableViewDelegate
@@ -219,25 +207,39 @@ extension PollViewController: UITableViewDelegate {
                    contextMenuConfigurationForRowAt indexPath: IndexPath,
                    point: CGPoint) -> UIContextMenuConfiguration? {
         let poll = polls[indexPath.row]
-        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-
-            let copyLink = UIAction(title: "Copy Link", image: .docOnDocFill) { _ in
-                print("Action")
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: {
+            PollPreviewController(pollId: poll.id, pollTitle: poll.title)
+        },actionProvider: { _ in
+            
+            let copyLink = UIAction(title: "Copy Link", image: .docOnDocFill) { [weak self] _ in
+                UIPasteboard.general.string = "ipoll://poll?id=\(poll.id)"
+                self?.view.makeToast("Link to Poll successfully copied to clipboard")
             }
             
             let copyCode = UIAction(title: "Copy Code", image: .number) { [weak self] _ in
                 UIPasteboard.general.string = poll.id
-                self?.displayBottomSheetAlert("Code successfully copied to clipboard", dismissAfter: 2)
+                self?.view.makeToast("Code successfully copied to clipboard")
             }
             
-            let qrCode = UIAction(title: "QR Code", image: .qrcode) {_ in
+            let qrCode = UIAction(title: "Share QR Code", image: .squareAndArrowUp ) { [weak self] _ in
+                // image to share
+                let image = QRGenerator.generatePollQR(poll: poll.id)?.resizeImageForShare(targetSize: CGSize(width: 100, height: 100))
                 
+                // set up activity view controller
+                let imageToShare = [ image! ]
+                let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+                
+                // so that iPads won't crash
+                activityViewController.popoverPresentationController?.sourceView = self?.view
+                
+                // present the view controller
+                self?.present(activityViewController, animated: true, completion: nil)
             }
             
             
-            let menu = UIMenu(title: "",  options: [], children: [copyLink, copyCode, qrCode])
+            let menu = UIMenu(title: "", children: [copyLink, copyCode, qrCode])
             return menu
-        }
+        })
         
         return config
     }

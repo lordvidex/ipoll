@@ -144,7 +144,7 @@ extension VoteViewController: SkeletonTableViewDataSource {
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        poll?.options?.count ?? 4
     }
 }
 

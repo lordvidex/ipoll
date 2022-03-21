@@ -89,13 +89,10 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             guard let stringValue = readableObject.stringValue else { return } // get stringValue
             
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate)) // vibrate
-            
+            self.navigationController?.popViewController(animated: true)
             goToPoll(code: stringValue)
         }
         
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
-        }
         
     }
     
