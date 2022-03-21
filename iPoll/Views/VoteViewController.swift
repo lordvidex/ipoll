@@ -10,12 +10,12 @@ import SkeletonView
 
 class VoteViewController: UIViewController {
     
-    // MARK: Variables
+    // MARK: - Properties
     private var poll: Poll?
     public var pollId: String?
     private let voteManager = VoteManager()
     
-    // MARK: UI
+    // MARK: - UI
     private var titleLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(24))
         return label
@@ -76,7 +76,7 @@ class VoteViewController: UIViewController {
 
 }
 
-// MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension VoteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteOption, for: indexPath) as? VoteOptionCell, let poll = poll {
@@ -104,9 +104,9 @@ extension VoteViewController: UITableViewDataSource {
 }
 
 
-// MARK: VoteManagerDelegate
+// MARK: - VoteManagerDelegate
 extension VoteViewController: VoteManagerDelegate {
-    func didFail(_ voteManager: VoteManager, sender: Action, with error: IPollError) {
+    func didFail(_ voteManager: VoteManager, sender: IPAction, with error: IPollError) {
         hideLoading()
         showErrorAlert(with: error.message, addBackButton: sender == .fetch, addOkButton: false)
     }
@@ -129,7 +129,7 @@ extension VoteViewController: VoteManagerDelegate {
         present(alert, animated: true)
     }
     
-    func didReceivePoll(_ voteManager: VoteManager, sender: Action, poll: Poll) {
+    func didReceivePoll(_ voteManager: VoteManager, sender: IPAction, poll: Poll) {
         self.poll = poll
         titleLabel.text = poll.title
         hideLoading()
@@ -137,7 +137,7 @@ extension VoteViewController: VoteManagerDelegate {
     }
 }
 
-// MARK: SkeletonTableViewDataSource
+// MARK: - SkeletonTableViewDataSource
 extension VoteViewController: SkeletonTableViewDataSource {
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         Constants.CellIdentifiers.voteOption
@@ -148,7 +148,7 @@ extension VoteViewController: SkeletonTableViewDataSource {
     }
 }
 
-// MARK: VoteOptionCellDeletate
+// MARK: - VoteOptionCellDeletate
 extension VoteViewController: VoteOptionCellDelegate {
     func didClickOption(_ cell: VoteOptionCell, with id: String?) {
         if let id = id, let poll = poll {

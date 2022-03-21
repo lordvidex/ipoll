@@ -8,15 +8,15 @@
 import Foundation
 import SocketIO
 
-enum Action {
+enum IPAction {
     case vote
     case fetch
     case update
 }
 
 protocol VoteManagerDelegate: AnyObject {
-    func didReceivePoll(_ voteManager: VoteManager,sender: Action, poll: Poll)
-    func didFail(_ voteManager: VoteManager,sender: Action, with error: IPollError)
+    func didReceivePoll(_ voteManager: VoteManager,sender: IPAction, poll: Poll)
+    func didFail(_ voteManager: VoteManager,sender: IPAction, with error: IPollError)
 }
 
 
@@ -28,16 +28,19 @@ protocol VoteManagerProtocol {
 
 class VoteManager: VoteManagerProtocol {
     private let network: NetworkService = .shared
-    private var socketManager: SocketManager?
     
-    private var socket: SocketIOClient?
+    // create a manager that connects to the socket API with a room param
+    private var socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!, config: [.log(false), .compress, .connectParams(["EIO": "3"])])
+    
+    
+    private weak var socket: SocketIOClient?
     
     weak var delegate: VoteManagerDelegate?
+    
     deinit {
-        socket?.disconnect()
-        socket?.removeAllHandlers()
-        socketManager?.disconnect()
+        closeSocket()
     }
+    
     
     func fetchPoll(_ id: String) {
         network.getPoll(id) { [weak self] result in
@@ -68,26 +71,33 @@ class VoteManager: VoteManagerProtocol {
     }
     
     private func setupSocket(room: String) {
-        // create a manager that connects to the socket API with a room param
-        socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!, config: [.log(true), .compress, .connectParams(["room" : room])])
-        
-        socket = socketManager!.socket(forNamespace: "/live")
-        
-        // register connect event
-        socket?.on(clientEvent: .connect, callback: { data, ack in
-            print("Socket successfully connected with data: \(data)")
-        })
+        socket = socketManager.socket(forNamespace: "/live")
         
         // register vote event
+        socket?.on(clientEvent: .connect, callback: { _, _ in
+            self.joinRoom(room: room)
+        })
         socket?.on("vote", callback: { data, ack in
             guard let dataInfo = data.first else { return }
-            print("Data gotten from socket: \(dataInfo)")
             if let poll: Poll = try? SocketParser.convert(data: dataInfo) {
                 self.delegate?.didReceivePoll(self, sender: .update, poll: poll)
+            } else {
+                print("Error parsing")
             }
         })
         
-        
         socket?.connect()  // connect the socket
+    }
+    
+    func joinRoom(room: String) {
+        socket?.emit("joinRoom", with: [room])
+    }
+    
+    
+    func closeSocket() {
+        socket?.disconnect()
+        socket?.removeAllHandlers()
+        socketManager.disconnect()
+        socket = nil
     }
 }

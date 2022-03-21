@@ -53,7 +53,7 @@ class NetworkService: NetworkServiceProtocol {
     /// If `id` does not exist in the keychain, it gets the UUID of the device
     /// and sets it as `id` in the KeyChain
     public static func configure() {
-        self.userId = "A435365S"
+        self.userId = "12345"
     }
     
     public func getUser(completion: @escaping (Result<User, IPollError>) -> Void) {
