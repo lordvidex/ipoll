@@ -1,6 +1,0 @@
-framework module Pods_iPoll {
-  umbrella header "Pods-iPoll-umbrella.h"
-
-  export *
-  module * { export * }
-}

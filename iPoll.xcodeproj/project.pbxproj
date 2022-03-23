@@ -15,7 +15,6 @@
 		B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
-		B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917466127CD9B5300140F5B /* KeyboardResponsive.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -54,7 +53,6 @@
 		B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
-		B917466127CD9B5300140F5B /* KeyboardResponsive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsive.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 		B9EA043827D52BD500D70769 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B917466127CD9B5300140F5B /* KeyboardResponsive.swift */,
 				B917465B27CD90A000140F5B /* UIColor+Hex.swift */,
 				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
 				B98837E827E656C700094768 /* IPollError.swift */,
@@ -216,6 +213,7 @@
 				B95E572027CD1B6E0021E53C /* Frameworks */,
 				B95E572127CD1B6E0021E53C /* Resources */,
 				0388AA80577839B5BDA6A1D3 /* [CP] Embed Pods Frameworks */,
+				B939957527E8E1C5001CAB56 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -290,6 +288,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iPoll/Pods-iPoll-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B939957527E8E1C5001CAB56 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse \n    echo \"Warning Swiftlint not installed\"\nfi\n";
+		};
 		E532B38F0D0118FB73E38137 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,7 +349,6 @@
 				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
 				B98837E727E6426700094768 /* User.swift in Sources */,
 				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
-				B917466227CD9B5300140F5B /* KeyboardResponsive.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
 				B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */,
 				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,

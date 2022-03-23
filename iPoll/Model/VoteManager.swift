@@ -14,18 +14,20 @@ enum IPAction {
     case update
 }
 
+// MARK: - delegate
 protocol VoteManagerDelegate: AnyObject {
     func didReceivePoll(_ voteManager: VoteManager,sender: IPAction, poll: Poll)
     func didFail(_ voteManager: VoteManager,sender: IPAction, with error: IPollError)
 }
 
-
+// MARK: - protocol
 protocol VoteManagerProtocol {
     func fetchPoll(_ id: String)
     func vote(pollId: String, optionId: String)
 }
 
 
+// MARK: - VoteManager
 class VoteManager: VoteManagerProtocol {
     private let network: NetworkService = .shared
     
