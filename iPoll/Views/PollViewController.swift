@@ -89,7 +89,8 @@ class PollViewController: UIViewController {
         tableView.dataSource = self
         pollManager.delegate = self
         setupViews()
-        pollManager.queryPolls()
+        pollManager.fetchVisitedPolls() // local
+        pollManager.fetchRemotePolls()  // remote
         
     }
     
@@ -182,12 +183,18 @@ class PollViewController: UIViewController {
     }
     
     @objc func onRefreshed(sender: UIRefreshControl) {
-        pollManager.queryPolls { [weak self] updated in
-            if updated {
-                self?.updatePolls()
-            }
-            DispatchQueue.main.async {
-                sender.endRefreshing()
+        if segmentedContol.selectedSegmentIndex == 0 {
+            pollManager.fetchVisitedPolls()
+            updatePolls()
+            sender.endRefreshing()
+        } else {
+            pollManager.fetchRemotePolls { [weak self] updated in
+                if updated {
+                    self?.updatePolls()
+                }
+                DispatchQueue.main.async {
+                    sender.endRefreshing()
+                }
             }
         }
     }

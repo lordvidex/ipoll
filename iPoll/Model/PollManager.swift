@@ -13,7 +13,7 @@ protocol PollManagerProtocol {
     var createdPolls: [Poll]? { get }
     var visitedPolls: [Poll]? { get }
     var participatedPolls: [Poll]? { get }
-    func queryPolls(completion: ( (Bool) -> Void)?)
+    func fetchRemotePolls(completion: ( (Bool) -> Void)?)
     func createPoll(title: String,
                     options: [String],
                     completion: ((Result<Poll, IPollError>) -> Void)?)
@@ -61,7 +61,7 @@ class PollManager: PollManagerProtocol {
         }
     }
     
-    func queryPolls(completion: ( (Bool) -> Void )? = nil) {
+    func fetchRemotePolls(completion: ( (Bool) -> Void )? = nil) {
         network.getUser { [weak self] result in
             switch result {
                 case .success(let user):
