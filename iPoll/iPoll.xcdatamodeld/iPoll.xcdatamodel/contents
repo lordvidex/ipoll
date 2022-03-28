@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PollEntity" representedClassName="PollEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isAnonymous" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PollOptionEntity" inverseName="poll" inverseEntity="PollOptionEntity"/>
+    </entity>
+    <entity name="PollOptionEntity" representedClassName="PollOptionEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="poll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PollEntity" inverseName="options" inverseEntity="PollEntity"/>
+        <relationship name="votesId" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VoteEntity" inverseName="option" inverseEntity="VoteEntity"/>
+    </entity>
+    <entity name="VoteEntity" representedClassName="VoteEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <relationship name="option" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollOptionEntity" inverseName="votesId" inverseEntity="PollOptionEntity"/>
+    </entity>
+    <elements>
+        <element name="PollEntity" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="PollOptionEntity" positionX="-54" positionY="18" width="128" height="89"/>
+        <element name="VoteEntity" positionX="-36" positionY="45" width="128" height="59"/>
+    </elements>
 </model>

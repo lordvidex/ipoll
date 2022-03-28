@@ -10,6 +10,12 @@ import UIKit
 
 typealias FailureCallBack = (String) -> Void
 
+enum Host: String {
+    case join = "join"
+    case poll
+    case create
+}
+
 class Router {
     // MARK: singleton
     static let shared = Router()
@@ -32,7 +38,8 @@ class Router {
     // uses the shared window instance to navigate to pages
     static func to(_ url: URL, failedWith reason: FailureCallBack? = nil) {
         if let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-           let host = components.host,
+           let hostString = components.host,
+           let host = Host(rawValue: hostString),
            let scheme = components.scheme,
            let params = components.queryItems {
             
@@ -46,7 +53,7 @@ class Router {
             //
             switch host {
                     
-                case "join":
+                case .join:
                     // navigate to the join poll screen
                     let joinPollViewContoller = JoinPollViewController()
                     let id = params.first { $0.name == "id" }
@@ -55,7 +62,7 @@ class Router {
                     }
                     navigator?.pushViewController(joinPollViewContoller, animated: true)
                     
-                case "poll":
+                case .poll:
                     // navigate to the vote poll screen if `id` param is provided
                     let id = params.first { $0.name == "id" }
                     if let id = id {
@@ -64,7 +71,7 @@ class Router {
                         navigator?.pushViewController(voteVC, animated: true)
                     }
                     
-                case "create":
+                case .create:
                     // navigate to the create poll screen
                     let createVC = CreatePollViewController()
                     
@@ -73,10 +80,6 @@ class Router {
                         createVC.pollTitleTF.text = title.value
                     }
                     navigator?.pushViewController(createVC, animated: true)
-                
-                default:
-                        reason?("Unrecognized method or QRCode")
-                    return
             }
         }
         

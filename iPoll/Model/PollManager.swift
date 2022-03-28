@@ -11,8 +11,9 @@ import Foundation
 protocol PollManagerProtocol {
     var delegate: PollManagerDelegate? { get set }
     var createdPolls: [Poll]? { get }
-    var joinedPolls: [Poll]? { get }
-    func queryPolls(completion: ( (Bool) -> Void)?)
+    var visitedPolls: [Poll]? { get }
+    var participatedPolls: [Poll]? { get }
+    func fetchRemotePolls(completion: ( (Bool) -> Void)?)
     func createPoll(title: String,
                     options: [String],
                     completion: ((Result<Poll, IPollError>) -> Void)?)
@@ -34,9 +35,15 @@ class PollManager: PollManagerProtocol {
     
     let network: NetworkService = .shared
     
+    let persistent: PersistenceService = .shared
+    
     var createdPolls: [Poll]?
     
-    var joinedPolls: [Poll]?
+    var visitedPolls: [Poll]?
+    
+    var participatedPolls: [Poll]?
+    
+    
     
     private init() {}
     
@@ -54,12 +61,12 @@ class PollManager: PollManagerProtocol {
         }
     }
     
-    func queryPolls(completion: ( (Bool) -> Void )? = nil) {
+    func fetchRemotePolls(completion: ( (Bool) -> Void )? = nil) {
         network.getUser { [weak self] result in
             switch result {
                 case .success(let user):
                     self?.createdPolls = user.createdPolls
-                    self?.joinedPolls = user.participatedPolls
+                    self?.participatedPolls = user.participatedPolls
                     completion?(true)
                     self?.delegate?.finishedFetchingPolls(true)
                 case .failure(let err):
@@ -68,5 +75,9 @@ class PollManager: PollManagerProtocol {
                     print(err.message)
             }
         }
+    }
+    
+    func fetchVisitedPolls() {
+        visitedPolls = persistent.fetchPolls()
     }
 }

@@ -30,6 +30,8 @@ protocol VoteManagerProtocol {
 // MARK: - VoteManager
 class VoteManager: VoteManagerProtocol {
     private let network: NetworkService = .shared
+    private let local: PersistenceService = .shared
+    private let pollManager: PollManager = .shared
     
     // create a manager that connects to the socket API with a room param
     private var socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!,
@@ -44,13 +46,19 @@ class VoteManager: VoteManagerProtocol {
         closeSocket()
     }
     
-    
     func fetchPoll(_ id: String) {
+        // temporarily return local version of poll
+        if let poll = local.fetchPoll(with: id) {
+            delegate?.didReceivePoll(self, sender: .fetch, poll: poll)
+        }
+        
+        // get live result from server and set up the live socket thereafter
         network.getPoll(id) { [weak self] result in
             if let self = self {
                 switch result {
                     case .success(let poll):
                         self.delegate?.didReceivePoll(self, sender: .fetch, poll: poll)
+                        self.persistPoll(poll)   // persist to local
                         self.setupSocket(room: poll.id)
                     case .failure(let error):
                         self.delegate?.didFail(self, sender: .fetch, with: error)
@@ -73,6 +81,17 @@ class VoteManager: VoteManagerProtocol {
         }
     }
     
+    /*
+     * saves poll to localstorage
+     * * Method is called after it has been gotten initially from the networkservice
+     */
+    func persistPoll(_ poll: Poll) {
+        //TODO: use background thread
+        local.savePoll(poll)
+        pollManager.fetchVisitedPolls()
+    }
+    
+    // MARK: - WebSocket Functions
     private func setupSocket(room: String) {
         socket = socketManager.socket(forNamespace: "/live")
         

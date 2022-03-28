@@ -108,7 +108,8 @@ extension VoteViewController: UITableViewDataSource {
 extension VoteViewController: VoteManagerDelegate {
     func didFail(_ voteManager: VoteManager, sender: IPAction, with error: IPollError) {
         hideLoading()
-        showErrorAlert(with: error.message, addBackButton: sender == .fetch, addOkButton: false)
+        
+        showErrorAlert(with: error.message, addBackButton: sender == .fetch, addOkButton: poll != nil)
     }
     
     func showErrorAlert(with message: String? = nil, addBackButton: Bool, addOkButton: Bool = true) {
