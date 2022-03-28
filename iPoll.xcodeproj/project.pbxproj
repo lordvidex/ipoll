@@ -40,6 +40,9 @@
 		B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03827E8A9D900483244 /* QRGenerator.swift */; };
 		B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03A27E8B1E100483244 /* PollPreviewController.swift */; };
 		B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03C27E8C62900483244 /* UIImage+resize.swift */; };
+		B9FE54DD27F1AB2900568082 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54DC27F1AB2900568082 /* PersistenceService.swift */; };
+		B9FE54DF27F1B3F400568082 /* Entity+Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */; };
+		B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,9 @@
 		B9EED03827E8A9D900483244 /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		B9EED03A27E8B1E100483244 /* PollPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPreviewController.swift; sourceTree = "<group>"; };
 		B9EED03C27E8C62900483244 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
+		B9FE54DC27F1AB2900568082 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Converter.swift"; sourceTree = "<group>"; };
+		B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+Array.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,8 @@
 				B98837E627E6426700094768 /* User.swift */,
 				B98837EA27E65A1400094768 /* PollManager.swift */,
 				B98837F027E71BE000094768 /* VoteManager.swift */,
+				B9FE54DC27F1AB2900568082 /* PersistenceService.swift */,
+				B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +205,7 @@
 				B9EED03627E88FDF00483244 /* Router.swift */,
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
+				B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -338,6 +347,7 @@
 				B98837E527E6311B00094768 /* NetworkService.swift in Sources */,
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
 				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
+				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
@@ -358,7 +368,9 @@
 				B98837ED27E6839200094768 /* VoteViewController.swift in Sources */,
 				B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */,
 				B98837E927E656C700094768 /* IPollError.swift in Sources */,
+				B9FE54DD27F1AB2900568082 /* PersistenceService.swift in Sources */,
 				B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */,
+				B9FE54DF27F1B3F400568082 /* Entity+Converter.swift in Sources */,
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,

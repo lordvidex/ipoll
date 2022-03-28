@@ -20,6 +20,8 @@ class PollViewController: UIViewController {
         }
     }
     
+    private static let segmentItems = ["Visited Polls", "Participated Polls", "Created Polls"]
+    
     weak var pollManager: PollManager! = .shared
     var polls: [Poll] = []
     
@@ -28,7 +30,7 @@ class PollViewController: UIViewController {
     @UsesAutoLayout
     private var pollLabel: UILabel = {
         let label = UILabel()
-        label.text = "Active Polls"
+        label.text = segmentItems[0]
         label.font = Constants.appFont?.withSize(24)
         return label
     }()
@@ -68,7 +70,7 @@ class PollViewController: UIViewController {
     
     @UsesAutoLayout
     private var segmentedContol: UISegmentedControl = {
-        let ctrl = UISegmentedControl(items: ["Active Polls", "Past Polls", "My Polls"])
+        let ctrl = UISegmentedControl(items: segmentItems)
         ctrl.layer.cornerRadius = 9
         ctrl.selectedSegmentTintColor = Constants.Colors.darkBlue
         ctrl.tintColor = Constants.Colors.lightBlue
@@ -150,13 +152,13 @@ class PollViewController: UIViewController {
     private func updatePolls() {
         switch segmentedContol.selectedSegmentIndex {
             case 0:
-                pollLabel.text = "Active Polls"
-                polls = pollManager?.joinedPolls ?? []
+                pollLabel.text = PollViewController.segmentItems[0]
+                polls = pollManager?.visitedPolls ?? []
             case 1:
-                pollLabel.text = "Past Polls"
-                polls = pollManager?.joinedPolls ?? []
+                pollLabel.text = PollViewController.segmentItems[1]
+                polls = pollManager?.participatedPolls ?? []
             case 2:
-                pollLabel.text = "My Polls"
+                pollLabel.text = PollViewController.segmentItems[2]
                 polls = pollManager?.createdPolls ?? []
             default:
                 fatalError("segmentControl should have only 2 children")
@@ -182,7 +184,6 @@ class PollViewController: UIViewController {
     @objc func onRefreshed(sender: UIRefreshControl) {
         pollManager.queryPolls { [weak self] updated in
             if updated {
-                print(self?.pollManager.joinedPolls ?? "Null")
                 self?.updatePolls()
             }
             DispatchQueue.main.async {
