@@ -9,18 +9,18 @@ import UIKit
 import SkeletonView
 
 class VoteViewController: UIViewController {
-    
+
     // MARK: - Properties
     private var poll: Poll?
     public var pollId: String?
     private let voteManager = VoteManager()
-    
+
     // MARK: - UI
     private var titleLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(24))
         return label
     }()
-    
+
     private var optionsTableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 56
@@ -33,24 +33,24 @@ class VoteViewController: UIViewController {
         table.alwaysBounceVertical = false
         return table
     }()
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if poll == nil {
             showLoading()
         }
     }
-    
+
     func showLoading() {
         optionsTableView.isSkeletonable = true
-        optionsTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: Constants.Colors.lightBlue!, secondaryColor: .white),  transition: .crossDissolve(1))
+        optionsTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: Constants.Colors.lightBlue!, secondaryColor: .white), transition: .crossDissolve(1))
     }
-    
+
     func hideLoading() {
         optionsTableView.stopSkeletonAnimation()
         self.view.hideSkeleton()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         voteManager.delegate = self
@@ -59,15 +59,15 @@ class VoteViewController: UIViewController {
         if pollId != nil {
             voteManager.fetchPoll(pollId!)
         }
-        
+
         view.addSubview(titleLabel)
         view.addSubview(optionsTableView)
-        
+
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalTo(view).inset(10)
             make.top.equalTo(view).offset(90)
         }
-        
+
         optionsTableView.snp.makeConstraints { make in
             make.bottom.left.right.equalTo(view).inset(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(27)
@@ -92,44 +92,43 @@ extension VoteViewController: UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         poll?.options?.count ?? 0
     }
-    
-}
 
+}
 
 // MARK: - VoteManagerDelegate
 extension VoteViewController: VoteManagerDelegate {
     func didFail(_ voteManager: VoteManager, sender: IPAction, with error: IPollError) {
         hideLoading()
-        
+
         showErrorAlert(with: error.message, addBackButton: sender == .fetch, addOkButton: poll != nil)
     }
-    
+
     func showErrorAlert(with message: String? = nil, addBackButton: Bool, addOkButton: Bool = true) {
         let alert = UIAlertController(title: "Vote Error", message: "An error occured while voting: \n \(message ?? "")", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         let backAction = UIAlertAction(title: "Exit", style: .cancel) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
-        
+
         if addOkButton {
             alert.addAction(okAction) // simply dismisses alertAction
         }
-        
+
         if addBackButton {
             alert.addAction(backAction) // returns User to previous screen
         }
-        
+
         present(alert, animated: true)
     }
-    
+
     func didReceivePoll(_ voteManager: VoteManager, sender: IPAction, poll: Poll) {
         self.poll = poll
         titleLabel.text = poll.title
@@ -143,7 +142,7 @@ extension VoteViewController: SkeletonTableViewDataSource {
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         Constants.CellIdentifiers.voteOption
     }
-    
+
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
         poll?.options?.count ?? 4
     }
@@ -157,6 +156,5 @@ extension VoteViewController: VoteOptionCellDelegate {
             voteManager.vote(pollId: poll.id, optionId: id)
         }
     }
-    
-    
+
 }

@@ -16,11 +16,11 @@ extension UITableView {
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
         messageLabel.sizeToFit()
-        
+
         self.backgroundView = messageLabel
         self.separatorStyle = .none
     }
-    
+
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine

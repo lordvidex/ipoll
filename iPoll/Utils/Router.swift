@@ -11,7 +11,7 @@ import UIKit
 typealias FailureCallBack = (String) -> Void
 
 enum Host: String {
-    case join = "join"
+    case join
     case poll
     case create
 }
@@ -19,22 +19,21 @@ enum Host: String {
 class Router {
     // MARK: singleton
     static let shared = Router()
-    
+
     // MARK: variables
     private init () {}
-    
+
     private weak var window: UIWindow?
-    
+
     private static var navigator: UINavigationController? {
         return Router.shared.window?.rootViewController as? UINavigationController
     }
-    
+
     // MARK: - functions
     static func configure(with window: UIWindow) {
         Router.shared.window = window
     }
-    
-    
+
     // uses the shared window instance to navigate to pages
     static func to(_ url: URL, failedWith reason: FailureCallBack? = nil) {
         if let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
@@ -42,17 +41,17 @@ class Router {
            let host = Host(rawValue: hostString),
            let scheme = components.scheme,
            let params = components.queryItems {
-            
+
             // check if the scheme is valid
             if scheme.lowercased() != "ipoll" {
                 reason?("Invalid QRCode / Link")
                 return
             }
-            
+
             // parse the hosts
             //
             switch host {
-                    
+
                 case .join:
                     // navigate to the join poll screen
                     let joinPollViewContoller = JoinPollViewController()
@@ -61,7 +60,7 @@ class Router {
                         joinPollViewContoller.pollIdTF.text = id.value
                     }
                     navigator?.pushViewController(joinPollViewContoller, animated: true)
-                    
+
                 case .poll:
                     // navigate to the vote poll screen if `id` param is provided
                     let id = params.first { $0.name == "id" }
@@ -70,11 +69,11 @@ class Router {
                         voteVC.pollId = id.value
                         navigator?.pushViewController(voteVC, animated: true)
                     }
-                    
+
                 case .create:
                     // navigate to the create poll screen
                     let createVC = CreatePollViewController()
-                    
+
                     let title = params.first { $0.name == "title" }
                     if let title = title {
                         createVC.pollTitleTF.text = title.value
@@ -82,6 +81,6 @@ class Router {
                     navigator?.pushViewController(createVC, animated: true)
             }
         }
-        
+
     }
 }

@@ -14,7 +14,7 @@ public struct UsesAutoLayout<T: UIView> {
             wrappedValue.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-    
+
     public init(wrappedValue: T) {
         self.wrappedValue = wrappedValue
         wrappedValue.translatesAutoresizingMaskIntoConstraints = false

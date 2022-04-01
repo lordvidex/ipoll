@@ -9,13 +9,13 @@ import Foundation
 
 extension PollEntity {
     func toPoll() -> Poll {
-        
+
         return Poll(id: id!,
                     title: title!,
                     isAnonymous: isAnonymous,
                     options: options?.toArray(of: PollOptionEntity.self).map { $0.toPollOption() })
     }
-    
+
     func copyProperties(of poll: Poll, with pollOptions: [PollOptionEntity]) {
         id = poll.id
         title = poll.title
@@ -30,7 +30,7 @@ extension PollOptionEntity {
                    title: title!,
                    votesId: (votesId?.toArray(of: VoteEntity.self) ?? []).map { $0.id! })
     }
-    
+
     func copyProperties(of option: PollOption, with votes: [VoteEntity]) {
         id = option.id
         title = option.title

@@ -12,11 +12,11 @@ class IPLabel: UILabel {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     convenience init(_ text: String,
                      textColor: UIColor? = Constants.Colors.darkBlue,
                      font: UIFont? = Constants.appFont

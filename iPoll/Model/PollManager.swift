@@ -19,34 +19,30 @@ protocol PollManagerProtocol {
                     completion: ((Result<Poll, IPollError>) -> Void)?)
 }
 
-
 /// Delegate for updating view from the ViewModel
 protocol PollManagerDelegate: AnyObject {
     func finishedFetchingPolls(_ success: Bool)
 }
 
-
 class PollManager: PollManagerProtocol {
-    
+
     // MARK: variables
     weak var delegate: PollManagerDelegate?
-    
+
     public static let shared = PollManager()
-    
+
     let network: NetworkService = .shared
-    
+
     let persistent: PersistenceService = .shared
-    
+
     var createdPolls: [Poll]?
-    
+
     var visitedPolls: [Poll]?
-    
+
     var participatedPolls: [Poll]?
-    
-    
-    
+
     private init() {}
-    
+
     // MARK: functions
     func createPoll(title: String,
                     options: [String],
@@ -60,7 +56,7 @@ class PollManager: PollManagerProtocol {
             }
         }
     }
-    
+
     func fetchRemotePolls(completion: ( (Bool) -> Void )? = nil) {
         network.getUser { [weak self] result in
             switch result {
@@ -76,7 +72,7 @@ class PollManager: PollManagerProtocol {
             }
         }
     }
-    
+
     func fetchVisitedPolls() {
         visitedPolls = persistent.fetchPolls()
     }
