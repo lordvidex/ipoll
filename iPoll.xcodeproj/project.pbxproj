@@ -11,23 +11,19 @@
 		B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F627DF9AF000D54B3E /* IPLabel.swift */; };
 		B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F727DF9AF000D54B3E /* IPButton.swift */; };
 		B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F827DF9AF000D54B3E /* IPTextField.swift */; };
-		B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */; };
-		B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
+		B938191627F779B300B91454 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938191527F779B300B91454 /* Assembler.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
 		B95E573327CD1B700021E53C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95E573227CD1B700021E53C /* Assets.xcassets */; };
 		B95E573627CD1B700021E53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95E573427CD1B700021E53C /* LaunchScreen.storyboard */; };
-		B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E573E27CD614D0021E53C /* CreatePollViewController.swift */; };
 		B98837E527E6311B00094768 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E427E6311B00094768 /* NetworkService.swift */; };
 		B98837E727E6426700094768 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E627E6426700094768 /* User.swift */; };
 		B98837E927E656C700094768 /* IPollError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837E827E656C700094768 /* IPollError.swift */; };
-		B98837EB27E65A1400094768 /* PollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EA27E65A1400094768 /* PollManager.swift */; };
-		B98837ED27E6839200094768 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EC27E6839200094768 /* VoteViewController.swift */; };
+		B98837EB27E65A1400094768 /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EA27E65A1400094768 /* PollViewModel.swift */; };
 		B98837EF27E6925200094768 /* VoteOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837EE27E6925200094768 /* VoteOptionCell.swift */; };
-		B98837F127E71BE000094768 /* VoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98837F027E71BE000094768 /* VoteManager.swift */; };
 		B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */; };
 		B9B275B327DF207E00DD3711 /* CreatePollOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */; };
 		B9EA042F27D4260500D70769 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA042E27D4260500D70769 /* Poll.swift */; };
@@ -36,7 +32,6 @@
 		B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043427D52A1500D70769 /* PollViewController.swift */; };
 		B9EA043727D52BC900D70769 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EA043627D52BC800D70769 /* Constants.swift */; };
 		B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03427E7D3CF00483244 /* SocketParser.swift */; };
-		B9EED03727E88FDF00483244 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03627E88FDF00483244 /* Router.swift */; };
 		B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03827E8A9D900483244 /* QRGenerator.swift */; };
 		B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03A27E8B1E100483244 /* PollPreviewController.swift */; };
 		B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03C27E8C62900483244 /* UIImage+resize.swift */; };
@@ -52,10 +47,9 @@
 		B90BC0F627DF9AF000D54B3E /* IPLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPLabel.swift; sourceTree = "<group>"; };
 		B90BC0F727DF9AF000D54B3E /* IPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPButton.swift; sourceTree = "<group>"; };
 		B90BC0F827DF9AF000D54B3E /* IPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPTextField.swift; sourceTree = "<group>"; };
-		B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPollViewController.swift; sourceTree = "<group>"; };
-		B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
+		B938191527F779B300B91454 /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,14 +57,11 @@
 		B95E573227CD1B700021E53C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B95E573527CD1B700021E53C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B95E573727CD1B700021E53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B95E573E27CD614D0021E53C /* CreatePollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollViewController.swift; sourceTree = "<group>"; };
 		B98837E427E6311B00094768 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B98837E627E6426700094768 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B98837E827E656C700094768 /* IPollError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPollError.swift; sourceTree = "<group>"; };
-		B98837EA27E65A1400094768 /* PollManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollManager.swift; sourceTree = "<group>"; };
-		B98837EC27E6839200094768 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		B98837EA27E65A1400094768 /* PollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewModel.swift; sourceTree = "<group>"; };
 		B98837EE27E6925200094768 /* VoteOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteOptionCell.swift; sourceTree = "<group>"; };
-		B98837F027E71BE000094768 /* VoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteManager.swift; sourceTree = "<group>"; };
 		B9B275B027DF207E00DD3711 /* CreatePollOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollOptionCell.swift; sourceTree = "<group>"; };
 		B9B275B127DF207E00DD3711 /* CreatePollOptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePollOptionCell.xib; sourceTree = "<group>"; };
 		B9EA042E27D4260500D70769 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
@@ -79,7 +70,6 @@
 		B9EA043427D52A1500D70769 /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
 		B9EA043627D52BC800D70769 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B9EED03427E7D3CF00483244 /* SocketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
-		B9EED03627E88FDF00483244 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B9EED03827E8A9D900483244 /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		B9EED03A27E8B1E100483244 /* PollPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPreviewController.swift; sourceTree = "<group>"; };
 		B9EED03C27E8C62900483244 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
@@ -117,6 +107,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B938191327F751B000B91454 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B98837EA27E65A1400094768 /* PollViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B938191427F7542800B91454 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B98837E427E6311B00094768 /* NetworkService.swift */,
+				B9FE54DC27F1AB2900568082 /* PersistenceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		B95E571A27CD1B6E0021E53C = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +145,8 @@
 		B95E572527CD1B6E0021E53C /* iPoll */ = {
 			isa = PBXGroup;
 			children = (
+				B938191427F7542800B91454 /* Services */,
+				B938191327F751B000B91454 /* ViewModel */,
 				B9EA043827D52BD500D70769 /* Utils */,
 				B9EA042D27D425EF00D70769 /* Model */,
 				B95E573D27CD61220021E53C /* Views */,
@@ -148,6 +157,7 @@
 				B95E573727CD1B700021E53C /* Info.plist */,
 				B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */,
 				B9EA043627D52BC800D70769 /* Constants.swift */,
+				B938191527F779B300B91454 /* Assembler.swift */,
 			);
 			path = iPoll;
 			sourceTree = "<group>";
@@ -156,11 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				B95E574027CD616C0021E53C /* Widgets */,
-				B95E573E27CD614D0021E53C /* CreatePollViewController.swift */,
 				B9EA043427D52A1500D70769 /* PollViewController.swift */,
-				B90BC0FC27DF9E7B00D54B3E /* JoinPollViewController.swift */,
-				B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */,
-				B98837EC27E6839200094768 /* VoteViewController.swift */,
 				B9EED03A27E8B1E100483244 /* PollPreviewController.swift */,
 			);
 			path = Views;
@@ -185,11 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				B9EA042E27D4260500D70769 /* Poll.swift */,
-				B98837E427E6311B00094768 /* NetworkService.swift */,
 				B98837E627E6426700094768 /* User.swift */,
-				B98837EA27E65A1400094768 /* PollManager.swift */,
-				B98837F027E71BE000094768 /* VoteManager.swift */,
-				B9FE54DC27F1AB2900568082 /* PersistenceService.swift */,
 				B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */,
 			);
 			path = Model;
@@ -202,7 +204,6 @@
 				B917465D27CD929300140F5B /* UsesAutoLayout.swift */,
 				B98837E827E656C700094768 /* IPollError.swift */,
 				B9EED03427E7D3CF00483244 /* SocketParser.swift */,
-				B9EED03627E88FDF00483244 /* Router.swift */,
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
 				B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */,
@@ -222,7 +223,6 @@
 				B95E572027CD1B6E0021E53C /* Frameworks */,
 				B95E572127CD1B6E0021E53C /* Resources */,
 				0388AA80577839B5BDA6A1D3 /* [CP] Embed Pods Frameworks */,
-				B939957527E8E1C5001CAB56 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -297,24 +297,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iPoll/Pods-iPoll-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B939957527E8E1C5001CAB56 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nalias swiftlint = ${PODS_ROOT}/SwiftLint/swiftlint\nif which swiftlint >/dev/null; then\n  \U001b swiftlint --fix\n   swiftlint\n   \nelse \n    echo \"Warning Swiftlint not installed\"\nfi\n";
-		};
 		E532B38F0D0118FB73E38137 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -348,28 +330,23 @@
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
 				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
 				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
+				B938191627F779B300B91454 /* Assembler.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
-				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
 				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
-				B98837F127E71BE000094768 /* VoteManager.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
 				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
 				B98837E727E6426700094768 /* User.swift in Sources */,
-				B95E573F27CD614D0021E53C /* CreatePollViewController.swift in Sources */,
 				B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */,
 				B9EED03527E7D3CF00483244 /* SocketParser.swift in Sources */,
 				B9EA043327D46E7500D70769 /* PollTableViewCell.swift in Sources */,
 				B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */,
-				B98837EB27E65A1400094768 /* PollManager.swift in Sources */,
-				B90BC0FD27DF9E7B00D54B3E /* JoinPollViewController.swift in Sources */,
-				B98837ED27E6839200094768 /* VoteViewController.swift in Sources */,
+				B98837EB27E65A1400094768 /* PollViewModel.swift in Sources */,
 				B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */,
 				B98837E927E656C700094768 /* IPollError.swift in Sources */,
 				B9FE54DD27F1AB2900568082 /* PersistenceService.swift in Sources */,
-				B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */,
 				B9FE54DF27F1B3F400568082 /* Entity+Converter.swift in Sources */,
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,

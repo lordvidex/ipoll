@@ -8,32 +8,51 @@
 import Foundation
 
 /// PollManagers ViewModels must conform to the following protocol
-protocol PollManagerProtocol {
-    var delegate: PollManagerDelegate? { get set }
+protocol PollViewModelProtocol {
+    // network handler for ViewModel
+    var network: NetworkServiceProtocol { get }
+    
+    // local storage handler for ViewModel
+    var persistent: PersistenceServiceProtocol { get }
+    
+    // event dispatcher for viewModel
+    var delegate: PollViewModelDelegate? { get set }
+    
+    // polls created by the logged in User
     var createdPolls: [Poll]? { get }
+    
+    // polls visited by the logged in User
     var visitedPolls: [Poll]? { get }
+    
+    // polls in which the user voted
     var participatedPolls: [Poll]? { get }
+    
+    // callback for getting remote polls
     func fetchRemotePolls(completion: ( (Bool) -> Void)?)
+    
+    // callback for creating a new poll
     func createPoll(title: String,
                     options: [String],
                     completion: ((Result<Poll, IPollError>) -> Void)?)
+    
+    // callback for getting visited polls
+    func fetchVisitedPolls()
 }
 
 /// Delegate for updating view from the ViewModel
-protocol PollManagerDelegate: AnyObject {
+protocol PollViewModelDelegate: AnyObject {
     func finishedFetchingPolls(_ success: Bool)
 }
 
-class PollManager: PollManagerProtocol {
+class PollViewModel: PollViewModelProtocol {
 
     // MARK: variables
-    weak var delegate: PollManagerDelegate?
+    weak var delegate: PollViewModelDelegate?
 
-    public static let shared = PollManager()
 
-    let network: NetworkService = .shared
+    let network: NetworkServiceProtocol
 
-    let persistent: PersistenceService = .shared
+    let persistent: PersistenceServiceProtocol
 
     var createdPolls: [Poll]?
 
@@ -41,7 +60,10 @@ class PollManager: PollManagerProtocol {
 
     var participatedPolls: [Poll]?
 
-    private init() {}
+    init(networkService: NetworkServiceProtocol, persistentService: PersistenceServiceProtocol) {
+        self.network = networkService
+        self.persistent = persistentService
+    }
 
     // MARK: functions
     func createPoll(title: String,

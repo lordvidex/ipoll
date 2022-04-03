@@ -16,10 +16,6 @@ protocol PersistenceServiceProtocol {
 
 class PersistenceService: PersistenceServiceProtocol {
 
-    static let shared = PersistenceService()
-
-    private init() {}
-
     // Container
     lazy private var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "iPoll")

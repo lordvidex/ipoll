@@ -21,9 +21,23 @@ class PollViewController: UIViewController {
     }
 
     private static let segmentItems = ["Visited Polls", "Participated Polls", "Created Polls"]
-
-    weak var pollManager: PollManager! = .shared
+    
+    // the view model of this view
+    var pollViewModel: PollViewModelProtocol?
+    
+    // list of polls currently showing for this page
     var polls: [Poll] = []
+    
+    // MARK: - constructor
+    init(pollViewModel: PollViewModelProtocol) {
+        super.init(nibName: nil, bundle: nil)
+        self.pollViewModel = pollViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     // MARK: - UI Elements
     @UsesAutoLayout
@@ -86,10 +100,10 @@ class PollViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        pollManager.delegate = self
+        pollViewModel?.delegate = self
         setupViews()
-        pollManager.fetchVisitedPolls() // local
-        pollManager.fetchRemotePolls()  // remote
+        pollViewModel?.fetchVisitedPolls() // local
+        pollViewModel?.fetchRemotePolls(completion: nil)  // remote
 
     }
 
@@ -153,13 +167,13 @@ class PollViewController: UIViewController {
         switch segmentedContol.selectedSegmentIndex {
             case 0:
                 pollLabel.text = PollViewController.segmentItems[0]
-                polls = pollManager?.visitedPolls ?? []
+                polls = pollViewModel?.visitedPolls ?? []
             case 1:
                 pollLabel.text = PollViewController.segmentItems[1]
-                polls = pollManager?.participatedPolls ?? []
+                polls = pollViewModel?.participatedPolls ?? []
             case 2:
                 pollLabel.text = PollViewController.segmentItems[2]
-                polls = pollManager?.createdPolls ?? []
+                polls = pollViewModel?.createdPolls ?? []
             default:
                 fatalError("segmentControl should have only 2 children")
 
@@ -174,20 +188,20 @@ class PollViewController: UIViewController {
     }
 
     @objc func onTapFab(_ sender: UIButton) {
-        navigationController?.pushViewController(CreatePollViewController(), animated: true)
+//        navigationController?.pushViewController(CreatePollViewController(), animated: true)
     }
 
     @objc func onJoinBtnClicked() {
-        navigationController?.pushViewController(JoinPollViewController(), animated: true)
+//        navigationController?.pushViewController(JoinPollViewController(), animated: true)
     }
 
     @objc func onRefreshed(sender: UIRefreshControl) {
         if segmentedContol.selectedSegmentIndex == 0 {
-            pollManager.fetchVisitedPolls()
+            pollViewModel?.fetchVisitedPolls()
             updatePolls()
             sender.endRefreshing()
         } else {
-            pollManager.fetchRemotePolls { [weak self] updated in
+            pollViewModel?.fetchRemotePolls { [weak self] updated in
                 if updated {
                     self?.updatePolls()
                 }
@@ -252,9 +266,9 @@ extension PollViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let voteViewController = VoteViewController()
-        voteViewController.pollId = polls[indexPath.row].id
-        navigationController?.pushViewController(voteViewController, animated: true)
+//        let voteViewController = VoteViewController()
+//        voteViewController.pollId = polls[indexPath.row].id
+//        navigationController?.pushViewController(voteViewController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -285,7 +299,7 @@ extension PollViewController: UITableViewDataSource {
 
 }
 
-extension PollViewController: PollManagerDelegate {
+extension PollViewController: PollViewModelDelegate {
     func finishedFetchingPolls(_ success: Bool) {
         DispatchQueue.main.async {
             self.updatePolls()
