@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-protocol NetworkServiceProtocol {
+protocol NetworkServiceProtocol: AnyObject {
     var baseUrl: String { get }
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
     func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void)

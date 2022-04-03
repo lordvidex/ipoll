@@ -14,6 +14,12 @@
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
 		B938191627F779B300B91454 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938191527F779B300B91454 /* Assembler.swift */; };
+		B938191E27F9B26700B91454 /* iPollUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938191D27F9B26700B91454 /* iPollUnitTests.swift */; };
+		B938192527F9B9CC00B91454 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938192427F9B9CC00B91454 /* MockNetworkService.swift */; };
+		B938192727F9BB6500B91454 /* MockPollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938192627F9BB6500B91454 /* MockPollViewModel.swift */; };
+		B938192A27F9BD3D00B91454 /* MockPersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938192927F9BD3D00B91454 /* MockPersistentService.swift */; };
+		B938193827F9C2C100B91454 /* iPollIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */; };
+		B938193A27F9C74B00B91454 /* MockPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193927F9C74B00B91454 /* MockPollViewController.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -40,6 +46,16 @@
 		B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B938191F27F9B26700B91454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95E571B27CD1B6E0021E53C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B95E572227CD1B6E0021E53C;
+			remoteInfo = iPoll;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		7B42ABA568AD87AB11D3D1C7 /* Pods-iPoll.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.release.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.release.xcconfig"; sourceTree = "<group>"; };
 		83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPoll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +66,13 @@
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		B938191527F779B300B91454 /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
+		B938191B27F9B26700B91454 /* iPollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B938191D27F9B26700B91454 /* iPollUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPollUnitTests.swift; sourceTree = "<group>"; };
+		B938192427F9B9CC00B91454 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		B938192627F9BB6500B91454 /* MockPollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPollViewModel.swift; sourceTree = "<group>"; };
+		B938192927F9BD3D00B91454 /* MockPersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistentService.swift; sourceTree = "<group>"; };
+		B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPollIntegrationTests.swift; sourceTree = "<group>"; };
+		B938193927F9C74B00B91454 /* MockPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPollViewController.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +102,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B938191827F9B26600B91454 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E572027CD1B6E0021E53C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,10 +154,32 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		B938191C27F9B26700B91454 /* iPollTests */ = {
+			isa = PBXGroup;
+			children = (
+				B938192827F9BCD200B91454 /* Mocks */,
+				B938191D27F9B26700B91454 /* iPollUnitTests.swift */,
+				B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */,
+			);
+			path = iPollTests;
+			sourceTree = "<group>";
+		};
+		B938192827F9BCD200B91454 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B938193927F9C74B00B91454 /* MockPollViewController.swift */,
+				B938192427F9B9CC00B91454 /* MockNetworkService.swift */,
+				B938192627F9BB6500B91454 /* MockPollViewModel.swift */,
+				B938192927F9BD3D00B91454 /* MockPersistentService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		B95E571A27CD1B6E0021E53C = {
 			isa = PBXGroup;
 			children = (
 				B95E572527CD1B6E0021E53C /* iPoll */,
+				B938191C27F9B26700B91454 /* iPollTests */,
 				B95E572427CD1B6E0021E53C /* Products */,
 				4C1F782A24B5792EA6C9EA08 /* Pods */,
 				2B8BF54055581C2C6DA9AF00 /* Frameworks */,
@@ -138,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				B95E572327CD1B6E0021E53C /* iPoll.app */,
+				B938191B27F9B26700B91454 /* iPollTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +267,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B938191A27F9B26600B91454 /* iPollTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B938192127F9B26700B91454 /* Build configuration list for PBXNativeTarget "iPollTests" */;
+			buildPhases = (
+				B938191727F9B26600B91454 /* Sources */,
+				B938191827F9B26600B91454 /* Frameworks */,
+				B938191927F9B26600B91454 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B938192027F9B26700B91454 /* PBXTargetDependency */,
+			);
+			name = iPollTests;
+			productName = iPollTests;
+			productReference = B938191B27F9B26700B91454 /* iPollTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B95E572227CD1B6E0021E53C /* iPoll */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B95E573A27CD1B700021E53C /* Build configuration list for PBXNativeTarget "iPoll" */;
@@ -240,9 +311,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					B938191A27F9B26600B91454 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = B95E572227CD1B6E0021E53C;
+					};
 					B95E572227CD1B6E0021E53C = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -262,11 +337,19 @@
 			projectRoot = "";
 			targets = (
 				B95E572227CD1B6E0021E53C /* iPoll */,
+				B938191A27F9B26600B91454 /* iPollTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B938191927F9B26600B91454 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E572127CD1B6E0021E53C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +405,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B938191727F9B26600B91454 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B938193A27F9C74B00B91454 /* MockPollViewController.swift in Sources */,
+				B938192727F9BB6500B91454 /* MockPollViewModel.swift in Sources */,
+				B938192527F9B9CC00B91454 /* MockNetworkService.swift in Sources */,
+				B938192A27F9BD3D00B91454 /* MockPersistentService.swift in Sources */,
+				B938191E27F9B26700B91454 /* iPollUnitTests.swift in Sources */,
+				B938193827F9C2C100B91454 /* iPollIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E571F27CD1B6E0021E53C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,6 +454,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B938192027F9B26700B91454 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B95E572227CD1B6E0021E53C /* iPoll */;
+			targetProxy = B938191F27F9B26700B91454 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B95E573427CD1B700021E53C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -370,6 +474,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B938192227F9B26700B91454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QX575RRUK3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPoll.app/iPoll";
+			};
+			name = Debug;
+		};
+		B938192327F9B26700B91454 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QX575RRUK3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPoll.app/iPoll";
+			};
+			name = Release;
+		};
 		B95E573827CD1B700021E53C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -547,6 +689,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B938192127F9B26700B91454 /* Build configuration list for PBXNativeTarget "iPollTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B938192227F9B26700B91454 /* Debug */,
+				B938192327F9B26700B91454 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B95E571E27CD1B6E0021E53C /* Build configuration list for PBXProject "iPoll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

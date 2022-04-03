@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol PersistenceServiceProtocol {
+protocol PersistenceServiceProtocol: AnyObject {
     func fetchPolls() -> [Poll]
     func fetchPoll(with id: String) -> Poll?
     func savePoll(_ poll: Poll)
