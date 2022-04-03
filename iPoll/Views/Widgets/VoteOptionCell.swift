@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SkeletonView
 
 protocol VoteOptionCellDelegate: AnyObject {
     func didClickOption(_ cell: VoteOptionCell, with id: String?)
@@ -26,7 +27,7 @@ class VoteOptionCell: UITableViewCell {
         view.layer.borderWidth = 1
         view.layer.borderColor = Constants.Colors.borderBlue?.cgColor
         view.backgroundColor = Constants.Colors.bgBlue
-        view.addTarget(self, action: #selector(onVotePressed), for: .touchUpInside)
+        view.addTarget(VoteOptionCell.self, action: #selector(onVotePressed), for: .touchUpInside)
         return view
     }()
 

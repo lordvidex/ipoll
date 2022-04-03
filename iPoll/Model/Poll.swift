@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Poll: Codable {
+struct Poll: Codable, Equatable {
     let id: String
     let title: String
 //    let finished: Bool
@@ -24,6 +24,10 @@ struct Poll: Codable {
             }
         }
         return count
+    }
+    
+    static func == (lhs: Poll, rhs: Poll) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

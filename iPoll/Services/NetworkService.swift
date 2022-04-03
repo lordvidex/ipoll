@@ -8,7 +8,8 @@
 import Foundation
 import Alamofire
 
-protocol NetworkServiceProtocol {
+protocol NetworkServiceProtocol: AnyObject {
+    var baseUrl: String { get }
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
     func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void)
     func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void)
@@ -16,13 +17,18 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
+    
+    init(url: String) {
+        self.baseUrl = url
+        configure()
+    }
+    
     // MARK: private variables
-
-    private static var userId: String? // id of this device
+    private var userId: String? // id of this device
 
     private var user: User? // the user data with his polls
 
-    private let baseUrl = "https://llopi.herokuapp.com/v1" // the base url for making api calls
+    internal let baseUrl: String // the base url for making api calls
 
     private var usersEndpoint: String {
         "\(baseUrl)/users"
@@ -34,24 +40,19 @@ class NetworkService: NetworkServiceProtocol {
 
     // required header for making api requests to server
     private var requestHeader: HTTPHeaders? {
-        if let userId = NetworkService.userId {
+        if let userId = userId {
             return [HTTPHeader(name: "user_id", value: userId)]
         } else {
             return nil
         }
     }
 
-    private init() {}
-
-    // single instance
-    public static let shared = NetworkService()
-
     // MARK: public functions
 
     /// Reads id from the KeyChain and sets it \
     /// If `id` does not exist in the keychain, it gets the UUID of the device
     /// and sets it as `id` in the KeyChain
-    public static func configure() {
+    public func configure() {
         self.userId = "A435365S"
     }
 

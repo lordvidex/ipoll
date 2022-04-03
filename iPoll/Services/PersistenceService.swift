@@ -8,17 +8,13 @@
 import Foundation
 import CoreData
 
-protocol PersistenceServiceProtocol {
+protocol PersistenceServiceProtocol: AnyObject {
     func fetchPolls() -> [Poll]
     func fetchPoll(with id: String) -> Poll?
     func savePoll(_ poll: Poll)
 }
 
 class PersistenceService: PersistenceServiceProtocol {
-
-    static let shared = PersistenceService()
-
-    private init() {}
 
     // Container
     lazy private var persistentContainer: NSPersistentContainer = {
