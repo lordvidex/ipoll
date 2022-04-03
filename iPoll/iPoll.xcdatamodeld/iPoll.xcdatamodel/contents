@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PollEntity" representedClassName="PollEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasTimeLimit" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="isAnonymous" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PollOptionEntity" inverseName="poll" inverseEntity="PollOptionEntity"/>
     </entity>
@@ -17,7 +20,7 @@
         <relationship name="option" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollOptionEntity" inverseName="votesId" inverseEntity="PollOptionEntity"/>
     </entity>
     <elements>
-        <element name="PollEntity" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="PollEntity" positionX="-63" positionY="-18" width="128" height="134"/>
         <element name="PollOptionEntity" positionX="-54" positionY="18" width="128" height="89"/>
         <element name="VoteEntity" positionX="-36" positionY="45" width="128" height="59"/>
     </elements>

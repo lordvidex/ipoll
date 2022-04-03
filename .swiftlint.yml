@@ -1,2 +1,11 @@
 excluded:
-  - ${PWD}/Pods
+  - ${PWD}/Pods 
+
+disabled_rules:
+  - switch_case_alignment
+  - self_in_property_initialization
+  
+identifier_name:
+  excluded:
+    - tf
+    - id

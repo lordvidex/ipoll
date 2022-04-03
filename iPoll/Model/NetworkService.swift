@@ -21,7 +21,9 @@ class NetworkService: NetworkServiceProtocol {
     private static var userId: String? // id of this device
 
     private var user: User? // the user data with his polls
-
+    
+    private var dataDecoder: DataDecoder?
+    
     private let baseUrl = "https://llopi.herokuapp.com/v1" // the base url for making api calls
 
     private var usersEndpoint: String {
@@ -58,14 +60,14 @@ class NetworkService: NetworkServiceProtocol {
     public func getUser(completion: @escaping (Result<User, IPollError>) -> Void) {
         AF.request(usersEndpoint,
                    headers: requestHeader)
-            .responseDecodable(of: User.self) { response in
-                switch response.result {
-                    case .success(let user):
-                        completion(.success(user))
-                    case .failure:
-                        completion(.failure(self.decodeError(from: response)))
-                }
+        .responseDecodable(of: User.self, decoder: getDecoder()) { response in
+            switch response.result {
+                case .success(let user):
+                    completion(.success(user))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
             }
+        }
     }
 
     public func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void) {
@@ -73,7 +75,19 @@ class NetworkService: NetworkServiceProtocol {
         AF.request(pollsEndpoint, method: .post, parameters: params,
                    encoding: URLEncoding.httpBody,
                    headers: requestHeader)
-            .responseDecodable(of: Poll.self) { response in
+        .responseDecodable(of: Poll.self) { response in
+            switch response.result {
+                case .success(let poll):
+                    completion(.success(poll))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
+            }
+        }
+    }
+
+    public func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
+        AF.request("\(pollsEndpoint)/\(id)", headers: requestHeader)
+            .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
                 switch response.result {
                     case .success(let poll):
                         completion(.success(poll))
@@ -81,32 +95,20 @@ class NetworkService: NetworkServiceProtocol {
                         completion(.failure(self.decodeError(from: response)))
                 }
             }
-    }
-
-    public func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
-        AF.request("\(pollsEndpoint)/\(id)", headers: requestHeader)
-            .responseDecodable(of: Poll.self) { response in
-                switch response.result {
-                    case .success(let poll):
-                        completion(.success(poll))
-                    case .failure:
-                        completion(.failure(self.decodeError(from: response)))
-                }
-        }
     }
 
     public func vote(pollId: String, optionId: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
         AF.request("\(pollsEndpoint)/\(pollId)/\(optionId)",
                    method: .post,
                    headers: requestHeader)
-            .responseDecodable(of: Poll.self) { response in
-                switch response.result {
-                    case .success(let poll):
-                        completion(.success(poll))
-                    case .failure:
-                        completion(.failure(self.decodeError(from: response)))
-                }
+        .responseDecodable(of: Poll.self) { response in
+            switch response.result {
+                case .success(let poll):
+                    completion(.success(poll))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
             }
+        }
     }
 
     private func decodeError<T>(from response: DataResponse<T, AFError>) -> IPollError {
@@ -117,6 +119,17 @@ class NetworkService: NetworkServiceProtocol {
             return err
         } catch {
             return IPollError(message: response.error?.errorDescription ?? "An Error Occurred")
+        }
+    }
+
+    private func getDecoder() -> DataDecoder {
+        if let dataDecoder = dataDecoder {
+            return dataDecoder
+        } else {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            dataDecoder = decoder
+            return decoder
         }
     }
 

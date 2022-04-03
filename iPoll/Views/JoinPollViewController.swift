@@ -27,13 +27,13 @@ class JoinPollViewController: UIViewController {
         return label
     }()
 
-    private var joinBtn: IPButton = {
+    private lazy var joinBtn: IPButton = {
         let btn = IPButton(text: "Join")
         btn.addTarget(self, action: #selector(onJoinBtnClicked), for: .touchUpInside)
         return btn
     }()
 
-    private var scanBtn: UIButton = {
+    private lazy var scanBtn: UIButton = {
 
         let btn = UIButton()
         btn.setTitle("Scan QR", for: .normal)
@@ -46,7 +46,7 @@ class JoinPollViewController: UIViewController {
         return btn
     }()
 
-    private var fab: IPButton = {
+    private lazy var fab: IPButton = {
         let btn = IPButton(
             text: "Create Poll",
             cornerRadius: 25,
@@ -112,7 +112,9 @@ class JoinPollViewController: UIViewController {
         border.lineDashPattern = [4, 2]
         border.fillColor = nil
         border.frame = view.bounds
-        border.path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize.zero).cgPath
+        border.path = UIBezierPath(roundedRect: view.bounds,
+                                   byRoundingCorners: .allCorners,
+                                   cornerRadii: CGSize.zero).cgPath
 
         // add to sublayer
         view.layer.addSublayer(border)

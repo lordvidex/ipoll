@@ -12,8 +12,9 @@ struct Poll: Codable {
     let title: String
 //    let finished: Bool
     let isAnonymous: Bool
-//    let startTime: Date
-//    let endTime: Date?
+    let hasTimeLimit: Bool
+    let startTime: Date
+    let endTime: Date?
     let options: [PollOption]?
 
     var totalVotes: Int {

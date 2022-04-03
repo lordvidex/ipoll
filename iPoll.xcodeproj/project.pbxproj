@@ -15,6 +15,7 @@
 		B90BC0FF27E0688100D54B3E /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */; };
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
+		B938193C27FA50F400B91454 /* DateFormatter+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -56,6 +57,7 @@
 		B90BC0FE27E0688100D54B3E /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
+		B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+UTC.swift"; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
 				B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */,
+				B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
 				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
+				B938193C27FA50F400B91454 /* DateFormatter+UTC.swift in Sources */,
 				B98837F127E71BE000094768 /* VoteManager.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,

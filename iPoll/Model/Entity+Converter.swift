@@ -13,6 +13,9 @@ extension PollEntity {
         return Poll(id: id!,
                     title: title!,
                     isAnonymous: isAnonymous,
+                    hasTimeLimit: hasTimeLimit,
+                    startTime: startTime!,
+                    endTime: endTime,
                     options: options?.toArray(of: PollOptionEntity.self).map { $0.toPollOption() })
     }
 
@@ -20,6 +23,9 @@ extension PollEntity {
         id = poll.id
         title = poll.title
         isAnonymous = poll.isAnonymous
+        hasTimeLimit = poll.hasTimeLimit
+        startTime = poll.startTime
+        endTime = poll.endTime
         pollOptions.forEach { addToOptions($0) }
     }
 }

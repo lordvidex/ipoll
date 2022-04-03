@@ -19,7 +19,7 @@ class VoteOptionCell: UITableViewCell {
     private var progressConstraint: NSLayoutConstraint?
     public weak var delegate: VoteOptionCellDelegate?
 
-    private var mainView: UIButton = {
+    private lazy var mainView: UIButton = {
         let view = UIButton()
         view.isSkeletonable = true
         view.layer.cornerRadius = 6
@@ -105,7 +105,8 @@ class VoteOptionCell: UITableViewCell {
     func updateProgress() {
         let ratio = Double(voteCount) / Double(totalCount == 0 ? 1 : totalCount)
         self.progressConstraint?.isActive = false
-        self.progressConstraint = progressView.widthAnchor.constraint(equalTo: self.mainView.widthAnchor, multiplier: ratio)
+        self.progressConstraint = progressView.widthAnchor.constraint(equalTo: self.mainView.widthAnchor,
+                                                                      multiplier: ratio)
         self.progressConstraint?.isActive = true
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) { [self] in
             self.layoutIfNeeded()

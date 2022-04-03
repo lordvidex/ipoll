@@ -13,14 +13,12 @@ class CreatePollViewController: UIViewController {
 
     private var _optionCount = 2
     private var optionCount: Int {
-        get {
-            _optionCount += 1
-            return _optionCount
-        }
+        _optionCount += 1
+        return _optionCount
+
     }
     weak var pollManager: PollManager! = .shared
 
-    @UsesAutoLayout
     private var pollTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Poll Title"
@@ -29,7 +27,6 @@ class CreatePollViewController: UIViewController {
         return label
     }()
 
-    @UsesAutoLayout
     private var headerLabel: UILabel = {
         let label = UILabel()
         label.text = "Create Poll"
@@ -38,21 +35,18 @@ class CreatePollViewController: UIViewController {
         return label
     }()
 
-    @UsesAutoLayout
-    var pollTitleTF: UITextField = {
+    lazy var pollTitleTF: UITextField = {
         let tf = IPTextField()
         tf.text = "Hello World!"
         return tf
     }()
 
-    @UsesAutoLayout
-    private var pollCreateBtn: UIButton = {
+    private lazy var pollCreateBtn: UIButton = {
         let btn = IPButton(text: "Create poll", textColor: .white)
         btn.addTarget(self, action: #selector(createPoll), for: .touchUpInside)
         return btn
     }()
 
-    @UsesAutoLayout
     private var optionsLabel: UILabel = {
         let label = UILabel()
         label.text = "Options"
@@ -61,17 +55,17 @@ class CreatePollViewController: UIViewController {
         return label
     }()
 
-    @UsesAutoLayout
     private var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.hidesWhenStopped = true
         return loading
     }()
 
-    @UsesAutoLayout
-    private var optionsTableView: UITableView = {
+    private lazy var optionsTableView: UITableView = {
         let table = UITableView()
-        table.register(UINib(nibName: Constants.CellIdentifiers.pollOption, bundle: nil), forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
+        table.register(UINib(nibName: Constants.CellIdentifiers.pollOption,
+                             bundle: nil),
+                       forCellReuseIdentifier: Constants.CellIdentifiers.pollOption)
         table.separatorStyle = .none
         table.allowsSelection = false
         table.estimatedRowHeight = 60
@@ -97,56 +91,57 @@ class CreatePollViewController: UIViewController {
 
         let safeArea = view.safeAreaLayoutGuide
 
-        NSLayoutConstraint.activate([
-            headerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            headerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            headerLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-
-            pollTitleTF.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pollTitleTF.leftAnchor.constraint(equalTo: headerLabel.leftAnchor, constant: 20),
-            pollTitleTF.rightAnchor.constraint(equalTo: headerLabel.rightAnchor, constant: -20),
-            pollTitleTF.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 40),
-
-            pollTitleLabel.leftAnchor.constraint(equalTo: pollTitleTF.leftAnchor),
-            pollTitleLabel.bottomAnchor.constraint(equalTo: pollTitleTF.topAnchor, constant: -5),
-
-            optionsLabel.leftAnchor.constraint(equalTo: pollTitleTF.leftAnchor),
-            optionsLabel.rightAnchor.constraint(equalTo: pollTitleTF.rightAnchor),
-            optionsLabel.topAnchor.constraint(equalTo: pollTitleTF.bottomAnchor, constant: 56),
-
-            pollCreateBtn.leftAnchor.constraint(equalTo: pollTitleTF.leftAnchor),
-            pollCreateBtn.rightAnchor.constraint(equalTo: pollTitleTF.rightAnchor),
-
-            pollCreateBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -26),
-
-            optionsTableView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 5),
-            optionsTableView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -5),
-            optionsTableView.topAnchor.constraint(equalTo: optionsLabel.bottomAnchor, constant: 10),
-            optionsTableView.bottomAnchor.constraint(equalTo: pollCreateBtn.topAnchor, constant: -5),
-
-            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        headerLabel.snp.makeConstraints { make in
+            make.left.right.equalTo(view).inset(20)
+            make.top.equalTo(safeArea).offset(20)
+        }
+        pollTitleTF.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.left.right.equalTo(headerLabel).inset(20)
+            make.top.equalTo(headerLabel.snp.bottom).offset(40)
+        }
+        pollTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(pollTitleTF)
+            make.bottom.equalTo(pollTitleTF.snp.top).offset(-5)
+        }
+        optionsLabel.snp.makeConstraints { make in
+            make.left.right.equalTo(pollTitleTF)
+            make.top.equalTo(pollTitleTF.snp.bottom).offset(56)
+        }
+        pollCreateBtn.snp.makeConstraints { make in
+            make.left.right.equalTo(pollTitleTF)
+            make.bottom.equalTo(view).offset(-26)
+        }
+        optionsTableView.snp.makeConstraints { make in
+            make.left.right.equalTo(safeArea).inset(5)
+            make.top.equalTo(optionsLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(pollCreateBtn.snp.top).offset(-5)
+        }
+        loadingIndicator.snp.makeConstraints { make in
+            make.center.equalTo(view)
+        }
     }
 
     @objc func createPoll() {
         loadingIndicator.startAnimating()
-        pollManager.createPoll(title: (pollTitleTF.text?.trimmingCharacters(in: .whitespacesAndNewlines))!, options: options) { [weak self] result in
-            switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        let pollVC = PollViewController()
-                        pollVC.activeSegmentedControlIndex = 2
-                        self?.navigationController?.viewControllers = [pollVC]
-                    }
-                case .failure(let err):
-                    print(err)
+        pollManager.createPoll(
+            title: (pollTitleTF.text?.trimmingCharacters(in: .whitespacesAndNewlines))!,
+            options: options) { [weak self] result in
+                switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            let pollVC = PollViewController()
+                            pollVC.activeSegmentedControlIndex = 2
+                            self?.navigationController?.viewControllers = [pollVC]
+                        }
+                    case .failure(let err):
+                        print(err)
 
+                }
+                DispatchQueue.main.async {
+                    self?.loadingIndicator.stopAnimating()
+                }
             }
-            DispatchQueue.main.async {
-                self?.loadingIndicator.stopAnimating()
-            }
-        }
 
     }
 
@@ -159,7 +154,8 @@ extension CreatePollViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.pollOption, for: indexPath) as? CreatePollOptionCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.pollOption,
+                                                    for: indexPath) as? CreatePollOptionCell {
             cell.delegate = self
             cell.indexPath = indexPath
             cell.initialText = options[indexPath.row]

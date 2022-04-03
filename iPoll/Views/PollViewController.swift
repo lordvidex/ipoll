@@ -15,7 +15,7 @@ class PollViewController: UIViewController {
     var activeSegmentedControlIndex: Int = 0 {
         didSet {
             if activeSegmentedControlIndex < 3 {
-                segmentedContol.selectedSegmentIndex = activeSegmentedControlIndex
+                segmentedControl.selectedSegmentIndex = activeSegmentedControlIndex
             }
         }
     }
@@ -26,16 +26,14 @@ class PollViewController: UIViewController {
     var polls: [Poll] = []
 
     // MARK: - UI Elements
-    @UsesAutoLayout
-    private var pollLabel: UILabel = {
+    private lazy var pollLabel: UILabel = {
         let label = UILabel()
-        label.text = segmentItems[0]
+        label.text = PollViewController.segmentItems.first
         label.font = Constants.appFont?.withSize(24)
         return label
     }()
 
-    @UsesAutoLayout
-    private var joinPollBtn: IPButton = {
+    private lazy var joinPollBtn: IPButton = {
         let btn = IPButton(text: "Join a poll", cornerRadius: 6, height: 48, backgroundColor: Constants.Colors.darkBlue)
         btn.addRightIcon(image: UIImage(systemName: "chevron.right")!)
         btn.tintColor = .white
@@ -43,8 +41,7 @@ class PollViewController: UIViewController {
         return btn
     }()
 
-    @UsesAutoLayout
-    private var fab: IPButton = {
+    private lazy var fab: IPButton = {
         let btn = IPButton(
             text: "Create Poll",
             cornerRadius: 25,
@@ -56,7 +53,6 @@ class PollViewController: UIViewController {
         return btn
     }()
 
-    @UsesAutoLayout
     fileprivate var tableView: UITableView = {
         let table = UITableView()
         table.rowHeight = UITableView.automaticDimension
@@ -67,9 +63,8 @@ class PollViewController: UIViewController {
         return table
     }()
 
-    @UsesAutoLayout
-    private var segmentedContol: UISegmentedControl = {
-        let ctrl = UISegmentedControl(items: segmentItems)
+    private var segmentedControl: UISegmentedControl = {
+        let ctrl = UISegmentedControl(items: PollViewController.segmentItems)
         ctrl.layer.cornerRadius = 9
         ctrl.selectedSegmentTintColor = Constants.Colors.darkBlue
         ctrl.tintColor = Constants.Colors.lightBlue
@@ -101,7 +96,10 @@ class PollViewController: UIViewController {
     private func setupViews() {
         // set navigation Items
         navigationItem.title = "Polls"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: tableView.isEditing ? .done : .edit,
+            target: self,
+            action: #selector(onEditBtnPressed))
         view.backgroundColor = Constants.Colors.bgBlue
 
         // set refresh control to tableView
@@ -110,7 +108,7 @@ class PollViewController: UIViewController {
         tableView.refreshControl = control
 
         // add subviews
-        view.addSubview(segmentedContol)
+        view.addSubview(segmentedControl)
         view.addSubview(pollLabel)
         view.addSubview(joinPollBtn)
         view.addSubview(tableView)
@@ -119,29 +117,28 @@ class PollViewController: UIViewController {
         // define constraints
 
         let guide = view.safeAreaLayoutGuide
-
-        NSLayoutConstraint.activate([
-            segmentedContol.heightAnchor.constraint(equalToConstant: 32),
-            segmentedContol.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            segmentedContol.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            segmentedContol.topAnchor.constraint(equalTo: guide.topAnchor),
-
-            pollLabel.topAnchor.constraint(equalTo: segmentedContol.bottomAnchor, constant: 30),
-            pollLabel.leadingAnchor.constraint(equalTo: segmentedContol.leadingAnchor),
-            pollLabel.trailingAnchor.constraint(equalTo: segmentedContol.trailingAnchor),
-
-            joinPollBtn.leadingAnchor.constraint(equalTo: pollLabel.leadingAnchor),
-            joinPollBtn.trailingAnchor.constraint(equalTo: pollLabel.trailingAnchor),
-            joinPollBtn.topAnchor.constraint(equalTo: pollLabel.bottomAnchor, constant: 19),
-
-            tableView.leadingAnchor.constraint(equalTo: joinPollBtn.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: joinPollBtn.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: joinPollBtn.bottomAnchor, constant: 10),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            fab.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -31),
-            fab.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
+        segmentedControl.snp.makeConstraints { make in
+            make.height.equalTo(32)
+            make.left.right.equalTo(view).inset(8)
+            make.top.equalTo(guide)
+        }
+        pollLabel.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(30)
+            make.left.right.equalTo(segmentedControl)
+        }
+        joinPollBtn.snp.makeConstraints({ make in
+            make.left.right.equalTo(pollLabel)
+            make.top.equalTo(pollLabel.snp.bottom).offset(19)
+        })
+        tableView.snp.makeConstraints { make in
+            make.left.right.equalTo(joinPollBtn)
+            make.bottom.equalTo(view)
+            make.top.equalTo(joinPollBtn.snp.bottom).offset(10)
+        }
+        fab.snp.makeConstraints { make in
+            make.right.equalTo(view).offset(-20)
+            make.bottom.equalTo(view).offset(-31)
+        }
     }
 
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
@@ -150,7 +147,7 @@ class PollViewController: UIViewController {
     }
 
     private func updatePolls() {
-        switch segmentedContol.selectedSegmentIndex {
+        switch segmentedControl.selectedSegmentIndex {
             case 0:
                 pollLabel.text = PollViewController.segmentItems[0]
                 polls = pollManager?.visitedPolls ?? []
@@ -169,7 +166,8 @@ class PollViewController: UIViewController {
 
     @objc func onEditBtnPressed() {
         tableView.isEditing = !tableView.isEditing
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(onEditBtnPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit,
+                                                            target: self, action: #selector(onEditBtnPressed))
 
     }
 
@@ -182,7 +180,7 @@ class PollViewController: UIViewController {
     }
 
     @objc func onRefreshed(sender: UIRefreshControl) {
-        if segmentedContol.selectedSegmentIndex == 0 {
+        if segmentedControl.selectedSegmentIndex == 0 {
             pollManager.fetchVisitedPolls()
             updatePolls()
             sender.endRefreshing()
@@ -230,11 +228,13 @@ extension PollViewController: UITableViewDelegate {
 
             let qrCode = UIAction(title: "Share QR Code", image: .squareAndArrowUp ) { [weak self] _ in
                 // image to share
-                let image = QRGenerator.generatePollQR(poll: poll.id)?.resizeImageForShare(targetSize: CGSize(width: 100, height: 100))
+                let image = QRGenerator.generatePollQR(poll: poll.id)?
+                .resizeImageForShare(targetSize: CGSize(width: 100, height: 100))
 
                 // set up activity view controller
                 let imageToShare = [ image! ]
-                let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+                let activityViewController = UIActivityViewController(activityItems: imageToShare,
+                                                                      applicationActivities: nil)
 
                 // so that iPads won't crash
                 activityViewController.popoverPresentationController?.sourceView = self?.view
