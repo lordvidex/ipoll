@@ -14,8 +14,7 @@ protocol PollManagerProtocol {
     var visitedPolls: [Poll]? { get }
     var participatedPolls: [Poll]? { get }
     func fetchRemotePolls(completion: ( (Bool) -> Void)?)
-    func createPoll(title: String,
-                    options: [String],
+    func createPoll(pollDto: PollDto,
                     completion: ((Result<Poll, IPollError>) -> Void)?)
 }
 
@@ -44,13 +43,9 @@ class PollManager: PollManagerProtocol {
     private init() {}
 
     // MARK: functions
-    func createPoll(title: String,
-                    options: [String],
-                    hasTimeLimit: Bool = false,
-                    startTime: Date? = nil,
-                    endTime: Date? = nil,
+    func createPoll(pollDto: PollDto,
                     completion: ((Result<Poll, IPollError>) -> Void)?) {
-        network.createPoll(title: title, options: options) { result in
+        network.createPoll(poll: pollDto) { result in
             switch result {
                 case .success(let poll):
                     completion?(.success(poll))

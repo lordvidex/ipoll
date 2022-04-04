@@ -6,23 +6,37 @@
 //
 
 import UIKit
-import QuartzCore
 
 enum TimeCause {
     case start
     case end
 }
+
+// MARK: - PollCreateManagerDelegate
 protocol PollCreateManagerDelegate: AnyObject {
     func didTogglePollHasTime(_ viewModel: PollCreateManager, value: Bool)
+    
     func startTimeDidChange(_ viewModel: PollCreateManager,
                             cause: TimeCause,
                             to date: Date)
+    
     func endTimeDidChange(_ viewModel: PollCreateManager,
                           cause: TimeCause,
                           to date: Date)
-//    func optionsDidChange(_ viewModel: PollCreateManager, to options: [String])
+    
+    func didToggleVoterAnonState(_ viewModel: PollCreateManager, value: Bool)
 }
 
+// MARK: Delegate Extension
+/// defines default implementation to avoid necessary protocol stubs in ViewControllers that conform
+/// to this protocol
+extension PollCreateManagerDelegate {
+    func didToggleVoterAnonState(_ viewModel: PollCreateManager, value: Bool) {
+        
+    }
+}
+
+// MARK: - PollCreateManagerProtocol
 protocol PollCreateManagerProtocol {
     var delegate: PollCreateManagerDelegate? { get set }
     var startTime: Date { get set }
@@ -32,6 +46,7 @@ protocol PollCreateManagerProtocol {
     
 }
 
+// MARK: - PollCreateManager [ViewModel]
 class PollCreateManager: PollCreateManagerProtocol {
     
     weak var delegate: PollCreateManagerDelegate?
@@ -42,6 +57,14 @@ class PollCreateManager: PollCreateManagerProtocol {
         didSet {
             if oldValue != hasTime {
                 delegate?.didTogglePollHasTime(self, value: hasTime)
+            }
+        }
+    }
+    
+    var isVoterAnonymous = true {
+        didSet {
+            if oldValue != isVoterAnonymous {
+                delegate?.didToggleVoterAnonState(self, value: isVoterAnonymous)
             }
         }
     }

@@ -72,10 +72,23 @@ class NetworkService: NetworkServiceProtocol {
 
     public func createPoll(poll: PollDto,
                            completion: @escaping (Result<Poll, IPollError>) -> Void) {
-        let params = ["title": poll.title,
-                      "options": poll.options,
-                      "hasTimeLimit": poll.hasTimeLimit] as [String: Any]
-        AF.request(pollsEndpoint, method: .post, parameters: params,
+        // encode the `PollDto`
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(.iso8601Full)
+        guard let data = try? encoder.encode(poll) else {
+            // encoding failed
+            completion(.failure(IPollError(message: "Error decoding Create Poll [PollDto]")))
+            return
+        }
+        
+        guard let params = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            // serialization failed
+            completion(.failure(IPollError(message: "Error serializing Encoded PollDto object to JSON Object")))
+            return
+        }
+        
+        AF.request(pollsEndpoint, method: .post,
+                   parameters: params,
                    encoding: URLEncoding.httpBody,
                    headers: requestHeader)
         .responseDecodable(of: Poll.self) { response in

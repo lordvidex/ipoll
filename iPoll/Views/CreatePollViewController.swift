@@ -12,6 +12,7 @@ class CreatePollViewController: UIViewController {
     weak var pollManager: PollManager! = .shared
     weak var pollCreateManager: PollCreateManager! = .shared
     
+    // MARK: - UI Views
     private lazy var pollTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Poll Title"
@@ -46,6 +47,13 @@ class CreatePollViewController: UIViewController {
         let swtch = UISwitch(frame: .zero)
         swtch.setOn(pollCreateManager.hasTime, animated: false)
         swtch.addTarget(self, action: #selector(onHasTimeSwitchChanged), for: .valueChanged)
+        return swtch
+    }()
+    
+    private lazy var anonymousSwitch: UISwitch = {
+        let swtch = UISwitch()
+        swtch.setOn(pollCreateManager.isVoterAnonymous, animated: false)
+        swtch.addTarget(self, action: #selector(onAnonymousToggled), for: .valueChanged)
         return swtch
     }()
     
@@ -88,6 +96,7 @@ class CreatePollViewController: UIViewController {
         return table
     }()
     
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,11 +148,25 @@ class CreatePollViewController: UIViewController {
     }
     
     @objc func createPoll() {
-        loadingIndicator.startAnimating()
-        pollManager.createPoll(
-            title: pollTitleTF.text!.trimmingCharacters(in: .whitespacesAndNewlines),
-            options: pollCreateManager.options
-        ) { [weak self] result in
+        loadingIndicator.startAnimating() // loading
+        
+        // TODO: validations
+        
+        // get variables
+        let title = pollTitleTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hasTime = pollCreateManager.hasTime
+        let isAnonymousVoters = pollCreateManager.isVoterAnonymous
+        let startTime = hasTime ? pollCreateManager.startTime : nil
+        let endTime = hasTime ? pollCreateManager.endTime : nil
+        
+        let dto = PollDto(title: title,
+                          options: pollCreateManager.options,
+                          hasTimeLimit: hasTime,
+                          isAnonymous: isAnonymousVoters,
+                          startTime: startTime,
+                          endTime: endTime)
+        
+        pollManager.createPoll(pollDto: dto) { [weak self] result in
             switch result {
                 case .success:
                     DispatchQueue.main.async {
@@ -172,6 +195,9 @@ class CreatePollViewController: UIViewController {
     @objc func onEndTimeChanged(_ sender: UIDatePicker) {
         pollCreateManager.endTime =  sender.date
     }
+    @objc func onAnonymousToggled(_ sender: UISwitch) {
+        pollCreateManager.isVoterAnonymous = sender.isOn
+    }
     
 }
 
@@ -181,7 +207,7 @@ extension CreatePollViewController: UITableViewDataSource {
         if section == 0 {
             return pollCreateManager.options.count
         } else if section == 1 {
-            return pollCreateManager.hasTime ? 3 : 1
+            return pollCreateManager.hasTime ? 4 : 2
         }
         return 0
     }
@@ -205,12 +231,15 @@ extension CreatePollViewController: UITableViewDataSource {
                                                          for: indexPath)
                 switch indexPath.row {
                     case 0:
+                        cell.textLabel?.text = "Are Voters anonymous?"
+                        cell.accessoryView = anonymousSwitch
+                    case 1:
                         cell.textLabel?.text = "Has Time Limit?"
                         cell.accessoryView = hasTimeSwitch
-                    case 1:
+                    case 2:
                         cell.textLabel?.text = "Start Time"
                         cell.accessoryView = startTimePicker
-                    case 2:
+                    case 3:
                         cell.textLabel?.text = "End Time"
                         cell.accessoryView = endTimePicker
                     default:
@@ -222,17 +251,6 @@ extension CreatePollViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-            case 0:
-                return "Options"
-            case 1:
-                return "Poll Settings"
-            default:
-                return nil
-        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -286,6 +304,7 @@ extension CreatePollViewController: CreatePollOptionCellDelegate {
 }
 
 extension CreatePollViewController: PollCreateManagerDelegate {
+    
     func didTogglePollHasTime(_ viewModel: PollCreateManager, value: Bool) {
         UIView.transition(with: optionsTableView,
                           duration: 0.5,

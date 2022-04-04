@@ -18,6 +18,7 @@
 		B938193C27FA50F400B91454 /* DateFormatter+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */; };
 		B938193E27FABA4D00B91454 /* PollCreateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193D27FABA4D00B91454 /* PollCreateManager.swift */; };
 		B938194227FAF35000B91454 /* PollDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938194127FAF35000B91454 /* PollDto.swift */; };
+		B938195127FB17C000B91454 /* iPollDtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195027FB17C000B91454 /* iPollDtoTests.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -48,6 +49,16 @@
 		B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B938194B27FB178700B91454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95E571B27CD1B6E0021E53C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B95E572227CD1B6E0021E53C;
+			remoteInfo = iPoll;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		7B42ABA568AD87AB11D3D1C7 /* Pods-iPoll.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.release.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.release.xcconfig"; sourceTree = "<group>"; };
 		83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPoll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +73,8 @@
 		B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+UTC.swift"; sourceTree = "<group>"; };
 		B938193D27FABA4D00B91454 /* PollCreateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCreateManager.swift; sourceTree = "<group>"; };
 		B938194127FAF35000B91454 /* PollDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollDto.swift; sourceTree = "<group>"; };
+		B938194727FB178700B91454 /* iPollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B938195027FB17C000B91454 /* iPollDtoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPollDtoTests.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +108,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B938194427FB178700B91454 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E572027CD1B6E0021E53C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,10 +143,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B938194827FB178700B91454 /* iPollTests */ = {
+			isa = PBXGroup;
+			children = (
+				B938195027FB17C000B91454 /* iPollDtoTests.swift */,
+			);
+			path = iPollTests;
+			sourceTree = "<group>";
+		};
 		B95E571A27CD1B6E0021E53C = {
 			isa = PBXGroup;
 			children = (
 				B95E572527CD1B6E0021E53C /* iPoll */,
+				B938194827FB178700B91454 /* iPollTests */,
 				B95E572427CD1B6E0021E53C /* Products */,
 				4C1F782A24B5792EA6C9EA08 /* Pods */,
 				2B8BF54055581C2C6DA9AF00 /* Frameworks */,
@@ -137,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				B95E572327CD1B6E0021E53C /* iPoll.app */,
+				B938194727FB178700B91454 /* iPollTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,6 +252,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B938194627FB178700B91454 /* iPollTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B938194D27FB178700B91454 /* Build configuration list for PBXNativeTarget "iPollTests" */;
+			buildPhases = (
+				B938194327FB178700B91454 /* Sources */,
+				B938194427FB178700B91454 /* Frameworks */,
+				B938194527FB178700B91454 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B938194C27FB178700B91454 /* PBXTargetDependency */,
+			);
+			name = iPollTests;
+			productName = iPollTests;
+			productReference = B938194727FB178700B91454 /* iPollTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B95E572227CD1B6E0021E53C /* iPoll */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B95E573A27CD1B700021E53C /* Build configuration list for PBXNativeTarget "iPoll" */;
@@ -249,9 +297,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					B938194627FB178700B91454 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = B95E572227CD1B6E0021E53C;
+					};
 					B95E572227CD1B6E0021E53C = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -271,11 +323,19 @@
 			projectRoot = "";
 			targets = (
 				B95E572227CD1B6E0021E53C /* iPoll */,
+				B938194627FB178700B91454 /* iPollTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B938194527FB178700B91454 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E572127CD1B6E0021E53C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +409,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B938194327FB178700B91454 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B938195127FB17C000B91454 /* iPollDtoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B95E571F27CD1B6E0021E53C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +461,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B938194C27FB178700B91454 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B95E572227CD1B6E0021E53C /* iPoll */;
+			targetProxy = B938194B27FB178700B91454 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B95E573427CD1B700021E53C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -405,6 +481,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B938194E27FB178700B91454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QX575RRUK3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPoll.app/iPoll";
+			};
+			name = Debug;
+		};
+		B938194F27FB178700B91454 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QX575RRUK3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Uno.iPollTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPoll.app/iPoll";
+			};
+			name = Release;
+		};
 		B95E573827CD1B700021E53C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -582,6 +696,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B938194D27FB178700B91454 /* Build configuration list for PBXNativeTarget "iPollTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B938194E27FB178700B91454 /* Debug */,
+				B938194F27FB178700B91454 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B95E571E27CD1B6E0021E53C /* Build configuration list for PBXProject "iPoll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
