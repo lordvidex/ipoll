@@ -86,19 +86,21 @@ class NetworkService: NetworkServiceProtocol {
             completion(.failure(IPollError(message: "Error serializing Encoded PollDto object to JSON Object")))
             return
         }
-        
         AF.request(pollsEndpoint, method: .post,
                    parameters: params,
-                   encoding: URLEncoding.httpBody,
-                   headers: requestHeader)
-        .responseDecodable(of: Poll.self) { response in
-            switch response.result {
-                case .success(let poll):
-                    completion(.success(poll))
-                case .failure:
-                    completion(.failure(self.decodeError(from: response)))
-            }
-        }
+                   encoder: JSONParameterEncoder(),
+                   encoding: JSONEncoding.default,
+                   headers: requestHeader).responseJSON(completionHandler: { response in
+            print(String(data: response.data!, encoding: .utf8))
+        })
+//        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
+//            switch response.result {
+//                case .success(let poll):
+//                    completion(.success(poll))
+//                case .failure:
+//                    completion(.failure(self.decodeError(from: response)))
+//            }
+//        }
     }
 
     public func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
@@ -134,6 +136,7 @@ class NetworkService: NetworkServiceProtocol {
             let err = try decoder.decode(IPollError.self, from: data)
             return err
         } catch {
+            print(response)
             return IPollError(message: response.error?.errorDescription ?? "An Error Occurred")
         }
     }
