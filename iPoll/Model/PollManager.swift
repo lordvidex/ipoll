@@ -46,6 +46,9 @@ class PollManager: PollManagerProtocol {
     // MARK: functions
     func createPoll(title: String,
                     options: [String],
+                    hasTimeLimit: Bool = false,
+                    startTime: Date? = nil,
+                    endTime: Date? = nil,
                     completion: ((Result<Poll, IPollError>) -> Void)?) {
         network.createPoll(title: title, options: options) { result in
             switch result {

@@ -4,7 +4,8 @@ excluded:
 disabled_rules:
   - switch_case_alignment
   - self_in_property_initialization
-  
+  - trailing_whitespace
+
 identifier_name:
   excluded:
     - tf

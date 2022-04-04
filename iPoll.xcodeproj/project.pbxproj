@@ -16,6 +16,8 @@
 		B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465B27CD90A000140F5B /* UIColor+Hex.swift */; };
 		B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917465D27CD929300140F5B /* UsesAutoLayout.swift */; };
 		B938193C27FA50F400B91454 /* DateFormatter+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */; };
+		B938193E27FABA4D00B91454 /* PollCreateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193D27FABA4D00B91454 /* PollCreateManager.swift */; };
+		B938194227FAF35000B91454 /* PollDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938194127FAF35000B91454 /* PollDto.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -58,6 +60,8 @@
 		B917465B27CD90A000140F5B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		B917465D27CD929300140F5B /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+UTC.swift"; sourceTree = "<group>"; };
+		B938193D27FABA4D00B91454 /* PollCreateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCreateManager.swift; sourceTree = "<group>"; };
+		B938194127FAF35000B91454 /* PollDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollDto.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				B98837F027E71BE000094768 /* VoteManager.swift */,
 				B9FE54DC27F1AB2900568082 /* PersistenceService.swift */,
 				B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */,
+				B938193D27FABA4D00B91454 /* PollCreateManager.swift */,
+				B938194127FAF35000B91454 /* PollDto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,6 +355,8 @@
 			files = (
 				B98837E527E6311B00094768 /* NetworkService.swift in Sources */,
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
+				B938193E27FABA4D00B91454 /* PollCreateManager.swift in Sources */,
+				B938194227FAF35000B91454 /* PollDto.swift in Sources */,
 				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
 				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,

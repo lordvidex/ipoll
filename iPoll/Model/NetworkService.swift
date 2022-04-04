@@ -10,7 +10,7 @@ import Alamofire
 
 protocol NetworkServiceProtocol {
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
-    func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void)
+    func createPoll(poll: PollDto, completion: @escaping (Result<Poll, IPollError>) -> Void)
     func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void)
     func vote(pollId: String, optionId: String, completion: @escaping (Result<Poll, IPollError>) -> Void)
 }
@@ -70,8 +70,11 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
 
-    public func createPoll(title: String, options: [String], completion: @escaping (Result<Poll, IPollError>) -> Void) {
-        let params = ["title": title, "options": options] as [String: Any]
+    public func createPoll(poll: PollDto,
+                           completion: @escaping (Result<Poll, IPollError>) -> Void) {
+        let params = ["title": poll.title,
+                      "options": poll.options,
+                      "hasTimeLimit": poll.hasTimeLimit] as [String: Any]
         AF.request(pollsEndpoint, method: .post, parameters: params,
                    encoding: URLEncoding.httpBody,
                    headers: requestHeader)
