@@ -14,6 +14,7 @@ target 'iPoll' do
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SwiftLint'
+  pod 'SwiftyJSON', '~> 4.0'
 
 end
 

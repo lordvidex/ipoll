@@ -7,6 +7,7 @@ PODS:
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
   - SwiftLint (0.46.5)
+  - SwiftyJSON (4.3.0)
   - Toast-Swift (5.0.1)
   - UIImageSymbols (0.6.1)
 
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftLint
+  - SwiftyJSON (~> 4.0)
   - Toast-Swift (~> 5.0.1)
   - UIImageSymbols (~> 0.6.1)
 
@@ -29,6 +31,7 @@ SPEC REPOS:
     - Socket.IO-Client-Swift
     - Starscream
     - SwiftLint
+    - SwiftyJSON
     - Toast-Swift
     - UIImageSymbols
 
@@ -40,9 +43,10 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UIImageSymbols: d0ad8b1865e8c295539b618b95cf4b8dc19614fb
 
-PODFILE CHECKSUM: 367a5502cb686d42f0679c804c28013305d53a64
+PODFILE CHECKSUM: 925c9091fbed60e423f60d9a12e2673b2112736c
 
 COCOAPODS: 1.11.2

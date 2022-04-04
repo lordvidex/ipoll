@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 protocol NetworkServiceProtocol {
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
@@ -81,26 +82,24 @@ class NetworkService: NetworkServiceProtocol {
             return
         }
         
-        guard let params = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            // serialization failed
-            completion(.failure(IPollError(message: "Error serializing Encoded PollDto object to JSON Object")))
+        guard let jsonData = try? JSON(data: data) else {
+            // converting to JSON failed
+            completion(.failure(IPollError(message: "Converting class Data to JSON failed")))
             return
         }
+        
         AF.request(pollsEndpoint, method: .post,
-                   parameters: params,
-                   encoder: JSONParameterEncoder(),
+                   parameters: jsonData.dictionaryObject,
                    encoding: JSONEncoding.default,
-                   headers: requestHeader).responseJSON(completionHandler: { response in
-            print(String(data: response.data!, encoding: .utf8))
-        })
-//        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
-//            switch response.result {
-//                case .success(let poll):
-//                    completion(.success(poll))
-//                case .failure:
-//                    completion(.failure(self.decodeError(from: response)))
-//            }
-//        }
+                   headers: requestHeader)
+        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
+            switch response.result {
+                case .success(let poll):
+                    completion(.success(poll))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
+            }
+        }
     }
 
     public func getPoll(_ id: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
