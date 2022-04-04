@@ -169,6 +169,7 @@ class CreatePollViewController: UIViewController {
         pollManager.createPoll(pollDto: dto) { [weak self] result in
             switch result {
                 case .success:
+                    print("Success")
                     DispatchQueue.main.async {
                         let pollVC = PollViewController()
                         pollVC.activeSegmentedControlIndex = 2

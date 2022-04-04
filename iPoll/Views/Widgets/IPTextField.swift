@@ -37,8 +37,9 @@ class IPTextField: UITextField {
         layer.borderWidth = 1.0
 
         // height constraint
-        self.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 51).isActive = true
+        self.snp.makeConstraints { make in
+            make.height.equalTo(51)
+        }
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {

@@ -28,4 +28,6 @@ struct PollDto: Encodable {
         try container.encodeIfPresent(startTime, forKey: .startTime)
         try container.encodeIfPresent(endTime, forKey: .endTime)
     }
+    
+//    func toParams() -> [String: Any]
 }

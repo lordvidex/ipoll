@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 protocol NetworkServiceProtocol {
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
@@ -81,17 +82,17 @@ class NetworkService: NetworkServiceProtocol {
             return
         }
         
-        guard let params = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            // serialization failed
-            completion(.failure(IPollError(message: "Error serializing Encoded PollDto object to JSON Object")))
+        guard let jsonData = try? JSON(data: data) else {
+            // converting to JSON failed
+            completion(.failure(IPollError(message: "Converting class Data to JSON failed")))
             return
         }
         
         AF.request(pollsEndpoint, method: .post,
-                   parameters: params,
-                   encoding: URLEncoding.httpBody,
+                   parameters: jsonData.dictionaryObject,
+                   encoding: JSONEncoding.default,
                    headers: requestHeader)
-        .responseDecodable(of: Poll.self) { response in
+        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
             switch response.result {
                 case .success(let poll):
                     completion(.success(poll))
@@ -134,6 +135,7 @@ class NetworkService: NetworkServiceProtocol {
             let err = try decoder.decode(IPollError.self, from: data)
             return err
         } catch {
+            print(response)
             return IPollError(message: response.error?.errorDescription ?? "An Error Occurred")
         }
     }
