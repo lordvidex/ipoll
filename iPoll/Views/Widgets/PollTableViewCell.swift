@@ -65,9 +65,4 @@ class PollTableViewCell: UITableViewCell {
             make.left.equalTo(mainView).offset(10)
         }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

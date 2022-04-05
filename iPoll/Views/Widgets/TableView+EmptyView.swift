@@ -8,6 +8,9 @@
 import UIKit
 
 extension UITableView {
+    
+    /// Sets a background UILabel [View] with text of
+    /// `message`
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0,
                                                  y: 0,
@@ -23,9 +26,10 @@ extension UITableView {
         self.backgroundView = messageLabel
         self.separatorStyle = .none
     }
-
+    
+    /// Removes `backgroundView` and resets `separatorStyle`
     func restore() {
         self.backgroundView = nil
-        self.separatorStyle = .singleLine
+//        self.separatorStyle = .singleLinere
     }
 }

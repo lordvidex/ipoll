@@ -277,6 +277,7 @@ extension PollViewController: UITableViewDataSource {
             self.tableView.setEmptyMessage("Empty List of Polls")
         } else {
             self.tableView.restore()
+            self.tableView.separatorStyle = .none
         }
 
         return polls.count
