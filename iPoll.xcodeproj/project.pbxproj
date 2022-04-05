@@ -20,6 +20,8 @@
 		B938192A27F9BD3D00B91454 /* MockPersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938192927F9BD3D00B91454 /* MockPersistentService.swift */; };
 		B938193827F9C2C100B91454 /* iPollIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */; };
 		B938193A27F9C74B00B91454 /* MockPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193927F9C74B00B91454 /* MockPollViewController.swift */; };
+		B938195327FBFA8700B91454 /* PollDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195227FBFA8700B91454 /* PollDto.swift */; };
+		B938195527FBFB5200B91454 /* DateFormatter+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195427FBFB5200B91454 /* DateFormatter+UTC.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -73,6 +75,8 @@
 		B938192927F9BD3D00B91454 /* MockPersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistentService.swift; sourceTree = "<group>"; };
 		B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPollIntegrationTests.swift; sourceTree = "<group>"; };
 		B938193927F9C74B00B91454 /* MockPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPollViewController.swift; sourceTree = "<group>"; };
+		B938195227FBFA8700B91454 /* PollDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollDto.swift; sourceTree = "<group>"; };
+		B938195427FBFB5200B91454 /* DateFormatter+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+UTC.swift"; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				B9EA042E27D4260500D70769 /* Poll.swift */,
 				B98837E627E6426700094768 /* User.swift */,
 				B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */,
+				B938195227FBFA8700B91454 /* PollDto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
 				B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */,
+				B938195427FBFB5200B91454 /* DateFormatter+UTC.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 			files = (
 				B98837E527E6311B00094768 /* NetworkService.swift in Sources */,
 				B917465C27CD90A000140F5B /* UIColor+Hex.swift in Sources */,
+				B938195527FBFB5200B91454 /* DateFormatter+UTC.swift in Sources */,
 				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
 				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
 				B938191627F779B300B91454 /* Assembler.swift in Sources */,
@@ -432,6 +439,7 @@
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
 				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
 				B9EA043527D52A1500D70769 /* PollViewController.swift in Sources */,
+				B938195327FBFA8700B91454 /* PollDto.swift in Sources */,
 				B9EA042F27D4260500D70769 /* Poll.swift in Sources */,
 				B9EA043727D52BC900D70769 /* Constants.swift in Sources */,
 				B98837E727E6426700094768 /* User.swift in Sources */,

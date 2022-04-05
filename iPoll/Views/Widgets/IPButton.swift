@@ -62,28 +62,25 @@ class IPButton: UIButton {
         layer.masksToBounds = true
         layer.cornerRadius = cornerRadius
         backgroundColor = color
-
-        heightAnchor.constraint(equalToConstant: height).isActive = true
-        if let width = self.width {
-            widthAnchor.constraint(equalToConstant: width).isActive = true
+        
+        snp.makeConstraints { make in
+            make.height.equalTo(height)
+            if let width = width {
+                make.width.equalTo(width)
+            }
         }
+        
     }
 
     func addRightIcon(image: UIImage) {
         let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-
         addSubview(imageView)
-
-        let length = CGFloat(15)
-        titleEdgeInsets.right += length
-
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: self.titleLabel!.trailingAnchor, constant: 10),
-            imageView.centerYAnchor.constraint(equalTo: self.titleLabel!.centerYAnchor, constant: 0),
-            imageView.widthAnchor.constraint(equalToConstant: length),
-            imageView.heightAnchor.constraint(equalToConstant: length)
-        ])
+        
+        imageView.snp.makeConstraints { make in
+            make.left.equalTo(titleLabel!.snp.right).offset(10)
+            make.centerY.equalTo(titleLabel!)
+            make.width.height.equalTo(15)
+        }
     }
 
     override var isHighlighted: Bool {

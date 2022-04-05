@@ -19,8 +19,21 @@ class iPollIntegrationTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        polls = [Poll(id: "1", title: "1", isAnonymous: true, options: nil),
-                 Poll(id: "2", title: "2", isAnonymous: true, options: nil)]
+        polls = [
+            Poll(id: "1",
+                 title: "1",
+                 isAnonymous: true,
+                 hasTimeLimit: false,
+                 startTime: .now,
+                 endTime: nil,
+                 options: nil),
+            Poll(id: "2",
+                 title: "2",
+                 isAnonymous: true,
+                 hasTimeLimit: false,
+                 startTime: .now,
+                 endTime: nil,
+                 options: nil)]
         user = User(id: "user1",
                     name: "Swift Tester",
                     participatedPolls: [polls[0]],
@@ -32,7 +45,7 @@ class iPollIntegrationTests: XCTestCase {
                                   persistentService: persistentService)
         viewController = MockPollViewController(pollViewModel: viewModel)
     }
-
+    
     override func tearDownWithError() throws {
         viewModel = nil
         viewController = nil

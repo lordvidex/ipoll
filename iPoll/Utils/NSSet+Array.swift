@@ -15,3 +15,13 @@ extension NSSet {
         allObjects as? [T] ?? []
     }
 }
+
+extension NSOrderedSet {
+    func toArray<T>(of type: T.Type) -> [T] {
+        if let array = array as? [T] {
+            return array
+        } else {
+            return []
+        }
+    }
+}
