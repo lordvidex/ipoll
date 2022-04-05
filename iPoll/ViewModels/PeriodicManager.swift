@@ -30,17 +30,31 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     init(period: TimeInterval) {
         self.period = period
-        self.listeners = []
+        self._listeners = []
         startTimer()
     }
     
-    private var listeners: [Any]!
+    private var _listeners: [Any]!
+    
+    var listeners: [PeriodicManagerDelegate] {
+        purgeNil()
+        
+        var array = [PeriodicManagerDelegate]()
+        
+        for listener in _listeners {
+            if let listener = listener as? Weak<AnyObject>,
+            let object = listener.object as? PeriodicManagerDelegate {
+                array.append(object)
+            }
+        }
+        return array
+    }
     
     let period: TimeInterval
     private var timer: Timer!
     
     func startTimer() {
-        if timer != nil {
+        if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: period,
                                          target: self,
                                          selector: #selector(update),
@@ -59,12 +73,23 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     func addListener(_ listener: PeriodicManagerDelegate) {
         purgeNil()
-        listeners.append(Weak(listener as AnyObject))
+        _listeners.append(Weak(listener as AnyObject))
+    }
+    
+    func hasListener(_ listener: PeriodicManagerDelegate) -> Bool {
+        purgeNil()
+        return _listeners.contains { each in
+            if let weakEl = each as? Weak<AnyObject>,
+               let obj = weakEl.object {
+                return obj === listener
+            }
+            return false
+        }
     }
     
     func removeListener(_ listener: PeriodicManagerDelegate) {
         purgeNil()
-        listeners.removeAll { weakElement in
+        _listeners.removeAll { weakElement in
             if let weakElement = weakElement as? Weak<AnyObject>,
                let object = weakElement.object {
                 return object === listener
@@ -76,7 +101,7 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     func removeListener(where: (PeriodicManagerDelegate) -> Bool) {
         purgeNil()
-        listeners.removeAll { weakEl in
+        _listeners.removeAll { weakEl in
             if let weakElement = weakEl as? Weak<AnyObject>,
                let object = weakElement.object {
                 if let object = object as? PeriodicManagerDelegate {
@@ -93,7 +118,7 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     @objc func update(_ timer: Timer) {
         purgeNil()
-        for listener in listeners {
+        for listener in _listeners {
             if let listener = listener as? Weak<AnyObject>,
                let delegate = listener.object as? PeriodicManagerDelegate {
                 delegate.didCallUpdate(self, with: timer, period: period)
@@ -103,7 +128,7 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     /// Used to remove `nil` elements from array
     func purgeNil() {
-        listeners.removeAll { elem in
+        _listeners.removeAll { elem in
             if let elem = elem as? Weak<AnyObject> {
                 return elem.object == nil
             } else {
@@ -114,10 +139,8 @@ class PeriodicManager: PeriodicManagerProtocol {
     
     deinit {
         // remove all listeners
-        removeListener { _ in
-            return true
-        }
-        listeners = nil
+        removeListener { _ in true} 
+        _listeners = nil
         stopTimer()
     }
         
