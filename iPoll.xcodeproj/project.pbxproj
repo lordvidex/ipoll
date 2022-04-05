@@ -164,6 +164,9 @@
 				B938192827F9BCD200B91454 /* Mocks */,
 				B938191D27F9B26700B91454 /* iPollUnitTests.swift */,
 				B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */,
+				B938195027FB17C000B91454 /* iPollDtoTests.swift */,
+				B938195B27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift */,
+				B938195D27FCC24400B91454 /* PeriodicManagerDelegateMock.swift */,
 			);
 			path = iPollTests;
 			sourceTree = "<group>";
@@ -421,6 +424,9 @@
 				B938192A27F9BD3D00B91454 /* MockPersistentService.swift in Sources */,
 				B938191E27F9B26700B91454 /* iPollUnitTests.swift in Sources */,
 				B938193827F9C2C100B91454 /* iPollIntegrationTests.swift in Sources */,
+				B938195C27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift in Sources */,
+				B938195E27FCC24400B91454 /* PeriodicManagerDelegateMock.swift in Sources */,
+				B938195127FB17C000B91454 /* iPollDtoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
