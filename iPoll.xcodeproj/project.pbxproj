@@ -22,6 +22,10 @@
 		B938193A27F9C74B00B91454 /* MockPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938193927F9C74B00B91454 /* MockPollViewController.swift */; };
 		B938195327FBFA8700B91454 /* PollDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195227FBFA8700B91454 /* PollDto.swift */; };
 		B938195527FBFB5200B91454 /* DateFormatter+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195427FBFB5200B91454 /* DateFormatter+UTC.swift */; };
+		B938196127FCCD6A00B91454 /* PeriodicManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195F27FCCD6A00B91454 /* PeriodicManagerDelegateMock.swift */; };
+		B938196227FCCD6A00B91454 /* PeriodicManagerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938196027FCCD6A00B91454 /* PeriodicManagerUnitTest.swift */; };
+		B938196427FCCE2600B91454 /* PeriodicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938196327FCCE2600B91454 /* PeriodicViewModel.swift */; };
+		B938196627FCCE5200B91454 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938196527FCCE5200B91454 /* Weak.swift */; };
 		B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572627CD1B6E0021E53C /* AppDelegate.swift */; };
 		B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95E572827CD1B6E0021E53C /* SceneDelegate.swift */; };
 		B95E573127CD1B6E0021E53C /* iPoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B95E572F27CD1B6E0021E53C /* iPoll.xcdatamodeld */; };
@@ -77,6 +81,10 @@
 		B938193927F9C74B00B91454 /* MockPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPollViewController.swift; sourceTree = "<group>"; };
 		B938195227FBFA8700B91454 /* PollDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollDto.swift; sourceTree = "<group>"; };
 		B938195427FBFB5200B91454 /* DateFormatter+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+UTC.swift"; sourceTree = "<group>"; };
+		B938195F27FCCD6A00B91454 /* PeriodicManagerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodicManagerDelegateMock.swift; sourceTree = "<group>"; };
+		B938196027FCCD6A00B91454 /* PeriodicManagerUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodicManagerUnitTest.swift; sourceTree = "<group>"; };
+		B938196327FCCE2600B91454 /* PeriodicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicViewModel.swift; sourceTree = "<group>"; };
+		B938196527FCCE5200B91454 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		B95E572327CD1B6E0021E53C /* iPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95E572627CD1B6E0021E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95E572827CD1B6E0021E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				B98837EA27E65A1400094768 /* PollViewModel.swift */,
+				B938196327FCCE2600B91454 /* PeriodicViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -161,12 +170,10 @@
 		B938191C27F9B26700B91454 /* iPollTests */ = {
 			isa = PBXGroup;
 			children = (
+				B938196027FCCD6A00B91454 /* PeriodicManagerUnitTest.swift */,
 				B938192827F9BCD200B91454 /* Mocks */,
 				B938191D27F9B26700B91454 /* iPollUnitTests.swift */,
 				B938193127F9C1F800B91454 /* iPollIntegrationTests.swift */,
-				B938195027FB17C000B91454 /* iPollDtoTests.swift */,
-				B938195B27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift */,
-				B938195D27FCC24400B91454 /* PeriodicManagerDelegateMock.swift */,
 			);
 			path = iPollTests;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 		B938192827F9BCD200B91454 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				B938195F27FCCD6A00B91454 /* PeriodicManagerDelegateMock.swift */,
 				B938193927F9C74B00B91454 /* MockPollViewController.swift */,
 				B938192427F9B9CC00B91454 /* MockNetworkService.swift */,
 				B938192627F9BB6500B91454 /* MockPollViewModel.swift */,
@@ -254,6 +262,7 @@
 				B98837E627E6426700094768 /* User.swift */,
 				B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */,
 				B938195227FBFA8700B91454 /* PollDto.swift */,
+				B938196527FCCE5200B91454 /* Weak.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -420,13 +429,12 @@
 			files = (
 				B938193A27F9C74B00B91454 /* MockPollViewController.swift in Sources */,
 				B938192727F9BB6500B91454 /* MockPollViewModel.swift in Sources */,
+				B938196227FCCD6A00B91454 /* PeriodicManagerUnitTest.swift in Sources */,
+				B938196127FCCD6A00B91454 /* PeriodicManagerDelegateMock.swift in Sources */,
 				B938192527F9B9CC00B91454 /* MockNetworkService.swift in Sources */,
 				B938192A27F9BD3D00B91454 /* MockPersistentService.swift in Sources */,
 				B938191E27F9B26700B91454 /* iPollUnitTests.swift in Sources */,
 				B938193827F9C2C100B91454 /* iPollIntegrationTests.swift in Sources */,
-				B938195C27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift in Sources */,
-				B938195E27FCC24400B91454 /* PeriodicManagerDelegateMock.swift in Sources */,
-				B938195127FB17C000B91454 /* iPollDtoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +449,7 @@
 				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
 				B938191627F779B300B91454 /* Assembler.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
+				B938196427FCCE2600B91454 /* PeriodicViewModel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
 				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
@@ -461,6 +470,7 @@
 				B9B275B227DF207E00DD3711 /* CreatePollOptionCell.swift in Sources */,
 				B9EA043127D428ED00D70769 /* TableView+EmptyView.swift in Sources */,
 				B95E572927CD1B6E0021E53C /* SceneDelegate.swift in Sources */,
+				B938196627FCCE5200B91454 /* Weak.swift in Sources */,
 				B98837EF27E6925200094768 /* VoteOptionCell.swift in Sources */,
 				B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */,
 			);
