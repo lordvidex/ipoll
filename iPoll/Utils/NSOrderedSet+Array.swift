@@ -7,11 +7,15 @@
 
 import Foundation
 
-extension NSSet {
+extension NSOrderedSet {
     /// Converts a Set to an array of a particular type
     ///
     /// returns an empty array if type casting fails
     func toArray<T>(of type: T.Type) -> [T] {
-        allObjects as? [T] ?? []
+        if let array = array as? [T] {
+            return array
+        } else {
+            return []
+        }
     }
 }

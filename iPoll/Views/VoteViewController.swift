@@ -43,7 +43,9 @@ class VoteViewController: UIViewController {
 
     func showLoading() {
         optionsTableView.isSkeletonable = true
-        optionsTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: Constants.Colors.lightBlue!, secondaryColor: .white), transition: .crossDissolve(1))
+        optionsTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: Constants.Colors.lightBlue!,
+                                                                           secondaryColor: .white),
+                                                      transition: .crossDissolve(1))
     }
 
     func hideLoading() {
@@ -79,7 +81,9 @@ class VoteViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension VoteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteOption, for: indexPath) as? VoteOptionCell, let poll = poll {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteOption,
+                                                    for: indexPath) as? VoteOptionCell,
+           let poll = poll {
             cell.delegate = self
             if let option = poll.options?[indexPath.row] {
                 cell.updateCell(optionTitle: option.title,
@@ -112,7 +116,9 @@ extension VoteViewController: VoteManagerDelegate {
     }
 
     func showErrorAlert(with message: String? = nil, addBackButton: Bool, addOkButton: Bool = true) {
-        let alert = UIAlertController(title: "Vote Error", message: "An error occured while voting: \n \(message ?? "")", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Vote Error",
+                                      message: "An error occured while voting: \n \(message ?? "")",
+                                      preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         let backAction = UIAlertAction(title: "Exit", style: .cancel) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
@@ -139,7 +145,8 @@ extension VoteViewController: VoteManagerDelegate {
 
 // MARK: - SkeletonTableViewDataSource
 extension VoteViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+    func collectionSkeletonView(_ skeletonView: UITableView,
+                                cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         Constants.CellIdentifiers.voteOption
     }
 

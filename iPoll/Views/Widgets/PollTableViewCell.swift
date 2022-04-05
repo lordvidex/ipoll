@@ -15,8 +15,7 @@ class PollTableViewCell: UITableViewCell {
         }
     }
 
-    @UsesAutoLayout
-    var mainView: UIView = {
+    lazy var mainView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
         view.backgroundColor = UIColor(hexString: "#CCDBFD")
@@ -25,8 +24,7 @@ class PollTableViewCell: UITableViewCell {
         return view
     }()
 
-    @UsesAutoLayout
-    var pollLabel: UILabel = {
+    lazy var pollLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(hexString: "#052161")
         label.font = Constants.appFont
@@ -34,8 +32,7 @@ class PollTableViewCell: UITableViewCell {
         return label
     }()
 
-    @UsesAutoLayout
-    var arrow: UIImageView = {
+    lazy var arrow: UIImageView = {
        let image = UIImage(systemName: "chevron.right")
         let view = UIImageView(image: image)
         view.tintColor = UIColor(hexString: "#052161")
@@ -52,23 +49,21 @@ class PollTableViewCell: UITableViewCell {
         mainView.addSubview(pollLabel)
         mainView.addSubview(arrow)
         contentView.addSubview(mainView)
-
-        NSLayoutConstraint.activate([
-
-            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-            mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-
-            arrow.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
-            arrow.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -14),
-            arrow.widthAnchor.constraint(greaterThanOrEqualToConstant: 12),
-
-            pollLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10),
-            pollLabel.trailingAnchor.constraint(lessThanOrEqualTo: arrow.leadingAnchor, constant: -12),
-            pollLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 13),
-            pollLabel.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -13)
-        ])
+        
+        mainView.snp.makeConstraints { make in
+            make.left.right.equalTo(contentView).inset(2)
+            make.top.bottom.equalTo(contentView).inset(5)
+        }
+        arrow.snp.makeConstraints { make in
+            make.centerY.equalTo(mainView)
+            make.right.equalTo(mainView).offset(-14)
+            make.width.greaterThanOrEqualTo(12)
+        }
+        pollLabel.snp.makeConstraints { make in
+            make.top.bottom.equalTo(mainView).inset(13)
+            make.right.lessThanOrEqualTo(mainView).offset(-12)
+            make.left.equalTo(mainView).offset(10)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

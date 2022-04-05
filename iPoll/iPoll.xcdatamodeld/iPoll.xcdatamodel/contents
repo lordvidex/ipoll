@@ -7,13 +7,13 @@
         <attribute name="isAnonymous" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PollOptionEntity" inverseName="poll" inverseEntity="PollOptionEntity"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="PollOptionEntity" inverseName="poll" inverseEntity="PollOptionEntity"/>
     </entity>
     <entity name="PollOptionEntity" representedClassName="PollOptionEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="poll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PollEntity" inverseName="options" inverseEntity="PollEntity"/>
-        <relationship name="votesId" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VoteEntity" inverseName="option" inverseEntity="VoteEntity"/>
+        <relationship name="votesId" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VoteEntity" inverseName="option" inverseEntity="VoteEntity"/>
     </entity>
     <entity name="VoteEntity" representedClassName="VoteEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="String"/>

@@ -20,7 +20,9 @@ class PollViewController: UIViewController {
         }
     }
 
-    private static let segmentItems = ["Visited Polls", "Participated Polls", "Created Polls"]
+    private lazy var segmentItems: [String] = {
+        ["Visited Polls", "Participated Polls", "Created Polls"]
+    }()
 
     weak var pollManager: PollManager! = .shared
     var polls: [Poll] = []
@@ -28,7 +30,7 @@ class PollViewController: UIViewController {
     // MARK: - UI Elements
     private lazy var pollLabel: UILabel = {
         let label = UILabel()
-        label.text = PollViewController.segmentItems.first
+        label.text = segmentItems.first
         label.font = Constants.appFont?.withSize(24)
         return label
     }()
@@ -63,14 +65,13 @@ class PollViewController: UIViewController {
         return table
     }()
 
-    private var segmentedControl: UISegmentedControl = {
-        let ctrl = UISegmentedControl(items: PollViewController.segmentItems)
+    private lazy var segmentedControl: UISegmentedControl = {
+        let ctrl = UISegmentedControl(items: segmentItems)
         ctrl.layer.cornerRadius = 9
         ctrl.selectedSegmentTintColor = Constants.Colors.darkBlue
         ctrl.tintColor = Constants.Colors.lightBlue
         ctrl.selectedSegmentIndex = 0
         ctrl.addTarget(self, action: #selector(onTapSegmentedControl(_:)), for: .valueChanged)
-        ctrl.sendActions(for: .valueChanged)
         ctrl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         return ctrl
     }()
@@ -83,6 +84,8 @@ class PollViewController: UIViewController {
         tableView.dataSource = self
         pollManager.delegate = self
         setupViews()
+        
+        tableView.refreshControl?.beginRefreshing()
         pollManager.fetchVisitedPolls() // local
         pollManager.fetchRemotePolls()  // remote
 
@@ -149,13 +152,13 @@ class PollViewController: UIViewController {
     private func updatePolls() {
         switch segmentedControl.selectedSegmentIndex {
             case 0:
-                pollLabel.text = PollViewController.segmentItems[0]
+                pollLabel.text = segmentItems[0]
                 polls = pollManager?.visitedPolls ?? []
             case 1:
-                pollLabel.text = PollViewController.segmentItems[1]
+                pollLabel.text = segmentItems[1]
                 polls = pollManager?.participatedPolls ?? []
             case 2:
-                pollLabel.text = PollViewController.segmentItems[2]
+                pollLabel.text = segmentItems[2]
                 polls = pollManager?.createdPolls ?? []
             default:
                 fatalError("segmentControl should have only 2 children")
@@ -285,9 +288,14 @@ extension PollViewController: UITableViewDataSource {
 
 }
 
+// MARK: - PollManagerDelegate
 extension PollViewController: PollManagerDelegate {
     func finishedFetchingPolls(_ success: Bool) {
         DispatchQueue.main.async {
+            if let refreshControl = self.tableView.refreshControl,
+               refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
             self.updatePolls()
         }
     }

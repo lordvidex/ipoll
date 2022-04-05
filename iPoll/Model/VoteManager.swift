@@ -84,9 +84,11 @@ class VoteManager: VoteManagerProtocol {
      * * Method is called after it has been gotten initially from the networkservice
      */
     func persistPoll(_ poll: Poll) {
-        // TODO: use background thread
-        local.savePoll(poll)
-        pollManager.fetchVisitedPolls()
+        DispatchQueue.global(qos: .utility).async {
+            self.local.savePoll(poll)
+            self.pollManager.fetchVisitedPolls()
+        }
+        
     }
 
     // MARK: - WebSocket Functions

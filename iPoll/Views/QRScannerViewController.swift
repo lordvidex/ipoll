@@ -79,7 +79,9 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         }
     }
 
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    func metadataOutput(_ output: AVCaptureMetadataOutput,
+                        didOutput metadataObjects: [AVMetadataObject],
+                        from connection: AVCaptureConnection) {
         captureSession?.stopRunning()
 
         if let metadata = metadataObjects.first {
@@ -95,7 +97,9 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     }
 
     private func showError() {
-        let alert = UIAlertController(title: "Error Initialising Camera", message: "Camera could not start to read QR code", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error Initialising Camera",
+                                      message: "Camera could not start to read QR code",
+                                      preferredStyle: .alert)
         let action = UIAlertAction(title: "Close", style: .default) { _ in
             self.dismiss(animated: true) {
                 self.navigationController?.popViewController(animated: true)

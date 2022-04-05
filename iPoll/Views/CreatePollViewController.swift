@@ -150,8 +150,6 @@ class CreatePollViewController: UIViewController {
     @objc func createPoll() {
         loadingIndicator.startAnimating() // loading
         
-        // TODO: validations
-        
         // get variables
         let title = pollTitleTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasTime = pollCreateManager.hasTime

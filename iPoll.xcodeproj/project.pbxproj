@@ -46,7 +46,7 @@
 		B9EED03D27E8C62900483244 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EED03C27E8C62900483244 /* UIImage+resize.swift */; };
 		B9FE54DD27F1AB2900568082 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54DC27F1AB2900568082 /* PersistenceService.swift */; };
 		B9FE54DF27F1B3F400568082 /* Entity+Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */; };
-		B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */; };
+		B9FE54E127F1B8CA00568082 /* NSOrderedSet+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FE54E027F1B8CA00568082 /* NSOrderedSet+Array.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +104,7 @@
 		B9EED03C27E8C62900483244 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		B9FE54DC27F1AB2900568082 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		B9FE54DE27F1B3F400568082 /* Entity+Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Converter.swift"; sourceTree = "<group>"; };
-		B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+Array.swift"; sourceTree = "<group>"; };
+		B9FE54E027F1B8CA00568082 /* NSOrderedSet+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOrderedSet+Array.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,7 +243,7 @@
 				B9EED03627E88FDF00483244 /* Router.swift */,
 				B9EED03827E8A9D900483244 /* QRGenerator.swift */,
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
-				B9FE54E027F1B8CA00568082 /* NSSet+Array.swift */,
+				B9FE54E027F1B8CA00568082 /* NSOrderedSet+Array.swift */,
 				B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */,
 			);
 			path = Utils;
@@ -382,7 +382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nalias swiftlint = ${PODS_ROOT}/SwiftLint/swiftlint\nif which swiftlint >/dev/null; then\n  \U001b swiftlint --fix\n   swiftlint\n   \nelse \n    echo \"Warning Swiftlint not installed\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nalias swiftlint = ${PODS_ROOT}/SwiftLint/swiftlint\n\nif which swiftlint >/dev/null; then\n  \U001b swiftlint --fix\n   swiftlint\n   \nelse \n    echo \"Warning Swiftlint not installed\"\nfi\n";
 		};
 		E532B38F0D0118FB73E38137 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -426,7 +426,7 @@
 				B938193E27FABA4D00B91454 /* PollCreateManager.swift in Sources */,
 				B938194227FAF35000B91454 /* PollDto.swift in Sources */,
 				B9EED03B27E8B1E100483244 /* PollPreviewController.swift in Sources */,
-				B9FE54E127F1B8CA00568082 /* NSSet+Array.swift in Sources */,
+				B9FE54E127F1B8CA00568082 /* NSOrderedSet+Array.swift in Sources */,
 				B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */,
 				B917465E27CD929300140F5B /* UsesAutoLayout.swift in Sources */,
 				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
