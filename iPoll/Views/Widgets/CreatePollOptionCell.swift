@@ -28,6 +28,18 @@ class CreatePollOptionCell: UITableViewCell {
             addBtn.isHidden = !showAddBtn
         }
     }
+    
+    var editable = true {
+        didSet {
+            if !editable {
+                deleteBtn.tintColor = .gray
+                deleteBtn.isEnabled = false
+            } else {
+                deleteBtn.tintColor = .systemRed
+                deleteBtn.isEnabled = true
+            }
+        }
+    }
 
     var showDeleteBtn = false {
         didSet {
@@ -51,6 +63,10 @@ class CreatePollOptionCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        addBtn.isSkeletonable = true
+        deleteBtn.isSkeletonable = true
+        optionTextField.isSkeletonable = true
+        contentView.isSkeletonable = true
         updateUI()
     }
 

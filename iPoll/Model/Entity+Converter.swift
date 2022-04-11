@@ -12,6 +12,7 @@ extension PollEntity {
 
         return Poll(id: id!,
                     title: title!,
+                    authorId: authorId,
                     isAnonymous: isAnonymous,
                     hasTimeLimit: hasTimeLimit,
                     startTime: startTime!,

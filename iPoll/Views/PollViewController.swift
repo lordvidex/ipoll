@@ -88,7 +88,13 @@ class PollViewController: UIViewController {
         tableView.refreshControl?.beginRefreshing()
         pollManager.fetchVisitedPolls() // local
         pollManager.fetchRemotePolls()  // remote
-
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        PeriodicManager.shared.startTimer()
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -175,7 +181,7 @@ class PollViewController: UIViewController {
     }
 
     @objc func onTapFab(_ sender: UIButton) {
-        navigationController?.pushViewController(CreatePollViewController(), animated: true)
+        gotoCreateVC()
     }
 
     @objc func onJoinBtnClicked() {
@@ -198,6 +204,22 @@ class PollViewController: UIViewController {
             }
         }
     }
+    
+    func gotoVoteVC(id: String) {
+        let voteViewController = VoteViewController()
+        voteViewController.pollId = id
+        navigationController?.pushViewController(voteViewController, animated: true)
+    }
+    
+    /// opens CreateViewController in [create] mode if id is `nil` otherwise
+    /// opens CreateViewController in [edit] mode
+    func gotoCreateVC(id: String? = nil) {
+        let createVC = CreatePollViewController()
+        if id != nil {
+            createVC.pollId = id
+        }
+        navigationController?.pushViewController(createVC, animated: true)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -215,10 +237,23 @@ extension PollViewController: UITableViewDelegate {
                    contextMenuConfigurationForRowAt indexPath: IndexPath,
                    point: CGPoint) -> UIContextMenuConfiguration? {
         let poll = polls[indexPath.row]
-        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: {
             PollPreviewController(pollId: poll.id, pollTitle: poll.title)
         }, actionProvider: { _ in
+            let openAsParticipant = UIAction(title: "Open as participant", image: .envelopeOpen) { [weak self] _ in
+                self?.gotoVoteVC(id: poll.id)
+            }
+            let openAsEditor = UIAction(title: "Open as creator", image: .pencilCircle) { [weak self] _ in
+                self?.gotoCreateVC(id: poll.id)
+            }
+            var actionChildren = [openAsParticipant]
 
+            if poll.authorId == NetworkService.userId { // created by this user
+                actionChildren.append(openAsEditor)
+            }
+            let openAction = UIMenu(title: "Open ...",
+                                    children: actionChildren)
+            
             let copyLink = UIAction(title: "Copy Link", image: .docOnDocFill) { [weak self] _ in
                 UIPasteboard.general.string = "ipoll://poll?id=\(poll.id)"
                 self?.view.makeToast("Link to Poll successfully copied to clipboard")
@@ -246,18 +281,13 @@ extension PollViewController: UITableViewDelegate {
                 self?.present(activityViewController, animated: true, completion: nil)
             }
 
-            let menu = UIMenu(title: "", children: [copyLink, copyCode, qrCode])
-            return menu
+            return UIMenu(title: "", children: [openAction, copyLink, copyCode, qrCode])
         })
-
-        return config
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let voteViewController = VoteViewController()
-        voteViewController.pollId = polls[indexPath.row].id
-        navigationController?.pushViewController(voteViewController, animated: true)
+        gotoVoteVC(id: polls[indexPath.row].id)
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

@@ -9,8 +9,12 @@ import UIKit
 
 class CreatePollViewController: UIViewController {
     
-    weak var pollManager: PollManager! = .shared
-    weak var pollCreateManager: PollCreateManager! = .shared
+    fileprivate weak var pollManager: PollManager! = .shared
+    fileprivate weak var pollCreateManager: PollCreateManager! = .shared
+    
+    // if pollId is not null then we are in editMode
+    var pollId: String?
+    private var editMode: Bool { pollId != nil }
     
     // MARK: - UI Views
     private lazy var pollTitleLabel: UILabel = {
@@ -18,6 +22,7 @@ class CreatePollViewController: UIViewController {
         label.text = "Poll Title"
         label.textColor = Constants.Colors.darkBlue
         label.font = Constants.appFont?.withSize(18)
+        label.isSkeletonable = true
         return label
     }()
     
@@ -25,6 +30,7 @@ class CreatePollViewController: UIViewController {
         let pickerView = UIDatePicker(frame: .zero)
         pickerView.datePickerMode = .dateAndTime
         pickerView.addTarget(self, action: #selector(onStartTimeChanged), for: .valueChanged)
+        pickerView.isSkeletonable = true
         return pickerView
     }()
     
@@ -32,6 +38,7 @@ class CreatePollViewController: UIViewController {
         let pickerView = UIDatePicker(frame: .zero)
         pickerView.datePickerMode = .dateAndTime
         pickerView.addTarget(self, action: #selector(onEndTimeChanged), for: .valueChanged)
+        pickerView.isSkeletonable = true
         return pickerView
     }()
     
@@ -40,6 +47,7 @@ class CreatePollViewController: UIViewController {
         label.text = "Create Poll"
         label.font = Constants.appFont?.withSize(24)
         label.textColor = Constants.Colors.darkBlue
+        label.isSkeletonable = true
         return label
     }()
     
@@ -47,6 +55,7 @@ class CreatePollViewController: UIViewController {
         let swtch = UISwitch(frame: .zero)
         swtch.setOn(pollCreateManager.hasTime, animated: false)
         swtch.addTarget(self, action: #selector(onHasTimeSwitchChanged), for: .valueChanged)
+        swtch.isSkeletonable = true
         return swtch
     }()
     
@@ -54,18 +63,21 @@ class CreatePollViewController: UIViewController {
         let swtch = UISwitch()
         swtch.setOn(pollCreateManager.isVoterAnonymous, animated: false)
         swtch.addTarget(self, action: #selector(onAnonymousToggled), for: .valueChanged)
+        swtch.isSkeletonable = true
         return swtch
     }()
     
     lazy var pollTitleTF: UITextField = {
         let tf = IPTextField()
         tf.text = "Hello World!"
+        tf.isSkeletonable = true
         return tf
     }()
     
     private lazy var pollCreateBtn: UIButton = {
         let btn = IPButton(text: "Create poll", textColor: .white)
         btn.addTarget(self, action: #selector(createPoll), for: .touchUpInside)
+        btn.isSkeletonable = true
         return btn
     }()
     
@@ -74,6 +86,7 @@ class CreatePollViewController: UIViewController {
         label.text = title
         label.font = Constants.appFont?.withSize(14)
         label.textColor = Constants.Colors.darkBlue
+        label.isSkeletonable = true
         return label
     }
     
@@ -93,6 +106,7 @@ class CreatePollViewController: UIViewController {
         table.allowsSelection = false
         table.estimatedRowHeight = 60
         table.rowHeight = UITableView.automaticDimension
+        table.isSkeletonable = true
         return table
     }()
     
@@ -103,12 +117,30 @@ class CreatePollViewController: UIViewController {
         optionsTableView.dataSource = self
         optionsTableView.delegate = self
         pollCreateManager.delegate = self
-        
-        pollCreateManager.startTime = startTimePicker.date
-        pollCreateManager.endTime = endTimePicker.date
+        pollManager.delegate = self
         
         loadingIndicator.stopAnimating()
+        setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        if !editMode {
+            pollCreateManager.startTime = startTimePicker.date
+            pollCreateManager.endTime = endTimePicker.date
+        } else {
+            pollManager.fetchPoll(with: pollId!)
+            headerLabel.text = "Edit Poll"
+            view.isSkeletonable = true
+            view.showAnimatedGradientSkeleton(usingGradient:
+                    .init(baseColor: Constants.Colors.lightBlue!,
+                          secondaryColor: .white),
+                                              transition: .crossDissolve(1))
+        }
+    }
+    
+    func setupView() {
         view.backgroundColor = .white
         
         view.addSubview(headerLabel)
@@ -164,7 +196,7 @@ class CreatePollViewController: UIViewController {
                           startTime: startTime,
                           endTime: endTime)
         
-        pollManager.createPoll(pollDto: dto) { [weak self] result in
+        let closure: (Result<Poll, IPollError>) -> Void = { [weak self] result in
             switch result {
                 case .success:
                     print("Success")
@@ -174,7 +206,10 @@ class CreatePollViewController: UIViewController {
                         self?.navigationController?.viewControllers = [pollVC]
                     }
                 case .failure(let err):
-                    print(err)
+                    self?.showErrorAlert(title: "An Error Occured",
+                                         with: "Failure Creating/Editing Poll \n\(err)",
+                                         addBackButton: false,
+                                         addOkButton: true)
                     
             }
             DispatchQueue.main.async {
@@ -182,6 +217,11 @@ class CreatePollViewController: UIViewController {
             }
         }
         
+        if editMode {
+            pollManager.editPoll(id: pollId!, pollDto: dto, completion: closure)
+        } else {
+            pollManager.createPoll(pollDto: dto, completion: closure)
+        }
     }
     
     @objc func onHasTimeSwitchChanged(_ sender: UISwitch) {
@@ -218,7 +258,8 @@ extension CreatePollViewController: UITableViewDataSource {
                                                             for: indexPath) as? CreatePollOptionCell {
                     cell.delegate = self
                     cell.indexPath = indexPath
-                    cell.initialText = pollCreateManager.options[indexPath.row]
+                    cell.editable = pollCreateManager.options[indexPath.row].editable
+                    cell.initialText = pollCreateManager.options[indexPath.row].title
                     cell.showAddBtn = indexPath.row == pollCreateManager.options.count - 1
                     cell.showDeleteBtn = pollCreateManager.options.count > 2
                     return cell
@@ -244,7 +285,7 @@ extension CreatePollViewController: UITableViewDataSource {
                     default:
                         break
                 }
-                
+                cell.isSkeletonable = true
                 return cell
             default:
                 return UITableViewCell()
@@ -281,7 +322,7 @@ extension CreatePollViewController: UITableViewDelegate {
 extension CreatePollViewController: CreatePollOptionCellDelegate {
     func didChangePollText(_ cell: CreatePollOptionCell, sender: UITextField, text: String, for indexPath: IndexPath?) {
         if let indexPath = indexPath {
-            pollCreateManager.options[indexPath.row] = text
+            pollCreateManager.options[indexPath.row].title = text
         }
     }
     
@@ -293,7 +334,8 @@ extension CreatePollViewController: CreatePollOptionCellDelegate {
     }
     
     func didAddNewOptionCell(_ sender: CreatePollOptionCell) {
-        pollCreateManager.options.append("Option \(pollCreateManager.optionCount)")
+        pollCreateManager.options
+            .append(PollOptionDto("Option \(pollCreateManager.optionCount)"))
         optionsTableView.reloadData()
         optionsTableView.scrollToRow(at: IndexPath(row: pollCreateManager.options.count-1,
                                                    section: 0),
@@ -302,6 +344,7 @@ extension CreatePollViewController: CreatePollOptionCellDelegate {
     
 }
 
+// MARK: - PollCreateManagerDelegate
 extension CreatePollViewController: PollCreateManagerDelegate {
     
     func didTogglePollHasTime(_ viewModel: PollCreateManager, value: Bool) {
@@ -330,6 +373,52 @@ extension CreatePollViewController: PollCreateManagerDelegate {
             animation.toValue = UIColor.red.cgColor
             animation.duration = 1
             endTimePicker.layer.add(animation, forKey: "backgroundColor")
+        }
+    }
+    
+    func updateEditMode(_ poll: Poll) {
+        // update the ViewModel
+        pollCreateManager.startTime = poll.startTime
+        pollCreateManager.endTime = poll.endTime
+        pollCreateManager.options = poll.options!.map {
+            PollOptionDto($0.title, with: $0.id, canEdit: false) }
+        pollCreateManager.hasTime = poll.hasTimeLimit
+        pollCreateManager.isVoterAnonymous = poll.isAnonymous
+        
+        // disable EDIT features
+        startTimePicker.isEnabled = false
+        pollTitleTF.text = poll.title
+        pollCreateBtn.setTitle("Edit Poll", for: .normal)
+        hasTimeSwitch.isOn = poll.hasTimeLimit
+        anonymousSwitch.isOn = poll.isAnonymous
+        
+        if poll.hasTimeLimit {
+            endTimePicker.date = poll.endTime! 
+            endTimePicker.minimumDate = max(.now, poll.endTime!)
+        } else {
+            endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: .now)
+            endTimePicker.date = .now
+        }
+        
+    }
+}
+
+// MARK: - PollManagerDelegate
+extension CreatePollViewController: PollManagerDelegate {
+    func finishedFetchingPolls(_ success: Bool) {}
+    
+    func finishedFetchingPoll(_ poll: Poll?, or error: IPollError?) {
+        view.stopSkeletonAnimation()
+        view.hideSkeleton()
+        if let error = error {
+            showErrorAlert(title: "Action Failed",
+                           with: "An error occured fetching poll for edit\n\(error)",
+                           addBackButton: true,
+                           addOkButton: false)
+        }
+        if let poll = poll {
+            updateEditMode(poll)
+            optionsTableView.reloadData()
         }
     }
 }

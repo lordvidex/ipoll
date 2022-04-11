@@ -10,7 +10,7 @@ import Foundation
 struct Poll: Codable {
     let id: String
     let title: String
-//    let finished: Bool
+    let authorId: String?
     let isAnonymous: Bool
     let hasTimeLimit: Bool
     let startTime: Date

@@ -46,6 +46,7 @@ class PollTableViewCell: UITableViewCell {
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .right
         label.font = Constants.appFont
         return label
     }()

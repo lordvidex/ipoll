@@ -21,6 +21,11 @@ protocol PollManagerProtocol {
 /// Delegate for updating view from the ViewModel
 protocol PollManagerDelegate: AnyObject {
     func finishedFetchingPolls(_ success: Bool)
+    func finishedFetchingPoll(_ poll: Poll?, or error: IPollError?)
+}
+
+extension PollManagerDelegate {
+    func finishedFetchingPoll(_ poll: Poll?, or error: IPollError?) {}
 }
 
 class PollManager: PollManagerProtocol {
@@ -51,6 +56,28 @@ class PollManager: PollManagerProtocol {
                     completion?(.success(poll))
                 case .failure(let err):
                     completion?(.failure(err))
+            }
+        }
+    }
+    
+    func editPoll(id: String, pollDto: PollDto, completion: ((Result<Poll, IPollError>) -> Void)?) {
+        network.editPoll(id, dto: pollDto) { result in
+            switch result {
+                case .success(let poll):
+                    completion?(.success(poll))
+                case .failure(let err):
+                    completion?(.failure(err))
+            }
+        }
+    }
+    
+    func fetchPoll(with id: String) {
+        network.getPoll(id) { [weak self] result in
+            switch result {
+                case .success(let poll):
+                    self?.delegate?.finishedFetchingPoll(poll, or: nil)
+                case .failure(let error):
+                    self?.delegate?.finishedFetchingPoll(nil, or: error)
             }
         }
     }

@@ -17,7 +17,7 @@ class IPollDtoTests: XCTestCase {
         date1 = .now
         date2 = Calendar.current.date(byAdding: .month, value: 1, to: date1)
         dto = PollDto(title: "Evans",
-                      options: ["Option1", "Option2"],
+                      options: [PollOptionDto("Option1"), PollOptionDto("Option2")],
                       hasTimeLimit: true,
                       isAnonymous: true,
                       startTime: date1,
@@ -59,7 +59,9 @@ class IPollDtoTests: XCTestCase {
         // Then
         XCTAssertNotNil(dictionary)
         XCTAssertEqual(dictionary?["title"] as? String, "Evans")
-        XCTAssertEqual(dictionary?["options"] as? [String], ["Option1", "Option2"])
+        XCTAssertEqual(dictionary?["options"] as? NSObject,
+                       [["title": "Option1"],
+                        ["title": "Option2"]] as NSObject)
         XCTAssertEqual(dictionary?["hasTime"] as? Bool, true)
         XCTAssertEqual(dictionary?["startTime"] as? String,
                        DateFormatter.iso8601Full.string(from: date1))

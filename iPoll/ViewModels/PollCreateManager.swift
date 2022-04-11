@@ -42,7 +42,7 @@ protocol PollCreateManagerProtocol {
     var startTime: Date { get set }
     var endTime: Date? { get set }
     var hasTime: Bool { get set }
-    var options: [String] { get }
+    var options: [PollOptionDto] { get }
     
 }
 
@@ -95,7 +95,7 @@ class PollCreateManager: PollCreateManagerProtocol {
         }
     }
     
-    var options = ["Option 1", "Option 2"]
+    var options = [PollOptionDto("Option 1"), PollOptionDto("Option 2")]
     private var _optionCount = 2
     var optionCount: Int {
         _optionCount += 1

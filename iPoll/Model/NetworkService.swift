@@ -19,7 +19,7 @@ protocol NetworkServiceProtocol {
 class NetworkService: NetworkServiceProtocol {
     // MARK: private variables
 
-    private static var userId: String? // id of this device
+    static var userId: String? // id of this device
 
     private var user: User? // the user data with his polls
     
@@ -70,35 +70,66 @@ class NetworkService: NetworkServiceProtocol {
             }
         }
     }
-
-    public func createPoll(poll: PollDto,
-                           completion: @escaping (Result<Poll, IPollError>) -> Void) {
+    
+    private func encode(_ pollDto: PollDto) throws -> JSON {
         // encode the `PollDto`
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(.iso8601Full)
-        guard let data = try? encoder.encode(poll) else {
+        guard let data = try? encoder.encode(pollDto) else {
             // encoding failed
-            completion(.failure(IPollError(message: "Error decoding Create Poll [PollDto]")))
-            return
+            throw IPollError(message: "Error decoding Create Poll [PollDto]")
         }
         
         guard let jsonData = try? JSON(data: data) else {
             // converting to JSON failed
-            completion(.failure(IPollError(message: "Converting class Data to JSON failed")))
-            return
+            throw IPollError(message: "Converting class Data to JSON failed")
         }
+        return jsonData
+    }
+    
+    public func createPoll(poll: PollDto,
+                           completion: @escaping (Result<Poll, IPollError>) -> Void) {
         
-        AF.request(pollsEndpoint, method: .post,
-                   parameters: jsonData.dictionaryObject,
-                   encoding: JSONEncoding.default,
-                   headers: requestHeader)
-        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
-            switch response.result {
-                case .success(let poll):
-                    completion(.success(poll))
-                case .failure:
-                    completion(.failure(self.decodeError(from: response)))
+        do {
+            let jsonData = try encode(poll)
+            AF.request(pollsEndpoint, method: .post,
+                       parameters: jsonData.dictionaryObject,
+                       encoding: JSONEncoding.default,
+                       headers: requestHeader)
+            .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
+                switch response.result {
+                    case .success(let poll):
+                        completion(.success(poll))
+                    case .failure:
+                        completion(.failure(self.decodeError(from: response)))
+                }
             }
+        } catch {
+            completion(.failure((error as? IPollError) ?? IPollError(message: "UnExpected error \(error)")))
+        }
+    }
+    
+    public func editPoll(_ id: String,
+                         dto: PollDto,
+                         completion: @escaping (Result<Poll, IPollError>) -> Void) {
+        
+        do {
+            let jsonData = try encode(dto)
+//            print(jsonData.dictionaryObject)
+            AF.request("\(pollsEndpoint)/\(id)", method: .patch,
+                       parameters: jsonData.dictionaryObject,
+                       encoding: JSONEncoding.default,
+                       headers: requestHeader)
+            .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
+                switch response.result {
+                    case .success(let poll):
+                        completion(.success(poll))
+                    case .failure:
+                        completion(.failure(self.decodeError(from: response)))
+                }
+            }
+        } catch {
+            completion(.failure((error as? IPollError) ?? IPollError(message: "UnExpected error \(error)")))
         }
     }
 
@@ -118,7 +149,7 @@ class NetworkService: NetworkServiceProtocol {
         AF.request("\(pollsEndpoint)/\(pollId)/\(optionId)",
                    method: .post,
                    headers: requestHeader)
-        .responseDecodable(of: Poll.self) { response in
+        .responseDecodable(of: Poll.self, decoder: getDecoder()) { response in
             switch response.result {
                 case .success(let poll):
                     completion(.success(poll))

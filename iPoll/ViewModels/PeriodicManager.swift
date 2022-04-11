@@ -57,12 +57,15 @@ class PeriodicManager: PeriodicManagerProtocol {
     private var timer: Timer!
     
     func startTimer() {
+        // creates a new timer OR triggers a current timer
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: period,
                                          target: self,
                                          selector: #selector(update),
                                          userInfo: nil,
                                          repeats: true)
+        } else {
+            update(timer)
         }
     }
     

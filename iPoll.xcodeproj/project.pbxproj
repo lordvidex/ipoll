@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44D069D584B70CEAA7F8C7F7 /* Pods_iPoll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */; };
+		B90A7ACB28043C1400F32769 /* ViewContoller+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A7ACA28043C1400F32769 /* ViewContoller+ErrorAlert.swift */; };
 		B90BC0F927DF9AF000D54B3E /* IPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F627DF9AF000D54B3E /* IPLabel.swift */; };
 		B90BC0FA27DF9AF000D54B3E /* IPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F727DF9AF000D54B3E /* IPButton.swift */; };
 		B90BC0FB27DF9AF000D54B3E /* IPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BC0F827DF9AF000D54B3E /* IPTextField.swift */; };
@@ -67,6 +68,7 @@
 		7B42ABA568AD87AB11D3D1C7 /* Pods-iPoll.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.release.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.release.xcconfig"; sourceTree = "<group>"; };
 		83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPoll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57117825CA50EA4D1352F15 /* Pods-iPoll.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.debug.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.debug.xcconfig"; sourceTree = "<group>"; };
+		B90A7ACA28043C1400F32769 /* ViewContoller+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewContoller+ErrorAlert.swift"; sourceTree = "<group>"; };
 		B90BC0F627DF9AF000D54B3E /* IPLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPLabel.swift; sourceTree = "<group>"; };
 		B90BC0F727DF9AF000D54B3E /* IPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPButton.swift; sourceTree = "<group>"; };
 		B90BC0F827DF9AF000D54B3E /* IPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPTextField.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				B9EED03C27E8C62900483244 /* UIImage+resize.swift */,
 				B9FE54E027F1B8CA00568082 /* NSOrderedSet+Array.swift */,
 				B938193B27FA50F400B91454 /* DateFormatter+UTC.swift */,
+				B90A7ACA28043C1400F32769 /* ViewContoller+ErrorAlert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				B938195A27FC280100B91454 /* Weak.swift in Sources */,
 				B9EED03727E88FDF00483244 /* Router.swift in Sources */,
 				B95E572727CD1B6E0021E53C /* AppDelegate.swift in Sources */,
+				B90A7ACB28043C1400F32769 /* ViewContoller+ErrorAlert.swift in Sources */,
 				B938195827FC17A000B91454 /* PeriodicManager.swift in Sources */,
 				B9EED03927E8A9D900483244 /* QRGenerator.swift in Sources */,
 				B938193C27FA50F400B91454 /* DateFormatter+UTC.swift in Sources */,

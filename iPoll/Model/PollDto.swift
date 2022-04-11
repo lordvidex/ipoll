@@ -9,7 +9,7 @@ import Foundation
 
 struct PollDto: Encodable {
     let title: String
-    let options: [String]
+    let options: [PollOptionDto]
     let hasTimeLimit: Bool
     let isAnonymous: Bool
     let startTime: Date?
@@ -28,6 +28,20 @@ struct PollDto: Encodable {
         try container.encodeIfPresent(startTime, forKey: .startTime)
         try container.encodeIfPresent(endTime, forKey: .endTime)
     }
+}
+
+struct PollOptionDto: Encodable {
+    let id: String?
+    var title: String
+    var editable: Bool = true
     
-//    func toParams() -> [String: Any]
+    enum CodingKeys: String, CodingKey {
+        case id, title
+    }
+    
+    init(_ title: String, with id: String? = nil, canEdit: Bool = true) {
+        self.id = id
+        self.title = title
+        self.editable = canEdit
+    }
 }
