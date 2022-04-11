@@ -41,6 +41,11 @@ class VoteViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        voteManager.closeSocket()
+    }
+    
     func showLoading() {
         optionsTableView.isSkeletonable = true
         optionsTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: Constants.Colors.lightBlue!,

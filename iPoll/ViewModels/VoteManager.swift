@@ -30,7 +30,7 @@ protocol VoteManagerProtocol {
 class VoteManager: VoteManagerProtocol {
     private let network: NetworkService = .shared
     private let local: PersistenceService = .shared
-    private let pollManager: PollManager = .shared
+    private let pollManager = PollManager()
 
     // create a manager that connects to the socket API with a room param
     private var socketManager = SocketManager(socketURL: URL(string: "https://llopi.herokuapp.com")!,
@@ -39,10 +39,6 @@ class VoteManager: VoteManagerProtocol {
     private weak var socket: SocketIOClient?
 
     weak var delegate: VoteManagerDelegate?
-
-    deinit {
-        closeSocket()
-    }
 
     func fetchPoll(_ id: String) {
         // temporarily return local version of poll

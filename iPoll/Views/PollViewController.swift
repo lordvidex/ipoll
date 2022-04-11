@@ -24,7 +24,7 @@ class PollViewController: UIViewController {
         ["Visited Polls", "Participated Polls", "Created Polls"]
     }()
 
-    weak var pollManager: PollManager! = .shared
+    var pollManager: PollManager! = .shared 
     var polls: [Poll] = []
 
     // MARK: - UI Elements

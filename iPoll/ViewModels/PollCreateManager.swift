@@ -51,8 +51,6 @@ class PollCreateManager: PollCreateManagerProtocol {
     
     weak var delegate: PollCreateManagerDelegate?
     
-    public static let shared = PollCreateManager()
-    
     var hasTime = false {
         didSet {
             if oldValue != hasTime {

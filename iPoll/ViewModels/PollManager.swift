@@ -45,8 +45,6 @@ class PollManager: PollManagerProtocol {
 
     var participatedPolls: [Poll]?
 
-    private init() {}
-
     // MARK: functions
     func createPoll(pollDto: PollDto,
                     completion: ((Result<Poll, IPollError>) -> Void)?) {

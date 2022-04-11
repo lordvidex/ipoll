@@ -35,7 +35,7 @@ class PeriodicManager: PeriodicManagerProtocol {
     }
     
     /// shared Periodic manager with frequency of 60 seconds
-    static var shared = PeriodicManager(period: 60)
+    static var shared = PeriodicManager(period: 30)
     
     private var _listeners: [Any]!
     

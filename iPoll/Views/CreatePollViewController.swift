@@ -9,8 +9,8 @@ import UIKit
 
 class CreatePollViewController: UIViewController {
     
-    fileprivate weak var pollManager: PollManager! = .shared
-    fileprivate weak var pollCreateManager: PollCreateManager! = .shared
+    fileprivate var pollManager = PollManager()
+    fileprivate var pollCreateManager = PollCreateManager()
     
     // if pollId is not null then we are in editMode
     var pollId: String?
