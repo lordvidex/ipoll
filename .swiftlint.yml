@@ -5,6 +5,7 @@ disabled_rules:
   - switch_case_alignment
   - self_in_property_initialization
   - trailing_whitespace
+  - large_tuple
 
 identifier_name:
   excluded:

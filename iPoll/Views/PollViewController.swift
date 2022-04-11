@@ -204,7 +204,7 @@ class PollViewController: UIViewController {
 extension PollViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "poll", for: indexPath) as? PollTableViewCell {
-            cell.title = polls[indexPath.row].title
+            cell.poll = polls[indexPath.row]
             return cell
         }
 

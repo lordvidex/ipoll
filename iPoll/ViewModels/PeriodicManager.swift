@@ -34,6 +34,9 @@ class PeriodicManager: PeriodicManagerProtocol {
         startTimer()
     }
     
+    /// shared Periodic manager with frequency of 60 seconds
+    static var shared = PeriodicManager(period: 60)
+    
     private var _listeners: [Any]!
     
     var listeners: [PeriodicManagerDelegate] {
@@ -121,7 +124,11 @@ class PeriodicManager: PeriodicManagerProtocol {
         for listener in _listeners {
             if let listener = listener as? Weak<AnyObject>,
                let delegate = listener.object as? PeriodicManagerDelegate {
-                delegate.didCallUpdate(self, with: timer, period: period)
+                DispatchQueue.global(qos: .utility).async { [weak self] in
+                    if let self = self {
+                        delegate.didCallUpdate(self, with: timer, period: self.period)
+                    }
+                }
             }
         }
     }
