@@ -42,15 +42,20 @@ class VoteManager: VoteManagerProtocol {
 
     func fetchPoll(_ id: String) {
         // temporarily return local version of poll
+        var localPoll: Poll?
         if let poll = local.fetchPoll(with: id) {
             delegate?.didReceivePoll(self, sender: .fetch, poll: poll)
+            localPoll = poll
         }
 
         // get live result from server and set up the live socket thereafter
         network.getPoll(id) { [weak self] result in
             if let self = self {
                 switch result {
-                    case .success(let poll):
+                    case .success(var poll):
+                        if localPoll != nil {
+                            poll = poll.copyWith(localPoll!)
+                        }
                         self.delegate?.didReceivePoll(self, sender: .fetch, poll: poll)
                         self.persistPoll(poll)   // persist to local
                         self.setupSocket(room: poll.id)
@@ -80,10 +85,10 @@ class VoteManager: VoteManagerProtocol {
      * * Method is called after it has been gotten initially from the networkservice
      */
     func persistPoll(_ poll: Poll) {
-        DispatchQueue.global(qos: .utility).async {
+//        DispatchQueue.global(qos: .utility).async {
             self.local.savePoll(poll)
             self.pollManager.fetchVisitedPolls()
-        }
+//        }
         
     }
 

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AuthorEntity" representedClassName="AuthorEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String" defaultValueString="Anonymous"/>
+        <relationship name="poll" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollEntity" inverseName="author" inverseEntity="PollEntity"/>
+    </entity>
     <entity name="PollEntity" representedClassName="PollEntity" syncable="YES" codeGenerationType="class">
         <attribute name="authorId" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String" valueTransformerName="NSKeyedUnarchiveFromDataTransformerName" minValueString="3" maxValueString="9"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasTimeLimit" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="isAnonymous" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorEntity" inverseName="poll" inverseEntity="AuthorEntity"/>
         <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="PollOptionEntity" inverseName="poll" inverseEntity="PollOptionEntity"/>
     </entity>
     <entity name="PollOptionEntity" representedClassName="PollOptionEntity" syncable="YES" codeGenerationType="class">
@@ -21,8 +28,9 @@
         <relationship name="option" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollOptionEntity" inverseName="votesId" inverseEntity="PollOptionEntity"/>
     </entity>
     <elements>
-        <element name="PollEntity" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="PollEntity" positionX="-63" positionY="-18" width="128" height="179"/>
         <element name="PollOptionEntity" positionX="-54" positionY="18" width="128" height="89"/>
         <element name="VoteEntity" positionX="-36" positionY="45" width="128" height="59"/>
+        <element name="AuthorEntity" positionX="-45" positionY="54" width="128" height="74"/>
     </elements>
 </model>

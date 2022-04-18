@@ -22,6 +22,7 @@ struct Constants {
     struct CellIdentifiers {
         static let pollOption = "CreatePollOptionCell"
         static let voteOption = "VoteOptionCell"
+        static let voteCustomSettings = "VoteCustomSettings"
         static let pollSetting = "CreatePollSettingCell"
     }
 

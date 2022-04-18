@@ -13,6 +13,13 @@ class PollTableViewCell: UITableViewCell {
         didSet {
             if let poll = poll {
                 pollLabel.text = poll.title
+                if let color = poll.color {
+                    mainView.backgroundColor = color.lighter()
+                    mainView.layer.borderColor = color.darker(componentDelta: 0.2).cgColor
+                } else {
+                    mainView.backgroundColor = UIColor(hexString: "#CCDBFD")
+                    mainView.layer.borderColor = UIColor(hexString: "#ABC4FF").cgColor
+                }
                 updateTimeLabel()
             }
         }

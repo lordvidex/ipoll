@@ -18,7 +18,30 @@ class VoteViewController: UIViewController {
     // MARK: - UI
     private var titleLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(24))
+        label.isSkeletonable = true
         return label
+    }()
+    
+    private var authorLabel: IPLabel = {
+        let label = IPLabel("", font: Constants.appFont?.withSize(18))
+        label.isSkeletonable = true
+        return label
+    }()
+    
+    private var timeLabel: IPLabel = {
+        let label = IPLabel("", font: Constants.appFont?.withSize(18))
+        label.isSkeletonable = true
+        return label
+    }()
+    
+    private lazy var chooseColorBtn: UIButton = {
+        let button = UIButton(configuration: .tinted())
+        button.frame = CGRect(x: 0, y: 0, width: 150, height: 40)
+        button.setTitle("Choose Color", for: .normal)
+        button.tintColor = poll?.color?.lighter()
+        button.setTitleColor(poll?.color?.darker(componentDelta: 0.2), for: .normal)
+        button.addTarget(self, action: #selector(onChooseColor(_:)), for: .touchUpInside)
+        return button
     }()
     
     private var optionsTableView: UITableView = {
@@ -27,6 +50,7 @@ class VoteViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         table.register(VoteOptionCell.self,
                        forCellReuseIdentifier: Constants.CellIdentifiers.voteOption)
+        table.register(UITableViewCell.self, forCellReuseIdentifier: Constants.CellIdentifiers.voteCustomSettings)
         table.allowsSelection = false
         table.separatorStyle = .none
         table.backgroundColor = .clear
@@ -58,6 +82,12 @@ class VoteViewController: UIViewController {
         self.view.hideSkeleton()
     }
     
+    @objc func onChooseColor(_ sender: UIButton) {
+        let colorPickerVC = UIColorPickerViewController()
+        colorPickerVC.delegate = self
+        present(colorPickerVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         voteManager.delegate = self
@@ -69,15 +99,21 @@ class VoteViewController: UIViewController {
         
         view.addSubview(titleLabel)
         view.addSubview(optionsTableView)
+        view.addSubview(authorLabel)
         
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalTo(view).inset(10)
             make.top.equalTo(view).offset(90)
         }
         
+        authorLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.equalTo(titleLabel)
+        }
+        
         optionsTableView.snp.makeConstraints { make in
             make.bottom.left.right.equalTo(view).inset(10)
-            make.top.equalTo(titleLabel.snp.bottom).offset(27)
+            make.top.equalTo(authorLabel.snp.bottom).offset(27)
         }
     }
     
@@ -86,28 +122,57 @@ class VoteViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension VoteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteOption,
-                                                    for: indexPath) as? VoteOptionCell,
-           let poll = poll {
-            cell.delegate = self
-            if let option = poll.options?[indexPath.row] {
-                cell.updateCell(optionTitle: option.title,
-                                optionId: option.id,
-                                voteCount: option.votesId.count,
-                                totalCount: poll.totalVotes)
-            }
-            return cell
-        } else {
-            return UITableViewCell()
+        switch indexPath.section {
+            case 0:
+                if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteOption,
+                                                            for: indexPath) as? VoteOptionCell,
+                   let poll = poll {
+                    cell.delegate = self
+                    if let option = poll.options?[indexPath.row] {
+                        cell.updateCell(optionTitle: option.title,
+                                        optionId: option.id,
+                                        voteCount: option.votesId.count,
+                                        totalCount: poll.totalVotes,
+                                        color: poll.color
+                        )
+                    }
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.voteCustomSettings)
+                cell?.textLabel?.text = "Choose Custom Color"
+                cell?.accessoryView = chooseColorBtn as UIView
+                return cell ?? UITableViewCell()
+            default:
+                fatalError("Only two sections should be provided for VoteViewController")
         }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        poll?.options?.count ?? 0
+        switch section {
+            case 0:
+                return poll?.options?.count ?? 0
+            case 1:
+                return 1
+            default:
+                fatalError("numberOfRowsInSection should be only for two sections")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Poll Options"
+        } else if section == 1 {
+            return "Your Poll Custom Settings"
+        }
+        return nil
     }
     
 }
@@ -124,8 +189,10 @@ extension VoteViewController: VoteManagerDelegate {
     }
     
     func didReceivePoll(_ voteManager: VoteManager, sender: IPAction, poll: Poll) {
-        self.poll = poll
+        self.poll = self.poll?.copyWith(poll) ?? poll
         titleLabel.text = poll.title
+        let authorName = poll.author?.name ?? "Anonymous"
+        authorLabel.text = "Created by: \(authorName)"
         hideLoading()
         optionsTableView.reloadData()
     }
@@ -152,4 +219,22 @@ extension VoteViewController: VoteOptionCellDelegate {
         }
     }
     
+}
+
+// MARK: - UIColorPickerViewControllerDelegate
+extension VoteViewController: UIColorPickerViewControllerDelegate {
+    
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        guard let poll = poll else { return }
+        voteManager.persistPoll(poll)
+        optionsTableView.reloadData()
+    }
+    
+    func colorPickerViewController(_ viewController: UIColorPickerViewController,
+                                   didSelect color: UIColor,
+                                   continuously: Bool) {
+        self.poll?.color = color
+        chooseColorBtn.setTitleColor(color.darker(componentDelta: 0.2), for: .normal)
+        chooseColorBtn.tintColor = color.lighter()
+    }
 }

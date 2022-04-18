@@ -67,6 +67,10 @@ class PersistenceService: PersistenceServiceProtocol {
      * `CREATE` & `UPDATE` (WRITES) to the database a new poll if it did not exist before
      */
     func savePoll(_ poll: Poll) {
+        // get the author
+        let author = fetch(entity: AuthorEntity.self, with: (poll.author?.name)!) ?? AuthorEntity(context: context)
+        author.id = poll.author?.id
+        author.name = poll.author?.name
         
         // create the option entities
         let pollOptionEntities = poll.options?.map { option -> PollOptionEntity in
@@ -86,6 +90,8 @@ class PersistenceService: PersistenceServiceProtocol {
         // create or update the poll
         let pollEntity = fetch(entity: PollEntity.self, with: poll.id) ?? PollEntity(context: context)
         pollEntity.copyProperties(of: poll, with: pollOptionEntities ?? [])
+        
+        author.addToPoll(pollEntity) // add this poll to the author
         saveContext()
     }
     

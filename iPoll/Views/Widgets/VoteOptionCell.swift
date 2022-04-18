@@ -16,6 +16,7 @@ class VoteOptionCell: UITableViewCell {
     private var totalCount = 1
     private var voteCount = 0
     private var optionId: String?
+    private var color: UIColor?
     private var progressConstraint: NSLayoutConstraint?
     public weak var delegate: VoteOptionCellDelegate?
 
@@ -24,17 +25,17 @@ class VoteOptionCell: UITableViewCell {
         view.isSkeletonable = true
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
-        view.layer.borderColor = Constants.Colors.borderBlue?.cgColor
-        view.backgroundColor = Constants.Colors.bgBlue
+        view.layer.borderColor = color?.darker().cgColor ?? Constants.Colors.borderBlue?.cgColor
+        view.backgroundColor = color?.lighter() ?? Constants.Colors.bgBlue
         view.addTarget(self, action: #selector(onVotePressed), for: .touchUpInside)
         return view
     }()
 
-    private var progressView: UIView = {
+    private lazy var progressView: UIView = {
         let view = UIView()
         view.isSkeletonable = true
         view.layer.cornerRadius = 6
-        view.backgroundColor = Constants.Colors.lightBlue
+        view.backgroundColor = color ?? Constants.Colors.lightBlue
         return view
     }()
 
@@ -90,10 +91,16 @@ class VoteOptionCell: UITableViewCell {
         progressConstraint?.isActive = true
     }
 
-    func updateCell(optionTitle: String, optionId: String, voteCount: Int = 0, totalCount: Int = 1) {
+    func updateCell(optionTitle: String,
+                    optionId: String,
+                    voteCount: Int = 0,
+                    totalCount: Int = 1,
+                    color: UIColor?
+    ) {
         self.voteCount = voteCount
         self.totalCount = totalCount
         self.optionId = optionId
+        self.color = color
         optionLabel.text = optionTitle
         voteCountLabel.text = "\(voteCount)"
         DispatchQueue.main.async {
@@ -104,6 +111,10 @@ class VoteOptionCell: UITableViewCell {
 
     func updateProgress() {
         let ratio = Double(voteCount) / Double(totalCount == 0 ? 1 : totalCount)
+        progressView.backgroundColor = color ?? progressView.backgroundColor
+        mainView.backgroundColor = color?.lighter(componentDelta: 0.4) ?? mainView.backgroundColor
+        mainView.layer.borderColor = color?.darker().cgColor ?? Constants.Colors.borderBlue?.cgColor
+        
         self.progressConstraint?.isActive = false
         self.progressConstraint = progressView.widthAnchor
             .constraint(equalTo: self.mainView.widthAnchor,
