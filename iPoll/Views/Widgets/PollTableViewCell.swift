@@ -78,6 +78,7 @@ class PollTableViewCell: UITableViewCell {
         mainView.snp.makeConstraints { make in
             make.left.right.equalTo(contentView).inset(2)
             make.top.bottom.equalTo(contentView).inset(5)
+            make.height.greaterThanOrEqualTo(80)
         }
         arrow.snp.makeConstraints { make in
             make.centerY.equalTo(mainView)

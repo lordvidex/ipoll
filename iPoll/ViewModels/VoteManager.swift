@@ -85,10 +85,10 @@ class VoteManager: VoteManagerProtocol {
      * * Method is called after it has been gotten initially from the networkservice
      */
     func persistPoll(_ poll: Poll) {
-//        DispatchQueue.global(qos: .utility).async {
+        DispatchQueue.global(qos: .utility).async {
             self.local.savePoll(poll)
             self.pollManager.fetchVisitedPolls()
-//        }
+        }
         
     }
 

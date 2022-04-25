@@ -59,7 +59,7 @@ class PollViewController: UIViewController {
         let table = UITableView()
         table.rowHeight = UITableView.automaticDimension
         table.register(PollTableViewCell.self, forCellReuseIdentifier: "poll")
-        table.estimatedRowHeight = 50
+        table.estimatedRowHeight = 80
         table.backgroundColor = .clear
         table.separatorStyle = .none
         return table
@@ -231,6 +231,71 @@ extension PollViewController: UITableViewDelegate {
         }
 
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let poll = polls[indexPath.row]
+        var actions = [UIContextualAction]()
+        
+        let openAsParticipant: UIContextualAction = .simple(
+            title: "Open", backgroundColor: .systemBlue, image: .envelopeOpen) {  [weak self] in
+                self?.gotoVoteVC(id: poll.id)
+            }
+        
+        let openAsEditor: UIContextualAction = .simple(title: "Open as Creator",
+                                                       backgroundColor: .systemPurple,
+                                                       image: .pencilCircle) { [weak self] in
+            self?.gotoCreateVC(id: poll.id)
+        }
+        
+        actions.append(openAsParticipant)
+        if poll.authorId == NetworkService.userId {
+            actions.append(openAsEditor)
+        }
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let poll = polls[indexPath.row]
+        var actions = [UIContextualAction]()
+        
+        let copyLink: UIContextualAction = .simple(title: "Copy Link",
+                                                   backgroundColor: .systemPink,
+                                                   image: .docOnDocFill) { [weak self] in
+            UIPasteboard.general.string = "ipoll://poll?id=\(poll.id)"
+            self?.view.makeToast("Link to Poll successfully copied to clipboard")
+        }
+        
+        let copyCode: UIContextualAction = .simple(title: "Copy Code",
+                                                   backgroundColor: .systemBrown,
+                                                   image: .number) { [weak self] in
+            UIPasteboard.general.string = poll.id
+            self?.view.makeToast("Code successfully copied to clipboard")
+        }
+        
+        let qrCode: UIContextualAction = .simple(title: "QR Code",
+                                                 backgroundColor: .systemYellow,
+                                                 image: .squareAndArrowUp) { [weak self] in
+            let image = QRGenerator.generatePollQR(poll: poll.id)?
+                .resizeImageForShare(targetSize: CGSize(width: 100, height: 100))
+            let imageToShare = [ image! ]
+            let activityViewController = UIActivityViewController(activityItems: imageToShare,
+                                                                  applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self?.view
+            self?.present(activityViewController, animated: true, completion: nil)
+        }
+        // Append actions
+        actions.append(copyLink)
+        actions.append(copyCode)
+        actions.append(qrCode)
+       
+        return UISwipeActionsConfiguration(actions: actions)
     }
 
     func tableView(_ tableView: UITableView,
