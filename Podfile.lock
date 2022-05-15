@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.5.0)
   - IQKeyboardManagerSwift (6.5.9)
+  - KeychainAccess (4.2.2)
   - SkeletonView (1.29.2)
   - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (15.2.0):
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.5)
   - IQKeyboardManagerSwift (~> 6.5.9)
+  - KeychainAccess
   - SkeletonView (~> 1.29.2)
   - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
@@ -26,6 +28,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - IQKeyboardManagerSwift
+    - KeychainAccess
     - SkeletonView
     - SnapKit
     - Socket.IO-Client-Swift
@@ -38,6 +41,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
@@ -47,6 +51,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UIImageSymbols: d0ad8b1865e8c295539b618b95cf4b8dc19614fb
 
-PODFILE CHECKSUM: 925c9091fbed60e423f60d9a12e2673b2112736c
+PODFILE CHECKSUM: 3c4b54c3678cb113392cdab15f22a376eceed9c2
 
 COCOAPODS: 1.11.2

@@ -105,10 +105,10 @@ class PollViewController: UIViewController {
     private func setupViews() {
         // set navigation Items
         navigationItem.title = "Polls"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(
             barButtonSystemItem: tableView.isEditing ? .done : .edit,
             target: self,
-            action: #selector(onEditBtnPressed))
+            action: #selector(onEditBtnPressed))]
         view.backgroundColor = Constants.Colors.bgBlue
 
         // set refresh control to tableView
