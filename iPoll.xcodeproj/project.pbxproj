@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		44D069D584B70CEAA7F8C7F7 /* Pods_iPoll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */; };
+		B92D59DB2837C988006BC73D /* VotersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92D59DA2837C988006BC73D /* VotersViewController.swift */; };
+		B92D59E12837E463006BC73D /* VotersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92D59E02837E463006BC73D /* VotersTableViewCell.swift */; };
 		B938195127FB17C000B91454 /* iPollDtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195027FB17C000B91454 /* iPollDtoTests.swift */; };
 		B938195C27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195B27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift */; };
 		B938195E27FCC24400B91454 /* PeriodicManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938195D27FCC24400B91454 /* PeriodicManagerDelegateMock.swift */; };
@@ -70,6 +72,8 @@
 		7B42ABA568AD87AB11D3D1C7 /* Pods-iPoll.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.release.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.release.xcconfig"; sourceTree = "<group>"; };
 		83A0FA5E62AABC7AA5AC687E /* Pods_iPoll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPoll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57117825CA50EA4D1352F15 /* Pods-iPoll.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPoll.debug.xcconfig"; path = "Target Support Files/Pods-iPoll/Pods-iPoll.debug.xcconfig"; sourceTree = "<group>"; };
+		B92D59DA2837C988006BC73D /* VotersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotersViewController.swift; sourceTree = "<group>"; };
+		B92D59E02837E463006BC73D /* VotersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotersTableViewCell.swift; sourceTree = "<group>"; };
 		B938194727FB178700B91454 /* iPollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B938195027FB17C000B91454 /* iPollDtoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPollDtoTests.swift; sourceTree = "<group>"; };
 		B938195B27FCC0CE00B91454 /* PeriodicManagerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicManagerUnitTest.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				B944A86E2831BDF90046073F /* OnboardViewController.swift */,
 				B944A86F2831BDF90046073F /* QRScannerViewController.swift */,
 				B944A8702831BDF90046073F /* PollPreviewController.swift */,
+				B92D59DA2837C988006BC73D /* VotersViewController.swift */,
 				B944A8722831BDF90046073F /* Widgets */,
 			);
 			path = Views;
@@ -213,6 +218,7 @@
 				B944A8782831BDF90046073F /* TableView+EmptyView.swift */,
 				B944A8792831BDF90046073F /* VoteOptionCell.swift */,
 				B944A87A2831BDF90046073F /* IPLabel.swift */,
+				B92D59E02837E463006BC73D /* VotersTableViewCell.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -473,6 +479,7 @@
 				B944A8BE2831BE890046073F /* UsesAutoLayout.swift in Sources */,
 				B944A8B22831BE890046073F /* Constants.swift in Sources */,
 				B944A8CB2831BE890046073F /* PeriodicManager.swift in Sources */,
+				B92D59E12837E463006BC73D /* VotersTableViewCell.swift in Sources */,
 				B944A8842831BDF90046073F /* IPButton.swift in Sources */,
 				B944A8B42831BE890046073F /* NSOrderedSet+Array.swift in Sources */,
 				B944A87B2831BDF90046073F /* JoinPollViewController.swift in Sources */,
@@ -490,6 +497,7 @@
 				B944A8CA2831BE890046073F /* PollManager.swift in Sources */,
 				B944A8832831BDF90046073F /* PollTableViewCell.swift in Sources */,
 				B944A8BB2831BE890046073F /* SocketParser.swift in Sources */,
+				B92D59DB2837C988006BC73D /* VotersViewController.swift in Sources */,
 				B944A8812831BDF90046073F /* PollPreviewController.swift in Sources */,
 				B944A8C12831BE890046073F /* PersistenceService.swift in Sources */,
 				B944A8B32831BE890046073F /* AppDelegate.swift in Sources */,
@@ -686,7 +694,7 @@
 				CODE_SIGN_ENTITLEMENTS = iPoll/iPoll.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QX575RRUK3;
+				DEVELOPMENT_TEAM = M6L4J4336Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iPoll/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";
@@ -718,7 +726,7 @@
 				CODE_SIGN_ENTITLEMENTS = iPoll/iPoll.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QX575RRUK3;
+				DEVELOPMENT_TEAM = M6L4J4336Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iPoll/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";

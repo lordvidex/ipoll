@@ -202,6 +202,18 @@ class NetworkService: NetworkServiceProtocol {
             }
     }
     
+    public func getPollVoters(poll: String, option: String, completion: @escaping (Result<PollOption, IPollError>) -> Void) {
+        AF.request("\(pollsEndpoint)/\(poll)/\(option)/", headers: requestHeader)
+            .responseDecodable(of: PollOption.self, decoder: getDecoder()) { response in
+                switch response.result {
+                case .success(let option):
+                    completion(.success(option))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
+                }
+            }
+    }
+    
     public func vote(pollId: String, optionId: String, completion: @escaping (Result<Poll, IPollError>) -> Void) {
         AF.request("\(pollsEndpoint)/\(pollId)/\(optionId)",
                    method: .post,

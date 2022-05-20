@@ -8,7 +8,7 @@
 import UIKit
 
 class PollTableViewCell: UITableViewCell {
-    
+    // MARK: - private variables
     var poll: Poll? {
         didSet {
             if let poll = poll {
@@ -27,6 +27,7 @@ class PollTableViewCell: UITableViewCell {
     
     weak var periodicManager: PeriodicManager? = .shared
     
+    // MARK: - UI Views
     private lazy var mainView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
@@ -131,6 +132,7 @@ class PollTableViewCell: UITableViewCell {
     }
 }
 
+// MARK: - PeriodicManagerDelegate
 extension PollTableViewCell: PeriodicManagerDelegate {
     func didCallUpdate(_ manager: PeriodicManager, with timer: Timer, period: TimeInterval) {
         DispatchQueue.main.async {

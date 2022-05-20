@@ -10,6 +10,6 @@ import Foundation
 struct User: Codable {
     let id: String
     let name: String?
-    let participatedPolls: [Poll]
-    let createdPolls: [Poll]
+    var participatedPolls: [Poll]? = []
+    var createdPolls: [Poll]? = []
 }

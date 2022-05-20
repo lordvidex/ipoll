@@ -24,6 +24,7 @@ struct Constants {
         static let voteOption = "VoteOptionCell"
         static let voteCustomSettings = "VoteCustomSettings"
         static let pollSetting = "CreatePollSettingCell"
+        static let voters = "VotersCell"
     }
 
     static var appFont = UIFont(name: "Futura-Medium", size: 16)
