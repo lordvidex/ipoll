@@ -18,7 +18,7 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
-    // MARK: private variables
+    // - MARK: private variables
     private static let keychain = Keychain(service: "dev.lordvidex.ipoll")
     static var userId: String? // id of this device
     static var username: String? // user registered name
@@ -51,7 +51,7 @@ class NetworkService: NetworkServiceProtocol {
     // single instance
     public static let shared = NetworkService()
     
-    // MARK: public functions
+    // - MARK: public functions
     
     /// Reads id from the KeyChain and sets it \
     /// If `id` does not exist in the keychain, it gets the UUID of the device
