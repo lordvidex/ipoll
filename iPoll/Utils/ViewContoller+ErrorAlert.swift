@@ -14,7 +14,7 @@ extension UIViewController {
                         addBackButton: Bool,
                         addOkButton: Bool = true) {
         let alert = UIAlertController(title: title ?? "Alert",
-                                      message: "An error occured while voting: \n \(message ?? "")",
+                                      message: message ?? "",
                                       preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         let backAction = UIAlertAction(title: "Exit", style: .cancel) { [weak self] _ in

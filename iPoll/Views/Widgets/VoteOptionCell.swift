@@ -34,11 +34,12 @@ class VoteOptionCell: UITableViewCell {
         return view
     }()
 
-    private lazy var progressView: UIView = {
-        let view = UIView()
+    private lazy var progressView: UIButton = {
+        let view = UIButton()
         view.isSkeletonable = true
         view.layer.cornerRadius = 6
         view.backgroundColor = color ?? Constants.Colors.lightBlue
+        view.addTarget(self, action: #selector(onVotePressed), for: .touchUpInside)
         return view
     }()
 
@@ -120,6 +121,7 @@ class VoteOptionCell: UITableViewCell {
                     color: UIColor?,
                     onClick: NavigateToVotersViewCallback?
     ) {
+        let dataChanged = voteCount != self.voteCount && totalCount != self.totalCount
         self.voteCount = voteCount
         self.totalCount = totalCount
         self.optionId = optionId
@@ -128,12 +130,12 @@ class VoteOptionCell: UITableViewCell {
         voteCountLabel.text = "\(voteCount)"
         self.callback = onClick
         DispatchQueue.main.async {
-            self.updateProgress()
+            self.updateProgress(needAnimate: dataChanged)
         }
 
     }
 
-    func updateProgress() {
+    func updateProgress(needAnimate: Bool) {
         let ratio = Double(voteCount) / Double(totalCount == 0 ? 1 : totalCount)
         progressView.backgroundColor = color ?? progressView.backgroundColor
         mainView.backgroundColor = color?.lighter(componentDelta: 0.4) ?? mainView.backgroundColor
@@ -144,8 +146,10 @@ class VoteOptionCell: UITableViewCell {
             .constraint(equalTo: self.mainView.widthAnchor,
                         multiplier: ratio)
         self.progressConstraint?.isActive = true
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) { [self] in
-            self.layoutIfNeeded()
+        if needAnimate {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) { [self] in
+                self.layoutIfNeeded()
+            }
         }
     }
 

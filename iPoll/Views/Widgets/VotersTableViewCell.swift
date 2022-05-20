@@ -13,7 +13,14 @@ class VotersTableViewCell: UITableViewCell {
     private static var avatarHeight = 30
     
     private var displayName: String {
-        name ?? id ?? "Nameless"
+        // return name
+        if let name = name, !name.isEmpty {
+            return name
+        } else if let id = id {
+            return replaceMiddle(of: id, withCharacter: "*", offset: 3)
+        } else {
+            return "Anonymous"
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -81,5 +88,21 @@ class VotersTableViewCell: UITableViewCell {
         self.id = id
         self.name = name
         updateViews()
+    }
+    
+    func replaceMiddle(of text: String, withCharacter character: String, offset: Int) -> String {
+        var count = max(text.count - 2 * offset, 0) // catch negative cases for short strings
+        let startIndex: String.Index
+        let endIndex: String.Index
+        if count == 0 {
+            count = text.count
+            startIndex = text.startIndex
+            endIndex = text.endIndex
+        } else {
+            startIndex = text.index(text.startIndex, offsetBy: offset)
+            endIndex = text.index(text.endIndex, offsetBy: -1 * offset)
+        }
+        let replacement = String(repeating: character, count: count)
+        return text.replacingCharacters(in: startIndex..<endIndex, with: replacement)
     }
 }
