@@ -56,5 +56,6 @@ struct Author: Codable {
 struct PollOption: Codable {
     let id: String
     let title: String
+    var votes: [User]? = nil
     let votesId: [String]
 }

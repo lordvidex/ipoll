@@ -12,12 +12,15 @@ protocol VoteOptionCellDelegate: AnyObject {
     func didClickOption(_ cell: VoteOptionCell, with id: String?)
 }
 
+typealias NavigateToVotersViewCallback = (_ optionId: String) -> Void
+
 class VoteOptionCell: UITableViewCell {
     private var totalCount = 1
     private var voteCount = 0
     private var optionId: String?
     private var color: UIColor?
     private var progressConstraint: NSLayoutConstraint?
+    private var callback: NavigateToVotersViewCallback?
     public weak var delegate: VoteOptionCellDelegate?
 
     private lazy var mainView: UIButton = {
@@ -50,6 +53,13 @@ class VoteOptionCell: UITableViewCell {
         label.isSkeletonable = true
         return label
     }()
+    
+    private lazy var viewVotersBtn: IPButton = {
+        let btn = IPButton(text: nil, image: .eye?.withTintColor(.white))
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(gotoVotersVC), for: .touchUpInside)
+        return btn
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,9 +81,21 @@ class VoteOptionCell: UITableViewCell {
         mainView.addSubview(voteCountLabel)
 
         contentView.addSubview(mainView)
-        mainView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+        contentView.addSubview(viewVotersBtn)
+        
+        viewVotersBtn.snp.makeConstraints { make in
+            make.height.equalTo(contentView).inset(5)
+            make.centerY.equalTo(contentView)
+            make.width.equalTo(contentView.snp.height)
+            make.right.equalTo(contentView)
         }
+        
+        mainView.snp.makeConstraints { make in
+            make.left.top.bottom.equalTo(contentView)
+                .inset(UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+            make.right.equalTo(viewVotersBtn.snp.left).offset(-5)
+        }
+        
         optionLabel.snp.makeConstraints { make in
             make.top.left.bottom.equalTo(mainView).inset(12)
             make.right.equalTo(mainView).offset(-70)
@@ -95,7 +117,8 @@ class VoteOptionCell: UITableViewCell {
                     optionId: String,
                     voteCount: Int = 0,
                     totalCount: Int = 1,
-                    color: UIColor?
+                    color: UIColor?,
+                    onClick: NavigateToVotersViewCallback?
     ) {
         self.voteCount = voteCount
         self.totalCount = totalCount
@@ -103,6 +126,7 @@ class VoteOptionCell: UITableViewCell {
         self.color = color
         optionLabel.text = optionTitle
         voteCountLabel.text = "\(voteCount)"
+        self.callback = onClick
         DispatchQueue.main.async {
             self.updateProgress()
         }
@@ -127,5 +151,9 @@ class VoteOptionCell: UITableViewCell {
 
     @objc private func onVotePressed() {
         delegate?.didClickOption(self, with: optionId)
+    }
+    
+    @objc private func gotoVotersVC() {
+        self.callback?(optionId!)
     }
 }

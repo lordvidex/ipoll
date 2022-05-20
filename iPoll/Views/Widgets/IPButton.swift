@@ -24,6 +24,7 @@ class IPButton: UIButton {
 
     convenience init(
         text: String?,
+        image: UIImage? = nil,
         cornerRadius: CGFloat? = nil,
         height: CGFloat? = nil,
         width: CGFloat? = nil,
@@ -36,6 +37,10 @@ class IPButton: UIButton {
 
         if let text = text {
             setTitle(text, for: .normal)
+        }
+        
+        if let image = image {
+            setImage(image, for: .normal)
         }
 
         if let textColor = textColor {

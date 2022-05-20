@@ -54,7 +54,7 @@ class VoteManager: VoteManagerProtocol {
                 switch result {
                     case .success(var poll):
                         if localPoll != nil {
-                            poll = poll.copyWith(localPoll!)
+                            poll = localPoll!.copyWith(poll)
                         }
                         self.delegate?.didReceivePoll(self, sender: .fetch, poll: poll)
                         self.persistPoll(poll)   // persist to local

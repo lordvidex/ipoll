@@ -18,7 +18,7 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
-    // MARK: private variables
+    // - MARK: private variables
     private static let keychain = Keychain(service: "dev.lordvidex.ipoll")
     static var userId: String? // id of this device
     static var username: String? // user registered name
@@ -51,7 +51,7 @@ class NetworkService: NetworkServiceProtocol {
     // single instance
     public static let shared = NetworkService()
     
-    // MARK: public functions
+    // - MARK: public functions
     
     /// Reads id from the KeyChain and sets it \
     /// If `id` does not exist in the keychain, it gets the UUID of the device
@@ -196,6 +196,18 @@ class NetworkService: NetworkServiceProtocol {
                 switch response.result {
                 case .success(let poll):
                     completion(.success(poll))
+                case .failure:
+                    completion(.failure(self.decodeError(from: response)))
+                }
+            }
+    }
+    
+    public func getPollVoters(poll: String, option: String, completion: @escaping (Result<PollOption, IPollError>) -> Void) {
+        AF.request("\(pollsEndpoint)/\(poll)/\(option)/", headers: requestHeader)
+            .responseDecodable(of: PollOption.self, decoder: getDecoder()) { response in
+                switch response.result {
+                case .success(let option):
+                    completion(.success(option))
                 case .failure:
                     completion(.failure(self.decodeError(from: response)))
                 }
