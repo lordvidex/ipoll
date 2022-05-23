@@ -26,7 +26,7 @@ class Router {
     
     private weak var window: UIWindow?
     
-    private static var navigator: UINavigationController? {
+    static var navigator: UINavigationController? {
         return Router.shared.window?.rootViewController as? UINavigationController
     }
     

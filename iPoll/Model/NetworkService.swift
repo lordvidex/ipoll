@@ -70,6 +70,22 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
+    /// Deletes the user authentication details from the KeyChain
+    public static func logout(completion: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                try keychain.remove("userId")
+                try keychain.remove("username")
+                NetworkService.shared.user = nil
+                NetworkService.userId = nil
+                NetworkService.username = nil
+                completion()
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     public func getUser(completion: @escaping (Result<User, IPollError>) -> Void) {
         AF.request(usersEndpoint,
                    headers: requestHeader)
@@ -87,9 +103,9 @@ class NetworkService: NetworkServiceProtocol {
         return UIDevice.current.identifierForVendor!.uuidString
     }
     
-    public func setUser(name: String?, completion: @escaping (Result<User, IPollError>) -> Void) {
+    public func setUser(name: String? = username, completion: @escaping (Result<User, IPollError>) -> Void) {
         // generate id and save to keychain
-        let id = generateUniqueId()
+        let id = NetworkService.userId ?? generateUniqueId()
         DispatchQueue.global().async {
             do {
                 // Should be the secret invalidated when passcode is removed? If not then use `.WhenUnlocked`
@@ -202,7 +218,9 @@ class NetworkService: NetworkServiceProtocol {
             }
     }
     
-    public func getPollVoters(poll: String, option: String, completion: @escaping (Result<PollOption, IPollError>) -> Void) {
+    public func getPollVoters(poll: String,
+                              option: String,
+                              completion: @escaping (Result<PollOption, IPollError>) -> Void) {
         AF.request("\(pollsEndpoint)/\(poll)/\(option)/", headers: requestHeader)
             .responseDecodable(of: PollOption.self, decoder: getDecoder()) { response in
                 switch response.result {

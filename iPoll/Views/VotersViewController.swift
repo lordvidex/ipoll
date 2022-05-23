@@ -56,15 +56,18 @@ class VotersViewController: UIViewController {
         let view = UITableView()
         view.register(VotersTableViewCell.self, forCellReuseIdentifier: Constants.CellIdentifiers.voters)
         view.dataSource = self
+        view.delegate = self
         view.backgroundColor = Constants.Colors.bgBlue
         view.allowsSelection = false
         return view
     }()
     
     lazy var tableHeader: UIView = {
-        let optionLabel = IPLabel("\(pollOption.title) - \(pollPercent)")
+        let optionLabel = IPLabel("\(pollOption.title) - \(pollPercent)%")
         let votesLabel = IPLabel("\(votersCount) votes")
         let view = UIView()
+        view.addSubview(optionLabel)
+        view.addSubview(votesLabel)
         optionLabel.snp.makeConstraints { make in
             make.left.equalTo(view)
             make.centerY.equalTo(view)
@@ -99,6 +102,10 @@ class VotersViewController: UIViewController {
 extension VotersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         votersCount
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -1,10 +1,3 @@
-//
-//  PollViewController.swift
-//  iPoll
-//
-//  Created by Evans Owamoyo on 06.03.2022.
-//
-
 import UIKit
 import UIImageSymbols
 import Toast_Swift
@@ -94,7 +87,6 @@ class PollViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         PeriodicManager.shared.startTimer()
-        
     }
 
     override func viewDidLayoutSubviews() {
@@ -104,11 +96,7 @@ class PollViewController: UIViewController {
 
     private func setupViews() {
         // set navigation Items
-        navigationItem.title = "Polls"
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(
-            barButtonSystemItem: tableView.isEditing ? .done : .edit,
-            target: self,
-            action: #selector(onEditBtnPressed))]
+        setupNavbarItems()
         view.backgroundColor = Constants.Colors.bgBlue
 
         // set refresh control to tableView
@@ -149,6 +137,18 @@ class PollViewController: UIViewController {
             make.bottom.equalTo(view).offset(-31)
         }
     }
+    
+    private func setupNavbarItems() {
+        navigationItem.title = "Polls"
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: .gear, style: .plain, target: self, action: #selector(onSettingsPressed)),
+            UIBarButtonItem(
+                image: tableView.isEditing ? .checkmarkDiamondFill : .pencil,
+                style: tableView.isEditing ? .done : .plain,
+            target: self,
+            action: #selector(onEditBtnPressed))
+        ]
+    }
 
     @objc func onTapSegmentedControl(_ sender: UISegmentedControl) {
         //        pollManager.queryPolls()
@@ -175,9 +175,72 @@ class PollViewController: UIViewController {
 
     @objc func onEditBtnPressed() {
         tableView.isEditing = !tableView.isEditing
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit,
-                                                            target: self, action: #selector(onEditBtnPressed))
+        setupNavbarItems()
+    }
+    
+    @objc func onSettingsPressed() {
+        let alertVC = UIAlertController(title: "Settings", message: "", preferredStyle: .actionSheet)
+        
+        let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
+            // create an alert controller
+            let pending = UIAlertController(title: "Logging out", message: nil, preferredStyle: .alert)
 
+            // create an activity indicator
+            let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
+            indicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            pending.view.addSubview(indicator)
+            indicator.isUserInteractionEnabled = false
+            indicator.startAnimating()
+
+            self?.present(pending, animated: true)
+            NetworkService.logout {
+                DispatchQueue.main.async {
+                    pending.dismiss(animated: true)
+                    alertVC.dismiss(animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        Router.navigator?.setViewControllers([OnboardViewController()], animated: false)
+                    }
+                }
+            }
+        }
+        let viewDetailsAction = UIAlertAction(title: "My Details", style: .default) { [weak self] _ in
+            alertVC.dismiss(animated: true)
+            let detailsVC = UIAlertController(title: "My Details",
+                                              message: "View / Edit your details",
+                                              preferredStyle: .alert)
+            var textField: UITextField!
+            detailsVC.addTextField { textfield in
+                textField = textfield
+                textfield.text = NetworkService.username
+                textfield.leftViewMode = .always
+                let label = UILabel()
+                label.text = "Name: "
+                label.font = label.font.withSize(14)
+                label.textColor = Constants.Colors.darkBlue
+                label.backgroundColor = Constants.Colors.lightBlue
+                textfield.leftView = label
+            }
+            let saveBtn = UIAlertAction(title: "Save", style: .default) { _ in
+                NetworkService.username = textField.text
+                
+                NetworkService.shared.setUser { _ in
+                    detailsVC.dismiss(animated: true)
+                }
+            }
+            let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                detailsVC.dismiss(animated: true)
+            }
+            detailsVC.addAction(saveBtn)
+            detailsVC.addAction(cancelBtn)
+            self?.present(detailsVC, animated: true)
+        }
+        
+        alertVC.addAction(logoutAction)
+        alertVC.addAction(viewDetailsAction)
+        
+        present(alertVC, animated: true)
+        
     }
 
     @objc func onTapFab(_ sender: UIButton) {

@@ -135,7 +135,8 @@ extension VoteViewController: UITableViewDataSource {
                                         totalCount: poll.totalVotes,
                                         color: poll.color) { optionId in
                             let viewController = VotersViewController(poll: poll,
-                                                                      pollOption: poll.options!.first { $0.id == optionId }!)
+                                                                      pollOption:
+                                                                        poll.options!.first { $0.id == optionId}!)
                             self.navigationController?.pushViewController(viewController, animated: true)
                         }
                     }
