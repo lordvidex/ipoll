@@ -35,12 +35,16 @@ class VoteViewController: UIViewController {
     }()
     
     private lazy var chooseColorBtn: UIButton = {
-        let button = UIButton(configuration: .tinted())
+        let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 150, height: 40)
         button.setTitle("Choose Color", for: .normal)
-        button.tintColor = poll?.color?.lighter()
+        button.tintColor = poll?.color?.lighter() ?? .systemBlue
         button.setTitleColor(poll?.color?.darker(componentDelta: 0.2), for: .normal)
-        button.addTarget(self, action: #selector(onChooseColor(_:)), for: .touchUpInside)
+        if #available(iOS 14.0, *) {
+            button.addTarget(self, action: #selector(onChooseColor(_:)), for: .touchUpInside)
+        } else {
+            // Fallback on earlier versions
+        }
         return button
     }()
     
@@ -82,6 +86,7 @@ class VoteViewController: UIViewController {
         self.view.hideSkeleton()
     }
     
+    @available(iOS 14.0, *)
     @objc func onChooseColor(_ sender: UIButton) {
         let colorPickerVC = UIColorPickerViewController()
         colorPickerVC.delegate = self
@@ -229,12 +234,14 @@ extension VoteViewController: VoteOptionCellDelegate {
 // MARK: - UIColorPickerViewControllerDelegate
 extension VoteViewController: UIColorPickerViewControllerDelegate {
     
+    @available(iOS 14.0, *)
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         guard let poll = poll else { return }
         voteManager.persistPoll(poll)
         optionsTableView.reloadData()
     }
     
+    @available(iOS 14.0, *)
     func colorPickerViewController(_ viewController: UIColorPickerViewController,
                                    didSelect color: UIColor,
                                    continuously: Bool) {

@@ -24,14 +24,14 @@ class OnboardViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("Skip", for: .normal)
         btn.addTarget(self, action: #selector(setUserIdAndName), for: .touchUpInside)
-//        btn.configuration = .tinted()
+        btn.setTitleColor(.systemBlue, for: .normal)
         return btn
     }()
     
     lazy var goBtn: IPButton = {
         let btn = IPButton()
-//        btn.configuration = UIButton.Configuration.filled()
-        btn.tintColor = Constants.Colors.lightBlue
+        btn.backgroundColor = Constants.Colors.lightBlue
+        btn.tintColor = Constants.Colors.darkBlue
         btn.addTarget(self, action: #selector(setUserIdAndName), for: .touchUpInside)
         btn.setImage(UIImage.arrowRight, for: .normal)
         return btn
@@ -93,9 +93,7 @@ class OnboardViewController: UIViewController {
             make.top.equalTo(instructionLabel.snp.bottom).offset(10)
             make.left.right.equalTo(view).inset(25)
         }
-//        goBtn.snp.makeConstraints { make in
-//            make.width.height.equalTo(textField.snp.height)
-//        }
+        
         skipBtn.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(25)
             make.centerX.equalTo(scrollView)
