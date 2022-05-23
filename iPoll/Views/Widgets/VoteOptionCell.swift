@@ -116,6 +116,7 @@ class VoteOptionCell: UITableViewCell {
 
     func updateCell(optionTitle: String,
                     optionId: String,
+                    isAnonymous: Bool,
                     voteCount: Int = 0,
                     totalCount: Int = 1,
                     color: UIColor?,
@@ -126,6 +127,8 @@ class VoteOptionCell: UITableViewCell {
         self.totalCount = totalCount
         self.optionId = optionId
         self.color = color
+        viewVotersBtn.isEnabled = !isAnonymous
+        viewVotersBtn.backgroundColor = viewVotersBtn.isEnabled ? Constants.Colors.darkBlue : .gray
         optionLabel.text = optionTitle
         voteCountLabel.text = "\(voteCount)"
         self.callback = onClick

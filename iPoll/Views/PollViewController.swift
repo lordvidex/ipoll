@@ -143,7 +143,7 @@ class PollViewController: UIViewController {
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: .gear, style: .plain, target: self, action: #selector(onSettingsPressed)),
             UIBarButtonItem(
-                image: tableView.isEditing ? .checkmarkDiamondFill : .pencil,
+                image: tableView.isEditing ? .checkmark : .pencil,
                 style: tableView.isEditing ? .done : .plain,
             target: self,
             action: #selector(onEditBtnPressed))

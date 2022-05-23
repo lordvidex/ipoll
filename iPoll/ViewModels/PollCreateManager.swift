@@ -67,7 +67,7 @@ class PollCreateManager: PollCreateManagerProtocol {
         }
     }
     
-    var startTime: Date = .now {
+    var startTime: Date = .init() {
         didSet {
             delegate?.startTimeDidChange(self, cause: .start, to: startTime)
             
@@ -79,7 +79,7 @@ class PollCreateManager: PollCreateManagerProtocol {
         }
     }
     
-    var endTime: Date? = Calendar.current.date(byAdding: .day, value: 1, to: .now) {
+    var endTime: Date? = Calendar.current.date(byAdding: .day, value: 1, to: .init()) {
         didSet {
             if let endTime = endTime {
                 delegate?.endTimeDidChange(self, cause: .end, to: endTime)

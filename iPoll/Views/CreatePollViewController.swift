@@ -394,10 +394,10 @@ extension CreatePollViewController: PollCreateManagerDelegate {
         
         if poll.hasTimeLimit {
             endTimePicker.date = poll.endTime! 
-            endTimePicker.minimumDate = max(.now, poll.endTime!)
+            endTimePicker.minimumDate = max(.init(), poll.endTime!)
         } else {
-            endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: .now)
-            endTimePicker.date = .now
+            endTimePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: .init())
+            endTimePicker.date = .init()
         }
         
     }

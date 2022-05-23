@@ -131,6 +131,7 @@ extension VoteViewController: UITableViewDataSource {
                     if let option = poll.options?[indexPath.row] {
                         cell.updateCell(optionTitle: option.title,
                                         optionId: option.id,
+                                        isAnonymous: poll.isAnonymous,
                                         voteCount: option.votesId.count,
                                         totalCount: poll.totalVotes,
                                         color: poll.color) { optionId in

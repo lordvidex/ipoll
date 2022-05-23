@@ -24,13 +24,13 @@ class OnboardViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("Skip", for: .normal)
         btn.addTarget(self, action: #selector(setUserIdAndName), for: .touchUpInside)
-        btn.configuration = .tinted()
+//        btn.configuration = .tinted()
         return btn
     }()
     
     lazy var goBtn: IPButton = {
         let btn = IPButton()
-        btn.configuration = UIButton.Configuration.filled()
+//        btn.configuration = UIButton.Configuration.filled()
         btn.tintColor = Constants.Colors.lightBlue
         btn.addTarget(self, action: #selector(setUserIdAndName), for: .touchUpInside)
         btn.setImage(UIImage.arrowRight, for: .normal)
