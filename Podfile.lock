@@ -1,34 +1,179 @@
 PODS:
-  - Alamofire (5.5.0)
-  - IQKeyboardManagerSwift (6.5.9)
+  - Alamofire (5.6.1)
+  - AppAuth (1.5.0):
+    - AppAuth/Core (= 1.5.0)
+    - AppAuth/ExternalUserAgent (= 1.5.0)
+  - AppAuth/Core (1.5.0)
+  - AppAuth/ExternalUserAgent (1.5.0):
+    - AppAuth/Core
+  - FirebaseAnalytics (9.1.0):
+    - FirebaseAnalytics/AdIdSupport (= 9.1.0)
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/MethodSwizzler (~> 7.7)
+    - GoogleUtilities/Network (~> 7.7)
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (9.1.0):
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
+    - GoogleAppMeasurement (= 9.1.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/MethodSwizzler (~> 7.7)
+    - GoogleUtilities/Network (~> 7.7)
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAuth (9.1.0):
+    - FirebaseCore (~> 9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.7)
+  - FirebaseAuthUI (12.2.0):
+    - FirebaseAuth (< 10.0, >= 8.0)
+    - FirebaseCore
+  - FirebaseCore (9.1.0):
+    - FirebaseCoreDiagnostics (~> 9.0)
+    - FirebaseCoreInternal (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GoogleUtilities/Logger (~> 7.7)
+  - FirebaseCoreDiagnostics (9.1.0):
+    - GoogleDataTransport (< 10.0.0, >= 9.1.4)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GoogleUtilities/Logger (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCoreInternal (9.1.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+  - FirebaseGoogleAuthUI (12.2.0):
+    - FirebaseAuth
+    - FirebaseAuthUI
+    - FirebaseCore
+    - GoogleSignIn (~> 6.0)
+  - FirebaseInstallations (9.1.0):
+    - FirebaseCore (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GoogleUtilities/UserDefaults (~> 7.7)
+    - PromisesObjC (~> 2.1)
+  - FirebaseOAuthUI (12.2.0):
+    - FirebaseAuth (< 10.0, >= 8.0)
+    - FirebaseAuthUI (< 13.0, >= 12.0.2)
+  - FirebaseUI/Auth (12.2.0):
+    - FirebaseAuthUI (~> 12.0)
+  - FirebaseUI/Google (12.2.0):
+    - FirebaseGoogleAuthUI (~> 12.0)
+  - FirebaseUI/OAuth (12.2.0):
+    - FirebaseOAuthUI (~> 12.0)
+  - GoogleAppMeasurement (9.1.0):
+    - GoogleAppMeasurement/AdIdSupport (= 9.1.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/MethodSwizzler (~> 7.7)
+    - GoogleUtilities/Network (~> 7.7)
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (9.1.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.1.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/MethodSwizzler (~> 7.7)
+    - GoogleUtilities/Network (~> 7.7)
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (9.1.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/MethodSwizzler (~> 7.7)
+    - GoogleUtilities/Network (~> 7.7)
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleDataTransport (9.1.4):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleSignIn (6.2.2):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleUtilities/AppDelegateSwizzler (7.7.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.7.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.7.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.7.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.7.0)"
+  - GoogleUtilities/Reachability (7.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.7.0):
+    - GoogleUtilities/Logger
+  - GTMAppAuth (1.3.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.7.2)
+  - IQKeyboardManagerSwift (6.5.10)
   - KeychainAccess (4.2.2)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
+  - PromisesObjC (2.1.0)
   - SkeletonView (1.29.2)
   - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
-  - SwiftLint (0.46.5)
+  - SwiftLint (0.47.1)
   - SwiftyJSON (4.3.0)
   - Toast-Swift (5.0.1)
   - UIImageSymbols (0.6.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
+  - FirebaseAnalytics
+  - FirebaseAuth
+  - FirebaseUI/Auth
+  - FirebaseUI/Google
+  - FirebaseUI/OAuth
+  - GoogleSignIn
   - IQKeyboardManagerSwift (~> 6.5.9)
-  - KeychainAccess
+  - KeychainAccess (~> 4.2.2)
   - SkeletonView (~> 1.29.2)
   - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
-  - SwiftLint
+  - SwiftLint (~> 0.47.1)
   - SwiftyJSON (~> 4.0)
   - Toast-Swift (~> 5.0.1)
-  - UIImageSymbols (~> 0.6.1)
+  - UIImageSymbols
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AppAuth
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseAuthUI
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreInternal
+    - FirebaseGoogleAuthUI
+    - FirebaseInstallations
+    - FirebaseOAuthUI
+    - FirebaseUI
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleSignIn
+    - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
     - IQKeyboardManagerSwift
     - KeychainAccess
+    - nanopb
+    - PromisesObjC
     - SkeletonView
     - SnapKit
     - Socket.IO-Client-Swift
@@ -39,18 +184,37 @@ SPEC REPOS:
     - UIImageSymbols
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
+  FirebaseAnalytics: bf11064790ac96804df1df9ddc0ae45af950d9fc
+  FirebaseAuth: 77247e07732ec5cdb20cc58ef40ad84d2fcce847
+  FirebaseAuthUI: 9381cd32c4efcaf3550f4a95dd176fc73da253ee
+  FirebaseCore: b7bfc258e996eada23b3666bd6b9a22ca092acb8
+  FirebaseCoreDiagnostics: 2dabba3412b23b524823325739f45e520f67d1e7
+  FirebaseCoreInternal: f3c838ae0b41cd840bbf34f90debfede78d352e5
+  FirebaseGoogleAuthUI: 978ae1845a5c9111fdf4c2e05708edb0a224bed3
+  FirebaseInstallations: a91c74276b544524ce144c8315d8cdbce2dbe30b
+  FirebaseOAuthUI: 4cb09dfdf3164e664e5381cc6beec9d600205790
+  FirebaseUI: 33ee19f70792fae68bee5cbbbf93733baa2cc7fa
+  GoogleAppMeasurement: 8ecc717f2abe3f9ee95a5d38db08827852894acc
+  GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
+  GoogleSignIn: 3c68388ac221f379676e8f1cb115df3aaf73b93f
+  GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
+  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
+  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UIImageSymbols: d0ad8b1865e8c295539b618b95cf4b8dc19614fb
 
-PODFILE CHECKSUM: 3c4b54c3678cb113392cdab15f22a376eceed9c2
+PODFILE CHECKSUM: 2a2e19820addf93a0a428ae389d2818465e200d8
 
 COCOAPODS: 1.11.2

@@ -7,16 +7,23 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuthUI
+import FirebaseOAuthUI
+import FirebaseGoogleAuthUI
 
 class OnboardViewController: UIViewController {
+    // MARK: - private variables
+    weak var authUI: FUIAuth?
     
+    // MARK: - UI
     lazy var welcomeLabel: IPLabel = {
-        let label = IPLabel("Welcome to IPoll..")
+        let label = IPLabel("Welcome to IPoll.. (Quick Auth)")
         label.font = Constants.appFont?.withSize(24)
         return label
     }()
+    
     lazy var instructionLabel: IPLabel = {
-        let label = IPLabel("Please enter your name for non-anonymous posts")
+        let label = IPLabel("Please enter your only your name for non-anonymous posts")
         return label
     }()
     
@@ -25,6 +32,13 @@ class OnboardViewController: UIViewController {
         btn.setTitle("Skip", for: .normal)
         btn.addTarget(self, action: #selector(setUserIdAndName), for: .touchUpInside)
         btn.setTitleColor(.systemBlue, for: .normal)
+        return btn
+    }()
+    
+    lazy var fullAuthBtn: IPButton = {
+        let btn = IPButton(text: "Full Sign In", cornerRadius: 10)
+        btn.addTarget(self, action: #selector(showAuthUI), for: .touchUpInside)
+        view.addSubview(btn)
         return btn
     }()
     
@@ -48,9 +62,30 @@ class OnboardViewController: UIViewController {
         tf.rightViewMode = .whileEditing
         return tf
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupFirebaseAuthUI()
         setupViews()
+    }
+    
+    private func setupFirebaseAuthUI() {
+        authUI = FUIAuth.defaultAuthUI()
+        authUI?.delegate = self
+        
+        var githubProvider = OAuthProvider(providerID: "github.com")
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth.init(authUI: authUI!),
+            FUIOAuth.githubAuthProvider(withAuthUI: authUI!)
+        ]
+        
+        authUI?.providers = providers
+    }
+    
+    @objc private func showAuthUI() {
+        guard let viewController = authUI?.authViewController() else { return }
+        present(viewController, animated: true)
     }
     
     @objc func setUserIdAndName() {
@@ -94,10 +129,25 @@ class OnboardViewController: UIViewController {
             make.left.right.equalTo(view).inset(25)
         }
         
-        skipBtn.snp.makeConstraints { make in
+        fullAuthBtn.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(25)
             make.centerX.equalTo(scrollView)
         }
         
+        skipBtn.snp.makeConstraints { make in
+            make.top.equalTo(fullAuthBtn.snp.bottom).offset(25)
+            make.centerX.equalTo(scrollView)
+        }
+        
+        
+        
+    }
+}
+
+extension OnboardViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        print(authDataResult?.user)
+        print(authDataResult?.additionalUserInfo)
+        print(error)
     }
 }
