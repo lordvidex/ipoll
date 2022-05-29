@@ -11,25 +11,29 @@ import Toast_Swift
 
 class JoinPollViewController: UIViewController {
 
-    private var joinPollLabel: UILabel = {
+    private lazy var joinPollLabel: UILabel = {
         let label = IPLabel("Join a poll", font: Constants.appFont?.withSize(24))
+        view.addSubview(label)
         return label
     }()
 
-    var pollIdTF: UITextField = {
+    lazy var pollIdTF: UITextField = {
         let tf = IPTextField()
+        view.addSubview(tf)
         return tf
     }()
 
-    private var pollIdLabel: UILabel = {
+    private lazy var pollIdLabel: UILabel = {
         let label = IPLabel("Poll #ID")
         label.font = Constants.appFont?.withSize(14)
+        view.addSubview(label)
         return label
     }()
 
     private lazy var joinBtn: IPButton = {
         let btn = IPButton(text: "Join")
         btn.addTarget(self, action: #selector(onJoinBtnClicked), for: .touchUpInside)
+        view.addSubview(btn)
         return btn
     }()
 
@@ -42,7 +46,7 @@ class JoinPollViewController: UIViewController {
         btn.titleLabel?.font = Constants.appFont?.withSize(18)
         btn.setTitleColor(Constants.Colors.darkBlue, for: .normal)
         btn.addTarget(self, action: #selector(openScanner), for: .touchUpInside)
-
+        view.addSubview(btn)
         return btn
     }()
 
@@ -54,6 +58,7 @@ class JoinPollViewController: UIViewController {
             width: 122,
             textColor: .white
         )
+        view.addSubview(btn)
         btn.addTarget(self, action: #selector(onTapFab(_:)), for: .touchUpInside)
         return btn
     }()
@@ -61,12 +66,6 @@ class JoinPollViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.Colors.bgBlue
-        view.addSubview(joinPollLabel)
-        view.addSubview(pollIdLabel)
-        view.addSubview(pollIdTF)
-        view.addSubview(joinBtn)
-        view.addSubview(scanBtn)
-        view.addSubview(fab)
 
         joinPollLabel.snp.makeConstraints { make in
             make.top.equalTo(self.view).offset(100)

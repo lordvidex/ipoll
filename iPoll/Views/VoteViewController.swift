@@ -16,19 +16,21 @@ class VoteViewController: UIViewController {
     private let voteManager = VoteManager()
     
     // MARK: - UI
-    private var titleLabel: IPLabel = {
+    private lazy var titleLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(24))
         label.isSkeletonable = true
+        view.addSubview(label)
         return label
     }()
     
-    private var authorLabel: IPLabel = {
+    private lazy var authorLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(18))
         label.isSkeletonable = true
+        view.addSubview(label)
         return label
     }()
     
-    private var timeLabel: IPLabel = {
+    private lazy var timeLabel: IPLabel = {
         let label = IPLabel("", font: Constants.appFont?.withSize(18))
         label.isSkeletonable = true
         return label
@@ -48,7 +50,7 @@ class VoteViewController: UIViewController {
         return button
     }()
     
-    private var optionsTableView: UITableView = {
+    private lazy Ivar optionsTableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 56
         table.rowHeight = UITableView.automaticDimension
@@ -59,6 +61,7 @@ class VoteViewController: UIViewController {
         table.separatorStyle = .none
         table.backgroundColor = .clear
         table.alwaysBounceVertical = false
+        view.addSubview(table)
         return table
     }()
     
@@ -97,14 +100,14 @@ class VoteViewController: UIViewController {
         super.viewDidLoad()
         voteManager.delegate = self
         optionsTableView.dataSource = self
-        self.view.backgroundColor = Constants.Colors.bgBlue
+        view.backgroundColor = Constants.Colors.bgBlue
         if pollId != nil {
             voteManager.fetchPoll(pollId!)
         }
-        
-        view.addSubview(titleLabel)
-        view.addSubview(optionsTableView)
-        view.addSubview(authorLabel)
+        configureConstraints()
+    }
+    
+    private func configureConstraints() {
         
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalTo(view).inset(10)
@@ -121,7 +124,6 @@ class VoteViewController: UIViewController {
             make.top.equalTo(authorLabel.snp.bottom).offset(27)
         }
     }
-    
 }
 
 // MARK: - UITableViewDataSource

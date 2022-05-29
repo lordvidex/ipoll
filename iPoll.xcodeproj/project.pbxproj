@@ -175,17 +175,11 @@
 		B944A8372831B4530046073F /* iPoll */ = {
 			isa = PBXGroup;
 			children = (
-				B944A8CE2831BEB10046073F /* LaunchScreen.storyboard */,
-				B944A88F2831BE880046073F /* AppDelegate.swift */,
-				B944A8B02831BE890046073F /* Assets.xcassets */,
-				B944A88E2831BE880046073F /* Constants.swift */,
-				B944A88D2831BE880046073F /* Info.plist */,
-				B944A8AF2831BE890046073F /* iPoll.entitlements */,
-				B944A8A72831BE890046073F /* iPoll.xcdatamodeld */,
+				B9DCB5922843D73800258A19 /* App Delegates */,
+				B9DCB5902843D6ED00258A19 /* Resources */,
 				B944A89C2831BE890046073F /* Model */,
-				B944A8A92831BE890046073F /* SceneDelegate.swift */,
 				B944A8902831BE880046073F /* Utils */,
-				B944A8AA2831BE890046073F /* ViewModels */,
+				B944A8AA2831BE890046073F /* Presenters */,
 				B944A8692831BDF90046073F /* Views */,
 			);
 			path = iPoll;
@@ -226,6 +220,7 @@
 		B944A8902831BE880046073F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B944A88E2831BE880046073F /* Constants.swift */,
 				B944A8912831BE880046073F /* NSOrderedSet+Array.swift */,
 				B944A8922831BE880046073F /* UIImage+resize.swift */,
 				B944A8932831BE880046073F /* DateFormatter+UTC.swift */,
@@ -255,7 +250,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B944A8AA2831BE890046073F /* ViewModels */ = {
+		B944A8AA2831BE890046073F /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
 				B944A8AB2831BE890046073F /* PollCreateManager.swift */,
@@ -263,7 +258,7 @@
 				B944A8AD2831BE890046073F /* PeriodicManager.swift */,
 				B944A8AE2831BE890046073F /* VoteManager.swift */,
 			);
-			path = ViewModels;
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		B95E571A27CD1B6E0021E53C = {
@@ -284,6 +279,27 @@
 				B938194727FB178700B91454 /* iPollTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B9DCB5902843D6ED00258A19 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B944A8A72831BE890046073F /* iPoll.xcdatamodeld */,
+				B944A88D2831BE880046073F /* Info.plist */,
+				B944A8AF2831BE890046073F /* iPoll.entitlements */,
+				B944A8B02831BE890046073F /* Assets.xcassets */,
+				B944A8CE2831BEB10046073F /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B9DCB5922843D73800258A19 /* App Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				B944A8A92831BE890046073F /* SceneDelegate.swift */,
+				B944A88F2831BE880046073F /* AppDelegate.swift */,
+			);
+			path = "App Delegates";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -691,12 +707,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = iPoll/iPoll.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iPoll/Resources/iPoll.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6L4J4336Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iPoll/Info.plist;
+				INFOPLIST_FILE = iPoll/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -724,12 +740,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = iPoll/iPoll.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iPoll/Resources/iPoll.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M6L4J4336Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iPoll/Info.plist;
+				INFOPLIST_FILE = iPoll/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission is needed to access the camera to get QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

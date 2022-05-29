@@ -24,7 +24,6 @@ class VotersTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        print("Init with style and reuseIdentifier")
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
