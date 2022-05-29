@@ -50,7 +50,7 @@ class VoteViewController: UIViewController {
         return button
     }()
     
-    private lazy Ivar optionsTableView: UITableView = {
+    private lazy var optionsTableView: UITableView = {
         let table = UITableView()
         table.estimatedRowHeight = 56
         table.rowHeight = UITableView.automaticDimension
