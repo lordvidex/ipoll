@@ -21,13 +21,6 @@ class AuthViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience init(id: String?, name: String?) {
-        self.init()
-        if let id = id, let name = name {
-            setUserIdAndName(id: id, name: name)
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -82,6 +75,7 @@ class AuthViewController: UIViewController {
     }()
     
     var spinner: UIActivityIndicatorView?
+    var blur: UIVisualEffectView?
     
     lazy var scrollView: UIScrollView = {
         let scrollv = UIScrollView()
@@ -128,12 +122,16 @@ class AuthViewController: UIViewController {
     }
     
     private func showLoadingSpinner() {
+        blur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        blur!.frame = view.bounds
+        view.addSubview(blur!)
+        
         spinner = UIActivityIndicatorView(style: .large)
         view.addSubview(spinner!)
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        spinner!.snp.makeConstraints({ make in
+        
+        spinner!.snp.makeConstraints { make in
             make.center.equalTo(view.safeAreaLayoutGuide)
-        })
+        }
         spinner?.startAnimating()
     }
     
@@ -143,7 +141,10 @@ class AuthViewController: UIViewController {
             spinner.removeFromSuperview()
             self.spinner = nil
         }
-        view.backgroundColor = nil
+        if let blur = blur {
+            blur.removeFromSuperview()
+            self.blur = nil
+        }
     }
     
     @objc private func showAuthUI() {
@@ -151,7 +152,7 @@ class AuthViewController: UIViewController {
         present(viewController, animated: true)
     }
     
-    @objc func setUserIdAndName(id: String? = nil, name: String? = nil) {
+    func setUserIdAndName(id: String? = nil, name: String? = nil) {
         showLoadingSpinner()
         NetworkService.shared.setUser(id: id, name: name ?? textField.text) { [weak self] result in
             switch result {
@@ -168,6 +169,10 @@ class AuthViewController: UIViewController {
                 self?.removeLoadingSpinner()
             }
         }
+    }
+    
+    @objc func setUserIdAndName() {
+        setUserIdAndName(id: nil, name: nil)
     }
     
     func setupViews() {
