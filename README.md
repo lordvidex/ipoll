@@ -1,4 +1,4 @@
-![IPoll Logo](/Users/lordvidex/XCodeProjects/iPoll/iPoll/Resources/Assets.xcassets/ipoll.imageset/ipoll@1x.png)  
+![IPoll Logo](/iPoll/Resources/Assets.xcassets/ipoll.imageset/ipoll@1x.png)  
 # iPoll
 Architecture: **MVP**  
 
