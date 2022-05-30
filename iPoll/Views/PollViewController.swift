@@ -194,12 +194,14 @@ class PollViewController: UIViewController {
             indicator.startAnimating()
 
             self?.present(pending, animated: true)
-            NetworkService.logout {
-                DispatchQueue.main.async {
-                    pending.dismiss(animated: true)
-                    alertVC.dismiss(animated: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        Router.navigator?.setViewControllers([OnboardViewController()], animated: false)
+            if PersistenceService.shared.deleteAllPolls() {
+                NetworkService.logout {
+                    DispatchQueue.main.async {
+                        pending.dismiss(animated: true)
+                        alertVC.dismiss(animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            Router.navigator?.setViewControllers([AuthViewController()], animated: false)
+                        }
                     }
                 }
             }
@@ -207,7 +209,7 @@ class PollViewController: UIViewController {
         let viewDetailsAction = UIAlertAction(title: "My Details", style: .default) { [weak self] _ in
             alertVC.dismiss(animated: true)
             let detailsVC = UIAlertController(title: "My Details",
-                                              message: "View / Edit your details",
+                                              message: "View / Edit your details \n ID: \(NetworkService.userId ?? "No ID")",
                                               preferredStyle: .alert)
             var textField: UITextField!
             detailsVC.addTextField { textfield in
@@ -221,10 +223,11 @@ class PollViewController: UIViewController {
                 label.backgroundColor = Constants.Colors.lightBlue
                 textfield.leftView = label
             }
+
             let saveBtn = UIAlertAction(title: "Save", style: .default) { _ in
                 NetworkService.username = textField.text
                 
-                NetworkService.shared.setUser { _ in
+                NetworkService.shared.setUser(id: nil, name: nil) { _ in
                     detailsVC.dismiss(animated: true)
                 }
             }
@@ -238,6 +241,9 @@ class PollViewController: UIViewController {
         
         alertVC.addAction(logoutAction)
         alertVC.addAction(viewDetailsAction)
+        alertVC.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { _ in
+            alertVC.dismiss(animated: true)
+        }))
         
         present(alertVC, animated: true)
         
