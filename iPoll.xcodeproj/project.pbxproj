@@ -16,7 +16,7 @@
 		B944A87C2831BDF90046073F /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86B2831BDF90046073F /* VoteViewController.swift */; };
 		B944A87D2831BDF90046073F /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86C2831BDF90046073F /* CreatePollViewController.swift */; };
 		B944A87E2831BDF90046073F /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86D2831BDF90046073F /* PollViewController.swift */; };
-		B944A87F2831BDF90046073F /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86E2831BDF90046073F /* OnboardViewController.swift */; };
+		B944A87F2831BDF90046073F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86E2831BDF90046073F /* AuthViewController.swift */; };
 		B944A8802831BDF90046073F /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A86F2831BDF90046073F /* QRScannerViewController.swift */; };
 		B944A8812831BDF90046073F /* PollPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A8702831BDF90046073F /* PollPreviewController.swift */; };
 		B944A8832831BDF90046073F /* PollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B944A8732831BDF90046073F /* PollTableViewCell.swift */; };
@@ -83,7 +83,7 @@
 		B944A86B2831BDF90046073F /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
 		B944A86C2831BDF90046073F /* CreatePollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePollViewController.swift; sourceTree = "<group>"; };
 		B944A86D2831BDF90046073F /* PollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
-		B944A86E2831BDF90046073F /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		B944A86E2831BDF90046073F /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B944A86F2831BDF90046073F /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		B944A8702831BDF90046073F /* PollPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollPreviewController.swift; sourceTree = "<group>"; };
 		B944A8732831BDF90046073F /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				B944A86B2831BDF90046073F /* VoteViewController.swift */,
 				B944A86C2831BDF90046073F /* CreatePollViewController.swift */,
 				B944A86D2831BDF90046073F /* PollViewController.swift */,
-				B944A86E2831BDF90046073F /* OnboardViewController.swift */,
+				B944A86E2831BDF90046073F /* AuthViewController.swift */,
 				B944A86F2831BDF90046073F /* QRScannerViewController.swift */,
 				B944A8702831BDF90046073F /* PollPreviewController.swift */,
 				B92D59DA2837C988006BC73D /* VotersViewController.swift */,
@@ -528,7 +528,7 @@
 				B944A8C32831BE890046073F /* NetworkService.swift in Sources */,
 				B944A8C82831BE890046073F /* SceneDelegate.swift in Sources */,
 				B944A88A2831BDF90046073F /* IPLabel.swift in Sources */,
-				B944A87F2831BDF90046073F /* OnboardViewController.swift in Sources */,
+				B944A87F2831BDF90046073F /* AuthViewController.swift in Sources */,
 				B944A8C42831BE890046073F /* Entity+Converter.swift in Sources */,
 				B944A8B62831BE890046073F /* DateFormatter+UTC.swift in Sources */,
 				B944A8C52831BE890046073F /* Weak.swift in Sources */,

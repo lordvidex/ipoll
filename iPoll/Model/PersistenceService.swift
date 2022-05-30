@@ -58,6 +58,21 @@ class PersistenceService: PersistenceServiceProtocol {
         }
     }
     
+    func deleteAllPolls() -> Bool {
+        let request = PollEntity.fetchRequest()
+        do {
+            let fetched = try context.fetch(request)
+            for item in fetched {
+                context.delete(item)
+            }
+            saveContext()
+            return true
+        } catch {
+            print("error")
+            return false
+        }
+    }
+    
     /// returns a Poll object or nil if such object with provided `id` does not exist
     func fetchPoll(with id: String) -> Poll? {
         fetch(entity: PollEntity.self, with: id)?.toPoll()

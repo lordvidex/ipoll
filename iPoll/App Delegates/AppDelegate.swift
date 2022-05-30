@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true // for automatic keyboard management
         FirebaseApp.configure()
+        print("NetworkService configure")
         NetworkService.configure()
         return true
     }
@@ -31,13 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        guard let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String? else { return false }
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        guard let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String?
+        else { return false }
          if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
            return true
          }
          // other URL handling goes here.
          return false
     }
-    
 }

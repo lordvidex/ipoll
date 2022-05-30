@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import KeychainAccess
+import FirebaseAuth
 
 protocol NetworkServiceProtocol {
     func getUser(completion: @escaping (Result<User, IPollError>) -> Void)
@@ -52,26 +53,37 @@ class NetworkService: NetworkServiceProtocol {
     public static let shared = NetworkService()
     
     // - MARK: public functions
-    
+    /// First: checks if user is authenticated by firebase
+    /// ELSE:
     /// Reads id from the KeyChain and sets it \
     /// If `id` does not exist in the keychain, it gets the UUID of the device
     /// and sets it as `id` in the KeyChain
     public static func configure() {
-        DispatchQueue.global().async {
-            do {
-                let userId = try keychain
-//                    .authenticationPrompt("Authenticate to login to iPoll")
-                    .get("userId")
-                self.username = try keychain.get("username")
-                self.userId = userId
-            } catch let error {
-                print("error occured \(error)")
+        if let user = Auth.auth().currentUser {
+            self.userId = user.uid
+            self.username = user.displayName ?? user.email ?? ""
+            print("User id is \(userId) and username is \(username)")
+        } else {
+            DispatchQueue.global().async {
+                do {
+                    let userId = try keychain
+                    //                    .authenticationPrompt("Authenticate to login to iPoll")
+                        .get("userId")
+                    self.username = try keychain.get("username")
+                    self.userId = userId
+                } catch let error {
+                    print("error occured \(error)")
+                }
             }
         }
     }
     
-    /// Deletes the user authentication details from the KeyChain
+    /// Deletes the user authentication details from the KeyChain and logs out from firebase
     public static func logout(completion: @escaping () -> Void) {
+        if Auth.auth().currentUser != nil {
+            try? Auth.auth().signOut()
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try keychain.remove("userId")
@@ -103,16 +115,21 @@ class NetworkService: NetworkServiceProtocol {
         return UIDevice.current.identifierForVendor!.uuidString
     }
     
-    public func setUser(name: String? = username, completion: @escaping (Result<User, IPollError>) -> Void) {
+    /// Logs in the user / creates a new account for this user
+    /// if id is not specified, the Device UUID is used as id and registered on the server
+    public func setUser(id: String?,
+                        name nam: String?,
+                        completion: @escaping (Result<User, IPollError>) -> Void) {
         // generate id and save to keychain
-        let id = NetworkService.userId ?? generateUniqueId()
+        let id = id ?? NetworkService.userId ?? generateUniqueId()
+        let name = nam ?? NetworkService.username ?? ""
         DispatchQueue.global().async {
             do {
                 // Should be the secret invalidated when passcode is removed? If not then use `.WhenUnlocked`
                 try NetworkService.keychain
                     .set(id, key: "userId")
                 try NetworkService.keychain
-                    .set(name ?? "", key: "username")
+                    .set(name, key: "username")
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -124,6 +141,7 @@ class NetworkService: NetworkServiceProtocol {
         
         // update the id on the NetworkService
         NetworkService.userId = id
+        NetworkService.username = name
     }
     
     private func createUser(_ user: User, completion: @escaping (Result<User, IPollError>) -> Void) {

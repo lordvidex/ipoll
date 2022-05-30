@@ -37,7 +37,7 @@ class Router {
         
         if NetworkService.userId == nil {
             // first time user - onboard and save the user
-            navController = UINavigationController(rootViewController: OnboardViewController())
+            navController = UINavigationController(rootViewController: AuthViewController())
         } else {
             // already logged in user
             navController = UINavigationController(rootViewController: PollViewController())

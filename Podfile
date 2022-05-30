@@ -21,9 +21,6 @@ target 'iPoll' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'GoogleSignIn'
-  pod 'FirebaseUI/Auth'
-  pod 'FirebaseUI/Google'
-  pod 'FirebaseUI/OAuth'
-
+  pod 'FirebaseUI'
 end
 
